@@ -1,0 +1,401 @@
+.wave-container {
+  > * {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  padding: 15px 10px;
+
+  .control-navigation {
+    width: 80px;
+    border-radius: 4px;
+    padding: 10px 0px;
+    background-color: #091619;
+
+    > div {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      padding: 5px;
+      gap: 5px;
+      margin-bottom: 10px;
+
+      &.active-control-btn {
+        > .icon {
+          border: 1px solid #f320b0;
+          color: #f320b0;
+        }
+      }
+
+      > .icon {
+        border: 1px solid #fff;
+        margin: 0px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+      }
+
+      > span {
+        font-size: 8px;
+        font-weight: 300;
+        text-transform: uppercase;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        > .icon {
+          border: 1px solid #f320b0;
+          color: #f320b0;
+        }
+      }
+    }
+  }
+
+  .control-after-display {
+    position: relative;
+    width: 0px;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #091619;
+    transition: width 0.3s ease-in-out;
+    display: block;
+
+    &.active-control-display {
+      width: 250px;
+      transition: width 0.3s ease-in-out;
+    }
+
+    .close-display-btn {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      width: 18px;
+      height: 18px;
+      z-index: 1;
+      cursor: pointer;
+      background: #fff;
+      color: #091619;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 900;
+      border-radius: 50%;
+      font-size: 13px;
+    }
+
+    .after-display-content {
+      display: block;
+      padding: 15px 5px 0px 5px;
+
+      .title {
+        font-size: 14px;
+        text-transform: uppercase;
+        word-spacing: 2px;
+        padding: 8px 10px;
+        border-bottom: 1px solid #333;
+        box-sizing: border-box;
+        font-weight: 800;
+        color: #fff;
+
+        i {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .trading-chart-display {
+    width: 850px;
+    border-radius: 5px;
+    background-color: #091619 !important;
+    transition: width 0.3s ease-in-out;
+
+    overflow: hidden;
+
+    &.control-display-is-active {
+      width: 600px;
+      transition: width 0.3s ease-in-out;
+    }
+
+    > div {
+      background: rgb(9, 22, 25);
+      border-radius: 5px;
+
+      > iframe {
+        background: #091619;
+      }
+    }
+  }
+
+  .trading-form-display {
+    display: block;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #091619;
+    padding: 5px;
+
+    .current-symbol-info {
+      width: 100%;
+      display: flex;
+      gap: 3px;
+      align-items: center;
+      align-content: center;
+      padding: 5px 0px;
+
+      > div {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #333;
+      }
+
+      > p {
+        color: gold;
+        font-weight: 400;
+      }
+    }
+
+    .trade-form {
+      width: 100%;
+      margin: 10px 0px;
+      display: block;
+
+      > .group {
+        margin: 5px 0px;
+        display: block;
+
+        > label {
+          display: block;
+          text-transform: uppercase;
+          font-size: 10px;
+          font-weight: 600;
+          margin-bottom: 6px;
+        }
+
+        > select {
+          width: 100%;
+          background: transparent;
+          padding: 5px;
+          color: #fff;
+
+          > option {
+            color: #fff;
+            background: #0b1f23;
+          }
+        }
+
+        p {
+          font-size: 10px;
+          text-transform: uppercase;
+          font-weight: 600;
+
+          span {
+            color: #fff;
+            font-size: 11px;
+            font-weight: 300;
+          }
+        }
+      }
+
+      .button-group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+
+        button {
+          flex: 0.5;
+          font-size: 9px;
+          text-transform: uppercase;
+          font-weight: 600;
+          padding: 3px;
+          border-radius: 5px;
+
+          p {
+            font-size: 10px;
+            font-weight: 600; /* Fixed */
+            letter-spacing: 1.2px;
+          }
+
+          &.set-sell {
+            color: #fa3131;
+            border: 1px solid #fa3131;
+
+            &:hover {
+              background: #fa3131;
+              color: #fff;
+
+              p {
+                color: #fff;
+              }
+            }
+
+            p {
+              color: #fa3131;
+            }
+
+            &.active {
+              background: #fa3131;
+              color: #fff;
+
+              p {
+                color: #fff;
+              }
+            }
+          }
+
+          &.set-buy {
+            color: #0caf66;
+            border: 1px solid #0caf66;
+
+            p {
+              color: #0caf66;
+            }
+
+            &:hover {
+              background: #0caf66;
+              color: #fff;
+
+              p {
+                color: #fff;
+              }
+            }
+
+            &.active {
+              background: #0caf66;
+              color: #fff;
+
+              p {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+
+      .trade-button-group {
+        margin: 14px 0px 14px 0;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        font-size: 10px;
+        transition: height 0.3s ease-in-out;
+
+        button {
+          text-transform: uppercase;
+          padding: 10px;
+          flex: 0.6;
+          border: 1px solid goldenrod;
+          border-radius: 8px;
+          color: goldenrod;
+
+          &:hover {
+            background: goldenrod;
+            color: #fff;
+          }
+        }
+
+        &.active {
+          height: 40px;
+          transition: height 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+
+  .advanced-accordion {
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #fff;
+
+    .accordion-btn {
+      cursor: pointer;
+      font-size: 9px;
+      text-transform: uppercase;
+      font-weight: bolder;
+
+      i {
+        padding: 5px;
+        border: 1px solid #fff;
+        border-radius: 50%;
+      }
+    }
+
+    .accordion-content {
+      height: 0px;
+      overflow: hidden;
+      padding: 0;
+      transition: all 0.3s ease-in-out;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 7px;
+
+      &.active {
+        height: 200px;
+        padding: 10px 0px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      > div {
+        display: block;
+
+        > p {
+          text-align: center;
+          color: #fff;
+          font-size: 9px;
+          text-transform: uppercase;
+          font-weight: 600;
+        }
+
+        > div {
+          margin-top: 5px;
+          padding: 4px;
+          border: 1px solid #fff;
+          border-radius: 5px;
+
+          > p {
+            text-align: center;
+            font-size: 8px;
+            text-transform: uppercase;
+            font-weight: 600;
+          }
+
+          .potentials-value {
+            font-size: 11px;
+            font-weight: 650;
+          }
+
+          .potential-action-buttons {
+            margin: 4px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+
+            button {
+              flex: 0.5;
+              text-align: center;
+              font-size: 8px;
+              padding: 2px;
+              background: #666;
+              color: #fff;
+              border-radius: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* transition: height 0.3s ease-in-out; */
