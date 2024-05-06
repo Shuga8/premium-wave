@@ -1,0 +1,23 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+	<defs>
+		<style>
+			.a{fill:#243e90;}.b{fill:#ffcd05;}
+		</style>
+	</defs>
+	<title>
+		EUR
+	</title>
+	<path class="a" d="M151,160a9,9,0,1,0-9-9A9,9,0,0,0,151,160Z" transform="translate(-142 -142)" />
+	<path class="b" d="M151,144l-.22.69h-.73l.58.43-.22.7.58-.43.58.43-.22-.7.59-.43h-.72Z" transform="translate(-142 -142)" />
+	<path class="b" d="M151.23,156.69,151,156l-.22.69h-.73l.58.43-.22.7.58-.43.58.43-.22-.7.59-.43Z" transform="translate(-142 -142)" />
+	<path class="b" d="M145,151.39l.58.42-.22-.7.58-.43h-.72L145,150l-.23.69h-.72l.58.43-.22.7Z" transform="translate(-142 -142)" />
+	<path class="b" d="M148,144.8l-.22.69h-.72l.58.43-.22.69.58-.43.58.43-.22-.69.59-.43h-.72Z" transform="translate(-142 -142)" />
+	<path class="b" d="M145.82,147l-.23.69h-.77l.58.43-.23.7.59-.43.58.43-.23-.7.59-.43H146Z" transform="translate(-142 -142)" />
+	<path class="b" d="M146,153.69l-.21-.69-.23.69h-.77l.58.43-.23.7.59-.43.58.43-.23-.7.59-.43Z" transform="translate(-142 -142)" />
+	<path class="b" d="M148.23,155.89l-.23-.69-.22.69h-.73l.58.43-.21.68.58-.43.58.43-.22-.69.59-.43Z" transform="translate(-142 -142)" />
+	<path class="b" d="M158,150.69h-.72L157,150l-.22.69H156l.58.43-.22.69.58-.42.59.42-.22-.7Z" transform="translate(-142 -142)" />
+	<path class="b" d="M154,144.8l-.22.69h-.72l.59.43-.22.69.59-.43.59.43-.22-.69.59-.43h-.72Z" transform="translate(-142 -142)" />
+	<path class="b" d="M155.82,148.11l-.22.7.59-.43.59.43-.22-.7.59-.43h-.73l-.22-.68-.22.69h-.72Z" transform="translate(-142 -142)" />
+	<path class="b" d="M156.42,153.69l-.22-.69-.22.69h-.72l.59.43-.22.7.58-.43.59.43-.22-.7.59-.43Z" transform="translate(-142 -142)" />
+	<path class="b" d="M154.23,155.89l-.22-.69-.22.69h-.72l.59.43-.24.68.59-.43.59.43-.22-.69.59-.43Z" transform="translate(-142 -142)" />
+</svg>

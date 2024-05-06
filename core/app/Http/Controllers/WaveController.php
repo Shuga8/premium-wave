@@ -18,10 +18,11 @@ class WaveController extends Controller
         }
 
         $user = User::where('id', auth()->user()->id)->first();
-        $stocks = Stock::all()->pluck('symbol');
-        $commodites = Commodity::all()->pluck('symbol');
-        $cryptos  = Currency::all()->where('type', 1)->pluck('symbol');
-        $forexs = Currency::all()->where('type', 2)->pluck('symbol');
+        $stocks = Stock::all();
+        $commodites = Commodity::all();
+        $cryptos  = Currency::all()->where('type', 1);
+        $forexs = Currency::all()->where('type', 2);
+
 
         $data = [
             'pageTitle' => 'Waves',

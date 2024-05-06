@@ -74,7 +74,36 @@
 
 			<div class="after-display-content">
 				<div class="title">
-					<i class="las la-coins"></i> Currencies
+				</div>
+
+				<div class="asset-list">
+					<div class="head">
+						<div>Symbol</div>
+						<div>Change</div>
+					</div>
+
+					<div class="asset-content">
+						{{-- <div class="asset-pair-item">
+
+							<div class="asset-pair-info">
+								<div class="img-pair"></div>
+								<div class="img-pair"></div>
+								<div class="pair-name"> EURUSD</div>
+							</div>
+
+							<div class="asset-pair-rate">
+								<div class="item-status">closed</div>
+								<div class="item-rate">2333.23</div>
+							</div>
+
+							<div class="asset-fav">
+								<i class="las la-star"></i>
+							</div>
+						</div> --}}
+					</div>
+
+
+					</table>
 				</div>
 			</div>
 		</div>
@@ -210,8 +239,12 @@
 				"details": false,
 				"container_id": "tradingview-container"
 			});
+
+			let cryptos = {!! json_encode($cryptos) !!};
+			let stocks = {!! json_encode($stocks) !!};
+			let forexs = {!! json_encode($forexs) !!};
+			let commodities = {!! json_encode($commodites) !!}
 		</script>
-		<script src="{{ asset('assets/global/js/wave.js') }}" data-cryptos={{ json_encode($cryptos) }}
-			data-stocks={{ json_encode($stocks) }} data-forexs={{ json_encode($forexs) }}></script>
+		<script src="{{ asset('assets/global/js/wave.js') }}"></script>
 	@endpush
 @endsection
