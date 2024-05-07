@@ -2,7 +2,7 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<a class="navbar-brand logo" href="{{ route('home') }}">
-				<img src="{{ asset('assets/global/images/logo.jpg') }}">
+				<img src="{{ asset('assets/global/images/logo.png') }}" style="mix-blend-mode:difference;">
 			</a>
 			<button class="navbar-toggler header-button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

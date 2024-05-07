@@ -1,7 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500&family=Outfit:wght@400;500;600;700&display=swap");
+
 .wave-container {
-  > * {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -140,7 +139,7 @@
             gap: 2px;
             cursor: pointer;
 
-            &:active {
+            &.active {
               border: 1px solid goldenrod;
             }
 
@@ -155,7 +154,12 @@
                 width: 18px;
                 height: 18px;
                 border-radius: 50%;
-                background: #333;
+                overflow: hidden;
+
+                img {
+                  object-fit: cover;
+                  mix-blend-mode: difference;
+                }
               }
 
               > div.pair-name {
@@ -227,6 +231,12 @@
         height: 25px;
         border-radius: 50%;
         background: #333;
+        overflow: hidden;
+
+        img {
+          object-fit: cover;
+          mix-blend-mode: difference;
+        }
       }
 
       > p {

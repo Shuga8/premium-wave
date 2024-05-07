@@ -6,14 +6,14 @@
 	<div class="wave-container">
 
 		<div class="control-navigation">
-			<div class="control-tab ct-1 text-white" data-nav-control-title="Favorites"
+			{{-- <div class="control-tab ct-1 text-white" data-nav-control-title="Favorites"
 				data-nav-control-icon='<i class="la la-star"></i>'>
 
 				<div class="icon">
 					<i class="la la-star"></i>
 				</div>
 				<span>Favorites</span>
-			</div>
+			</div> --}}
 
 			<div class="control-tab ct-2 text-white" data-nav-control-title="Currencies"
 				data-nav-control-icon='<i class="la la-coins"></i>'>
@@ -21,7 +21,7 @@
 				<div class="icon">
 					<i class="la la-coins"></i>
 				</div>
-				<span>Currencies</span>
+				<span>@lang('Currencies')</span>
 			</div>
 
 			<div class="control-tab text-white" data-nav-control-title="Stocks"
@@ -30,7 +30,7 @@
 				<div class="icon">
 					<i class="la la-chart-bar"></i>
 				</div>
-				<span>Stocks</span>
+				<span>@lang('Stocks')</span>
 			</div>
 
 			<div class="control-tab text-white" data-nav-control-title="Commodities"
@@ -39,7 +39,7 @@
 				<div class="icon">
 					<i class="la la-charging-station"></i>
 				</div>
-				<span>Commodities</span>
+				<span>@lang('Commodities')</span>
 			</div>
 
 			<div class="control-tab text-white" data-nav-control-title="Cryptos"
@@ -47,7 +47,7 @@
 				<div class="icon">
 					<i class="la la-bitcoin"></i>
 				</div>
-				<span>Cryptos</span>
+				<span>@lang('Cryptos')</span>
 			</div>
 
 			<div class="control-tab text-white" data-nav-control-title="Indicies"
@@ -55,7 +55,7 @@
 				<div class="icon">
 					<i class="la la-charging-station"></i>
 				</div>
-				<span>Indicies</span>
+				<span>@lang('Indicies')</span>
 			</div>
 
 			<div class="control-tab text-white" data-nav-control-title="Cannabis"
@@ -63,7 +63,7 @@
 				<div class="icon">
 					<i class="las la-leaf"></i>
 				</div>
-				<span>Cannabis</span>
+				<span>@lang('Cannabis')</span>
 			</div>
 
 
@@ -117,8 +117,8 @@
 		<div class="trading-form-display">
 			<div class="current-symbol-info">
 				<div class="SymbolImg"></div>
-				<div class="usdSymbolImg"></div>
-				<p class="pair-name">EURUSD</p>
+				<div class="usdSymbolImg"><img src="{{ asset('assets/global/icons/USD.png') }}" alt=""></div>
+				<p class="pair-name">AUDUSD</p>
 			</div>
 
 			<form class="trade-form" name="trade-form">
@@ -225,8 +225,8 @@
 			"use strict";
 			new TradingView.widget({
 				"width": "100%",
-				"height": 525,
-				"symbol": "EURUSD",
+				"height": 559,
+				"symbol": "AUDUSD",
 				"interval": "1",
 				"timezone": "Etc/UTC",
 				"theme": "dark",
