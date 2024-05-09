@@ -24,6 +24,14 @@
 				<span>@lang('Currencies')</span>
 			</div>
 
+			<div class="control-tab text-white" data-nav-control-title="Cryptos"
+				data-nav-control-icon='<i class="la la-bitcoin"></i>'>
+				<div class="icon">
+					<i class="la la-bitcoin"></i>
+				</div>
+				<span>@lang('Cryptos')</span>
+			</div>
+
 			<div class="control-tab text-white" data-nav-control-title="Stocks"
 				data-nav-control-icon='<i class="la la-chart-bar"></i>'>
 
@@ -40,14 +48,6 @@
 					<i class="la la-charging-station"></i>
 				</div>
 				<span>@lang('Commodities')</span>
-			</div>
-
-			<div class="control-tab text-white" data-nav-control-title="Cryptos"
-				data-nav-control-icon='<i class="la la-bitcoin"></i>'>
-				<div class="icon">
-					<i class="la la-bitcoin"></i>
-				</div>
-				<span>@lang('Cryptos')</span>
 			</div>
 
 			<div class="control-tab text-white" data-nav-control-title="Indicies"
@@ -142,7 +142,7 @@
 						<option value="5">5</option>
 						<option value="6">6</option>
 						<option value="7">7</option>
-						<option value="8">9</option>
+						<option value="8">8</option>
 						<option value="9">9</option>
 						<option value="10">10</option>
 					</select>
@@ -150,18 +150,18 @@
 
 				<div class="group">
 					<p>Pips Value: <b><span class="pips-value">$ 1</span></b></p>
-					<p>Required Margin: <b><span class="required-margin">$ 120</span></b></p>
+					<p>Required Margin: <b><span class="required-margin">$ 53.87</span></b></p>
 				</div>
 
 				<div class="button-group">
 					<button class="set-sell" type="submit">
 						<i class="la la-arrow-down"></i>Sell
-						<p>0.2234</p>
+						<p class="set-sell-value"></p>
 					</button>
 
 					<button class="set-buy" type="submit">
 						<i class="la la-arrow-up"></i>Buy
-						<p>1.2234</p>
+						<p class="set-buy-value"></p>
 					</button>
 				</div>
 
@@ -226,7 +226,7 @@
 			new TradingView.widget({
 				"width": "100%",
 				"height": 559,
-				"symbol": "AUDUSD",
+				"symbol": "FX:AUDUSD",
 				"interval": "1",
 				"timezone": "Etc/UTC",
 				"theme": "dark",

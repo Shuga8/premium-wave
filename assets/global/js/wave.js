@@ -5,13 +5,34 @@ const afterDisplay = document.querySelector(".control-after-display");
 const tradeChartDisplay = document.querySelector(".trading-chart-display");
 const tradeFormDisplay = document.querySelector(".trading-form-display");
 const tradeFom = document.querySelector(".trade-form");
+const btnGroup = document.querySelector(".button-group");
 const tradeBtnGroup = document.querySelector(".trade-button-group");
 const accordionBtn = document.querySelector(".accordion-btn");
 const accordionContent = document.querySelector(".accordion-content");
 const closeDisplayBtn = document.querySelector(".close-display-btn");
 
+let coin_rate = null;
+let stop_loss = null;
+let take_profit = null;
+let lotsize = 0.1;
+let currency_type = "currency";
+
+let cryptoRates = {};
 let currencyRates = [];
 let stockRates = [];
+let commodityRates = [];
+
+document.querySelector("#lot").addEventListener("change", function (e) {
+  let value = parseFloat(this.value) * 10;
+
+  lotsize = this.value;
+
+  tradeFom.querySelector(".pips-value").textContent = `$${value}`;
+
+  let returnval = parseFloat(value * 53.87).toFixed(2);
+
+  tradeFom.querySelector(".required-margin").textContent = `$${returnval}`;
+});
 
 controlButtons.forEach((controlBtn) => {
   controlBtn.addEventListener("click", async function (e) {
@@ -59,8 +80,6 @@ tradeFom.addEventListener("submit", function (e) {
   e.preventDefault();
 });
 
-const btnGroup = document.querySelector(".button-group");
-
 btnGroup.querySelectorAll("button").forEach((button) => {
   button.addEventListener("click", function (e) {
     btnGroup.querySelectorAll("button").forEach((button) => {
@@ -76,6 +95,8 @@ btnGroup.querySelectorAll("button").forEach((button) => {
         }
       }, 100);
     }
+
+    console.log(coin_rate);
   });
 });
 
@@ -102,14 +123,18 @@ async function setAfterDisplayContent(element) {
 
   if (elementTitle.toLowerCase() == "cryptos") {
     setForCryptos();
+    type = "crypto";
     return false;
   } else if (elementTitle.toLowerCase() == "currencies") {
     setForCurrencies();
+    type = "currency";
   } else if (elementTitle.toLowerCase() == "stocks") {
     setForStocks();
+    type = "stock";
     return false;
   } else if (elementTitle.toLowerCase() == "commodities") {
     setForCommodities();
+    type = "commodity";
     return false;
   }
 }
@@ -170,10 +195,17 @@ async function setForCurrencies() {
 
     try {
       const rate = currencyRates[currencies.indexOf(currency)];
+
       assetContent.innerHTML += `
-          <div class="asset-pair-item" data-asset-symbol=${currency[4]} onclick="assetClickTrigger(this)" data-asset-type="currency">
+          <div class="asset-pair-item ${
+            currency[4] == "AUD" ? "active" : ""
+          }" data-asset-symbol=${
+        currency[4]
+      } onclick="assetClickTrigger(this)" data-asset-type="currency">
             <div class="asset-pair-info">
-                <div class="img-pair"><img src="/${url}/assets/global/icons/${currency[4]}.png" alt="" /></div>
+                <div class="img-pair"><img src="/${url}/assets/global/icons/${
+        currency[4]
+      }.png" alt="" /></div>
                 <div class="img-pair"><img src="/${url}/assets/global/icons/USD.png" alt="" /></div>
                 <div class="pair-name">${currency[4]}USD</div>
             </div>
@@ -199,10 +231,10 @@ async function setForStocks() {
     let rate = stockRates[stocks.indexOf(stock)];
 
     assetContent.innerHTML += `
-            <div class="asset-pair-item" data-asset-symbol=${stock.symbol} onclick="assetClickTrigger(this)" data-asset-type="">
+            <div class="asset-pair-item" data-asset-symbol=${stock.symbol} onclick="assetClickTrigger(this)" data-asset-type="stock">
 
                 <div class="asset-pair-info">
-                    <div class="img-pair"></div>
+                    <div class="img-pair"><img src="/${url}/assets/global/icons/${stock.symbol}.png" alt="" /></div>
                     <div class="pair-name">${stock.symbol}</div>
                 </div>
 
@@ -223,17 +255,18 @@ async function setForCommodities() {
   const assetContent = afterDisplay.querySelector(".asset-content");
 
   commodities.forEach((commodity) => {
+    let rate = commodityRates[commodities.indexOf(commodity)];
     assetContent.innerHTML += `
-          <div class="asset-pair-item" data-asset-symbol=${commodity.symbol} onclick="assetClickTrigger(this)" data-asset-type="">
+          <div class="asset-pair-item" data-asset-symbol=${commodity.symbol} onclick="assetClickTrigger(this)" data-asset-type="commodity">
 
               <div class="asset-pair-info">
-                  <div class="img-pair"></div>
+                  <div class="img-pair"><img src="/${url}/assets/global/icons/stock.png" alt="" /></div>
                   <div class="pair-name">${commodity.symbol}USD</div>
               </div>
 
               <div class="asset-pair-rate">
                   <div class="item-status">open</div>
-                  <div class="item-rate">0.001</div>
+                  <div class="item-rate">${rate}</div>
               </div>
 
               <div class="asset-fav">
@@ -244,29 +277,60 @@ async function setForCommodities() {
   });
 }
 
-function assetClickTrigger(element) {
+async function assetClickTrigger(element) {
+  currency_type = element.getAttribute("data-asset-type");
+
   const symbol = element.getAttribute("data-asset-symbol");
 
-  const returnSymbol =
-    element.getAttribute("data-asset-type") === ""
-      ? `${symbol}`
-      : `${symbol}USD`;
+  if (currency_type == "currency") {
+    coin_rate = await getCurrencyRate(symbol);
+  } else if (currency_type == "crypto") {
+    coin_rate = cryptoRates[symbol];
+  } else if (currency_type == "stock") {
+    coin_rate = await getStockRate(symbol);
+  } else if (currency_type == "commodity") {
+    coin_rate = await getCommodityRate(symbol);
+  }
 
-  const pairname =
-    element.getAttribute("data-asset-type") === "" ||
-    element.getAttribute("data-asset-type") == "crypto"
-      ? `${symbol}`
-      : `${symbol}USD`;
+  setVisuals();
+
+  document.querySelectorAll(".asset-pair-item").forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  element.classList.add("active");
+
+  let returnSymbol;
+
+  if (currency_type == "currency" || currency_type == "crypto") {
+    returnSymbol = `${symbol}USD`;
+  } else if (currency_type == "stock") {
+    returnSymbol = `${symbol}`;
+  } else if (currency_type == "commodity") {
+    if (symbol == "GF") {
+      returnSymbol = `CME:GF1!`;
+    } else if (symbol == "GDP") {
+      returnSymbol = `ACTIVTRADES:DIESELK2024`;
+    } else if (symbol == "NG") {
+      returnSymbol = `CAPITALCOM:NATURALGAS`;
+    } else {
+      returnSymbol = `CAPITALCOM:${symbol}`;
+    }
+  } else {
+    returnSymbol = `${symbol}`;
+  }
+
+  const pairname = currency_type !== "currency" ? `${symbol}` : `${symbol}USD`;
 
   tradeFormDisplay.querySelector(".pair-name").textContent = `${pairname}`;
-  if (
-    element.getAttribute("data-asset-type") === "" ||
-    element.getAttribute("data-asset-type") == "crypto"
-  ) {
+  if (currency_type !== "currency") {
     tradeFormDisplay
       .querySelector(".usdSymbolImg")
       .setAttribute("hidden", true);
-    tradeFormDisplay.querySelector(".SymbolImg").innerHTML = `
+    tradeFormDisplay.querySelector(".SymbolImg").innerHTML =
+      currency_type == "commodity"
+        ? `<img src="/${url}/assets/global/icons/stock.png" alt="" />`
+        : `
     <img src="/${url}/assets/global/icons/${symbol}.png" alt="" />
     `;
   } else {
@@ -310,7 +374,7 @@ async function getCurrencyRate(symbol) {
       requestOptions
     );
     const result = await response.json();
-    return result.result.rate;
+    return parseFloat(result.result.rate).toFixed(4);
   } catch (error) {
     console.error(error);
   }
@@ -327,6 +391,10 @@ async function setCurrencyRates() {
 
     currencyRates.push(rate);
   }
+
+  coin_rate = currencyRates[1];
+
+  setVisuals();
 }
 
 async function getStockRate(symbol) {
@@ -354,5 +422,63 @@ async function setStockRates() {
     stockRates.push(rate);
   }
 }
+
+async function getCommodityRate(symbol) {
+  const myHeaders = new Headers();
+  myHeaders.append("Cookie", "ctoken=ef97832feebc4885851723444a94419e");
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  const response = await fetch(
+    `https://api.iex.cloud/v1/data/CORE/QUOTE/${symbol}?token=pk_2ee9841565e7480c933da27c494aa466`,
+    requestOptions
+  );
+  const result = await response.json();
+  return result[0]["latestPrice"];
+}
+
+async function setCommodityRates() {
+  for (const commodity of commodities) {
+    let rate = await getCommodityRate(commodity.symbol);
+
+    commodityRates.push(rate);
+  }
+}
+
+function setVisuals() {
+  if (coin_rate < 10) {
+    stop_loss = parseFloat(coin_rate) - 0.0009;
+
+    take_profit = parseFloat(coin_rate) + 0.0009;
+
+    document.querySelector(".set-sell-value").textContent =
+      parseFloat(stop_loss).toFixed(4);
+    document.querySelector(".set-buy-value").textContent =
+      parseFloat(take_profit).toFixed(4);
+  } else {
+    stop_loss = parseFloat(coin_rate) - 9.09;
+
+    take_profit = parseFloat(coin_rate) + 9.09;
+
+    document.querySelector(".set-sell-value").textContent =
+      parseFloat(stop_loss).toFixed(2);
+    document.querySelector(".set-buy-value").textContent =
+      parseFloat(take_profit).toFixed(2);
+  }
+}
+
+function extractAndSaveCryptoBalance() {
+  cryptos.forEach((crypto) => {
+    let sym = crypto.symbol;
+    cryptoRates[sym] = crypto.rate;
+  });
+}
+
+extractAndSaveCryptoBalance();
 setCurrencyRates();
 setStockRates();
+setCommodityRates();
