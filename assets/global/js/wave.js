@@ -1,4 +1,5 @@
 /** HTML ELEMENTS */
+const url = "premium-wave";
 const controlButtons = document.querySelectorAll(".control-tab");
 const afterDisplay = document.querySelector(".control-after-display");
 const tradeChartDisplay = document.querySelector(".trading-chart-display");
@@ -56,25 +57,25 @@ controlButtons.forEach((controlBtn) => {
 
 tradeFom.addEventListener("submit", function (e) {
   e.preventDefault();
+});
 
-  const btnGroup = document.querySelector(".button-group");
+const btnGroup = document.querySelector(".button-group");
 
-  btnGroup.querySelectorAll("button").forEach((button) => {
-    button.addEventListener("click", function (e) {
-      btnGroup.querySelectorAll("button").forEach((button) => {
-        button.classList.remove("active");
-      });
-      if (this.classList.contains("active")) {
-        this.classList.remove("active");
-      } else {
-        this.classList.add("active");
-        setTimeout(() => {
-          if (!tradeBtnGroup.classList.contains("active")) {
-            tradeBtnGroup.classList.add("active");
-          }
-        }, 100);
-      }
+btnGroup.querySelectorAll("button").forEach((button) => {
+  button.addEventListener("click", function (e) {
+    btnGroup.querySelectorAll("button").forEach((button) => {
+      button.classList.remove("active");
     });
+    if (this.classList.contains("active")) {
+      this.classList.remove("active");
+    } else {
+      this.classList.add("active");
+      setTimeout(() => {
+        if (!tradeBtnGroup.classList.contains("active")) {
+          tradeBtnGroup.classList.add("active");
+        }
+      }, 100);
+    }
   });
 });
 
@@ -131,11 +132,11 @@ async function setForCryptos() {
     rate = rate.toFixed(2);
 
     assetContent.innerHTML += `
-          <div class="asset-pair-item" data-asset-symbol=${crypto.symbol} onclick="assetClickTrigger(this)" data-asset-type="">
+          <div class="asset-pair-item" data-asset-symbol=${crypto.symbol} onclick="assetClickTrigger(this)" data-asset-type="crypto">
 
               <div class="asset-pair-info">
-                  <div class="img-pair"></div>
-                  <div class="img-pair"><img src="/premium-wave/assets/global/icons/USD.png" alt=""></div>
+                  <div class="img-pair"><img src="/${url}/assets/global/icons/${crypto.symbol}.png" alt="" /></div>
+                  <div class="img-pair"><img src="/${url}/assets/global/icons/USD.png" alt="" /></div>
                   <div class="pair-name">${crypto.symbol}USD</div>
               </div>
 
@@ -170,10 +171,10 @@ async function setForCurrencies() {
     try {
       const rate = currencyRates[currencies.indexOf(currency)];
       assetContent.innerHTML += `
-          <div class="asset-pair-item" data-asset-symbol=${currency[4]} onclick="assetClickTrigger(this)" data-asset-type="hhxjx">
+          <div class="asset-pair-item" data-asset-symbol=${currency[4]} onclick="assetClickTrigger(this)" data-asset-type="currency">
             <div class="asset-pair-info">
-                <div class="img-pair"></div>
-                <div class="img-pair"></div>
+                <div class="img-pair"><img src="/${url}/assets/global/icons/${currency[4]}.png" alt="" /></div>
+                <div class="img-pair"><img src="/${url}/assets/global/icons/USD.png" alt="" /></div>
                 <div class="pair-name">${currency[4]}USD</div>
             </div>
             <div class="asset-pair-rate">
@@ -251,13 +252,28 @@ function assetClickTrigger(element) {
       ? `${symbol}`
       : `${symbol}USD`;
 
-  tradeFormDisplay.querySelector(".pair-name").textContent = `${returnSymbol}`;
-  if (element.getAttribute("data-asset-type") === "") {
+  const pairname =
+    element.getAttribute("data-asset-type") === "" ||
+    element.getAttribute("data-asset-type") == "crypto"
+      ? `${symbol}`
+      : `${symbol}USD`;
+
+  tradeFormDisplay.querySelector(".pair-name").textContent = `${pairname}`;
+  if (
+    element.getAttribute("data-asset-type") === "" ||
+    element.getAttribute("data-asset-type") == "crypto"
+  ) {
     tradeFormDisplay
       .querySelector(".usdSymbolImg")
       .setAttribute("hidden", true);
+    tradeFormDisplay.querySelector(".SymbolImg").innerHTML = `
+    <img src="/${url}/assets/global/icons/${symbol}.png" alt="" />
+    `;
   } else {
     tradeFormDisplay.querySelector(".usdSymbolImg").removeAttribute("hidden");
+    tradeFormDisplay.querySelector(".SymbolImg").innerHTML = `
+    <img src="/${url}/assets/global/icons/${symbol}.png" alt="" />
+    `;
   }
 
   new TradingView.widget({

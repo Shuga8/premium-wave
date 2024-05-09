@@ -140,9 +140,10 @@
   overflow: hidden;
 }
 .wave-container .control-after-display .after-display-content .asset-list .asset-content .asset-pair-item .asset-pair-info > div.img-pair img {
-  -o-object-fit: cover;
-     object-fit: cover;
-  mix-blend-mode: difference;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover !important;
+     object-fit: cover !important;
 }
 .wave-container .control-after-display .after-display-content .asset-list .asset-content .asset-pair-item .asset-pair-info > div.pair-name {
   font-size: 9.5px;
@@ -202,9 +203,10 @@
   overflow: hidden;
 }
 .wave-container .trading-form-display .current-symbol-info > div img {
+  width: 25px;
+  height: 25px;
   -o-object-fit: cover;
      object-fit: cover;
-  mix-blend-mode: difference;
 }
 .wave-container .trading-form-display .current-symbol-info > p {
   color: gold;

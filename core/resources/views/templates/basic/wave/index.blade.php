@@ -116,7 +116,7 @@
 
 		<div class="trading-form-display">
 			<div class="current-symbol-info">
-				<div class="SymbolImg"></div>
+				<div class="SymbolImg"><img src="{{ asset('assets/global/icons/AUD.png') }}" alt="" /></div>
 				<div class="usdSymbolImg"><img src="{{ asset('assets/global/icons/USD.png') }}" alt=""></div>
 				<p class="pair-name">AUDUSD</p>
 			</div>
