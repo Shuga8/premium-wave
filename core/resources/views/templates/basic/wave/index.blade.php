@@ -115,6 +115,7 @@
 		</div>
 
 		<div class="trading-form-display">
+
 			<div class="current-symbol-info">
 				<div class="SymbolImg"><img src="{{ asset('assets/global/icons/AUD.png') }}" alt="" /></div>
 				<div class="usdSymbolImg"><img src="{{ asset('assets/global/icons/USD.png') }}" alt=""></div>
@@ -244,6 +245,7 @@
 			let stocks = {!! json_encode($stocks) !!};
 			let forexs = {!! json_encode($forexs) !!};
 			let commodities = {!! json_encode($commodites) !!}
+			let token = "{{ csrf_token() }}"
 		</script>
 		<script src="{{ asset('assets/global/js/wave.js') }}"></script>
 	@endpush

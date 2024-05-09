@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Commodity;
-use App\Models\Currency;
-use App\Models\Stock;
+use App\Lib\Wave;
 use App\Models\User;
+use App\Models\Stock;
+use App\Models\Wallet;
+use App\Models\Currency;
+use App\Models\Commodity;
 use Illuminate\Http\Request;
+use App\Traits\HttpResponses;
 
 class WaveController extends Controller
 {
+    use HttpResponses;
     public function index()
     {
 
@@ -34,5 +38,11 @@ class WaveController extends Controller
         ];
 
         return view($this->activeTemplate . 'wave.index')->with($data);
+    }
+
+    public function store(Request $request)
+    {
+        $wave = new Wave();
+        return $wave->store($request);
     }
 }

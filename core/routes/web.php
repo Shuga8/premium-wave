@@ -47,6 +47,7 @@ Route::controller("StocksController")->prefix('stock')->group(function () {
 
 Route::controller('WaveController')->prefix('wave')->group(function () {
     Route::get('', 'index')->name('wave');
+    Route::post('store', 'store')->name('wave.store');
 });
 
 Route::namespace('P2P')->group(function () {
