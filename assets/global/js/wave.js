@@ -16,6 +16,7 @@ let stop_loss = null;
 let take_profit = null;
 let lotsize = 0.1;
 let currency_type = "currency";
+let coin_symbol = "AUD";
 
 let cryptoRates = {};
 let currencyRates = [];
@@ -95,8 +96,6 @@ btnGroup.querySelectorAll("button").forEach((button) => {
         }
       }, 100);
     }
-
-    console.log(coin_rate);
   });
 });
 
@@ -281,6 +280,8 @@ async function assetClickTrigger(element) {
   currency_type = element.getAttribute("data-asset-type");
 
   const symbol = element.getAttribute("data-asset-symbol");
+
+  coin_symbol = symbol;
 
   if (currency_type == "currency") {
     coin_rate = await getCurrencyRate(symbol);
@@ -482,3 +483,30 @@ extractAndSaveCryptoBalance();
 setCurrencyRates();
 setStockRates();
 setCommodityRates();
+
+$(".trade-btn").click(function (e) {
+  $.ajax({
+    headers: {
+      "X-CSRF-TOKEN": token,
+    },
+    url: `wave/store`,
+    method: "POST",
+    data: {
+      stop_loss: stop_loss,
+      take_profit: take_profit,
+      rate: coin_rate,
+      lotsize: lotsize,
+      symbol: coin_symbol,
+      type: currency_type,
+    },
+    success: function (response, status) {
+      if (response.success) {
+        notify("success", response.success);
+        return 0;
+      } else if (response.error) {
+        notify("error", response.error);
+        return 0;
+      }
+    },
+  });
+});
