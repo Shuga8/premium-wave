@@ -18,7 +18,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-      /**
+    /**
      * Register any application services.
      *
      * @return void
@@ -27,13 +27,14 @@ class AppServiceProvider extends ServiceProvider
     {
     }
 
-      /**
+    /**
      * Bootstrap any application services.
      *
      * @return void
      */
     public function boot()
     {
+
         if (!cache()->get('SystemInstalled')) {
             $envFilePath = base_path('.env');
             $envContents = file_get_contents($envFilePath);
@@ -46,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
 
-        $general                         = gs();
+        $general = gs();
         $activeTemplate                  = activeTemplate();
         $viewShare['general']            = $general;
         $viewShare['activeTemplate']     = $activeTemplate;

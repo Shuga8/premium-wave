@@ -3,7 +3,7 @@
 		<span class="sidebar-menu__close d-xl-none d-block"><i class="fas fa-times"></i></span>
 		<div class="sidebar-logo">
 			<a class="sidebar-logo__link" href="{{ route('user.home') }}">
-				<img src="{{ siteLogo() }}">
+				<img src="{{ asset('assets/global/images/logo.png') }}">
 			</a>
 		</div>
 		<ul class="sidebar-menu-list">
