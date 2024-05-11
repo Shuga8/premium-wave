@@ -75,6 +75,12 @@ class Wave
                 $wave->isCommodity = true;
                 $wave->commodity = $request->symbol;
             }
+            if ($request->has('open_at') && !is_null($request->open_at) && !empty($request->open_at)) {
+                $wave->open_at = $request->open_at;
+                $wave->status = 'pending';
+            } else {
+                $wave->status = 'running';
+            }
 
             $wave->save();
             $balance->save();

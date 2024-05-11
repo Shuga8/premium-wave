@@ -31,7 +31,8 @@ return new class extends Migration
             $table->string("crypto")->nullable();
             $table->string("commodity")->nullable();
             $table->string("stock")->nullable();
-            $table->boolean("status")->default(false)->comment("0: running, 1: completed");
+            $table->date('open_at')->nullable();
+            $table->enum("status", ['pending', 'running', 'completed'])->default('pending');
             $table->timestamps();
         });
     }

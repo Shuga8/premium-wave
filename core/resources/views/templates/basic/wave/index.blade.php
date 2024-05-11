@@ -220,6 +220,36 @@
 
 	</div>
 
+	<div class="wave-logs">
+
+		<div class="logs">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="open-trade-tab" data-bs-toggle="tab" data-bs-target="#open-trade"
+						type="button" role="tab" aria-controls="open-trade" aria-selected="true">Open Trades</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="pending-trade-tab" data-bs-toggle="tab" data-bs-target="#pending-trade"
+						type="button" role="tab" aria-controls="pending-trade" aria-selected="false">Pending Trades</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button"
+						role="tab" aria-controls="history" aria-selected="false">Trade History</button>
+				</li>
+
+			</ul>
+
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="open-trade" role="tabpanel" aria-labelledby="open-trade-tab">
+					{{-- <x-flexible-view :view="$activeTemplate . 'wave.open-trades'" :opentrades=  /> --}}
+				</div>
+				<div class="tab-pane fade" id="pending-trade" role="tabpanel" aria-labelledby="pending-trade-tab">...</div>
+				<div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">...</div>
+			</div>
+		</div>
+	</div>
+
 	@push('script')
 		<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 		<script>
@@ -245,7 +275,7 @@
 			let stocks = {!! json_encode($stocks) !!};
 			let forexs = {!! json_encode($forexs) !!};
 			let commodities = {!! json_encode($commodites) !!}
-			let token = "{{ csrf_token() }}"
+			let token = "{{ csrf_token() }}";
 		</script>
 		<script src="{{ asset('assets/global/js/wave.js') }}"></script>
 	@endpush

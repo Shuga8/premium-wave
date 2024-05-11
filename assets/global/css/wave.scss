@@ -482,4 +482,30 @@
   }
 }
 
+.wave-logs {
+  width: 100%;
+  padding: 7px 14px;
+
+  .logs {
+    background: #0b1f23;
+    padding: 10px 7px;
+    border-radius: 5px;
+    ul {
+      li {
+        button {
+          color: goldenrod;
+
+          &:hover {
+            color: gold;
+          }
+
+          &.active {
+            background: #0b1f23 !important;
+            color: #fff !important;
+          }
+        }
+      }
+    }
+  }
+}
 /* transition: height 0.3s ease-in-out; */
