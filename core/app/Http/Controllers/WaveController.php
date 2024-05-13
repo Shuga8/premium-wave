@@ -8,6 +8,7 @@ use App\Models\Stock;
 use App\Models\Wallet;
 use App\Models\Currency;
 use App\Models\Commodity;
+use App\Models\WaveLog;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 
@@ -44,5 +45,16 @@ class WaveController extends Controller
     {
         $wave = new Wave();
         return $wave->store($request);
+    }
+
+    public function getOpenTrades()
+    {
+        if (!auth()->check()) {
+            return redirect()->route('user.login');
+        }
+
+        $trades = WaveLog::where('user_id', auth()->user()->id)->where('status', 'running')->get();
+
+        return $this->success([$trades]);
     }
 }

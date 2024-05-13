@@ -1,1 +1,3 @@
-@props(['trades' => 'opentrades'])
+<div class="w-full">
+
+</div>
