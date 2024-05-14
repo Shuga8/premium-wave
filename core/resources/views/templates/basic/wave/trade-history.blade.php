@@ -5,33 +5,31 @@
 				<th>
 					ORDER ID
 					<br>
-					OPEN PRICE
-					<br>
-				</th>
-
-				<th>
-					CREATED TIME
-					<br>
-					CURRENT PRICE
+					STOP LOSS
 					<br>
 					USED FUNDS
 				</th>
 
 				<th>
-					SYMBOL
-					<br>
-					STOP LOSS
-					<br>
-				</th>
-
-				<th>
-					WALLET
+					CREATED TIME
 					<br>
 					TAKE PROFIT
+					<br>
+					PROFIT/LOSS
 				</th>
 
 				<th>
-					Action
+					CLOSING TIME
+					<br>
+					OPEN PRICE
+					<br>
+				</th>
+
+				<th>
+					SYMBOL
+					<br>
+					CLOSED PRICE
+
 				</th>
 			</tr>
 		</thead>
@@ -65,75 +63,6 @@
 					0.6999
 				</td>
 
-				<td>
-					<a class="bg-success px-4 py-2 text-white" href="">End</a>
-				</td>
-
-			</tr>
-
-			<tr>
-				<td>
-					2239908202
-					<br>
-					0.5564
-				</td>
-
-				<td>
-					22:12:30 11/11/2024
-					<br>
-					0.6674
-					<br>
-					$100
-				</td>
-
-				<td>
-					AED
-					<br>
-					0.3345
-				</td>
-
-				<td>
-					USD
-					<br>
-					0.6999
-				</td>
-
-				<td>
-					<a class="bg-success px-4 py-2 text-white" href="">End</a>
-				</td>
-
-			</tr>
-
-			<tr>
-				<td>
-					2239908202
-					<br>
-					0.5564
-				</td>
-
-				<td>
-					22:12:30 11/11/2024
-					<br>
-					0.6674
-					<br>
-					$100
-				</td>
-
-				<td>
-					AED
-					<br>
-					0.3345
-				</td>
-
-				<td>
-					USD
-					<br>
-					0.6999
-				</td>
-
-				<td>
-					<a class="bg-success px-4 py-2 text-white" href="">End</a>
-				</td>
 
 			</tr>
 

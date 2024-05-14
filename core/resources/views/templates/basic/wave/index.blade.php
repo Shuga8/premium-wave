@@ -241,15 +241,19 @@
 			</ul>
 
 			<div class="tab-content" id="myTabContent">
+
 				<div class="tab-pane fade show active" id="open-trade" role="tabpanel" aria-labelledby="open-trade-tab">
 					<x-flexible-view :view="$activeTemplate . 'wave.open-trades'" />
 				</div>
+
 				<div class="tab-pane fade" id="pending-trade" role="tabpanel" aria-labelledby="pending-trade-tab">
 					<x-flexible-view :view="$activeTemplate . 'wave.pending-trades'" />
 				</div>
+
 				<div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
 					<x-flexible-view :view="$activeTemplate . 'wave.trade-history'" />
 				</div>
+
 			</div>
 		</div>
 	</div>
