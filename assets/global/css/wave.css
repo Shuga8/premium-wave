@@ -417,6 +417,9 @@
   padding: 10px 7px;
   border-radius: 5px;
 }
+.wave-logs .logs ul li {
+  margin: 0px 2px;
+}
 .wave-logs .logs ul li button {
   color: goldenrod;
 }

@@ -371,7 +371,7 @@ async function getCurrencyRate(symbol) {
 
   try {
     const response = await fetch(
-      `https://api.fastforex.io/convert?from=${symbol}&to=USD&amount=1&api_key=4686c1d244-257beffcf5-sd2qy0`,
+      `https://api.fastforex.io/convert?from=${symbol}&to=USD&amount=1&api_key=ae27ced6c8-8cd8134a9b-sdgq3a`,
       requestOptions
     );
     const result = await response.json();
@@ -409,7 +409,7 @@ async function getStockRate(symbol) {
   };
 
   const response = await fetch(
-    `https://api.iex.cloud/v1/data/CORE/QUOTE/${symbol}?token=pk_2ee9841565e7480c933da27c494aa466`,
+    `https://api.iex.cloud/v1/data/CORE/QUOTE/${symbol}?token=pk_371f158cb46d43debe6973a8d62416f7`,
     requestOptions
   );
   const result = await response.json();
@@ -435,7 +435,7 @@ async function getCommodityRate(symbol) {
   };
 
   const response = await fetch(
-    `https://api.iex.cloud/v1/data/CORE/QUOTE/${symbol}?token=pk_2ee9841565e7480c933da27c494aa466`,
+    `https://api.iex.cloud/v1/data/CORE/QUOTE/${symbol}?token=pk_371f158cb46d43debe6973a8d62416f7`,
     requestOptions
   );
   const result = await response.json();
