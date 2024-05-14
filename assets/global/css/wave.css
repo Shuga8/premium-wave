@@ -427,5 +427,24 @@
   background: #0b1f23 !important;
   color: #fff !important;
 }
+.wave-logs .logs .tab-content .tab-pane table {
+  width: 100%;
+}
+.wave-logs .logs .tab-content .tab-pane table thead tr {
+  border-bottom: 1px solid #fff;
+}
+.wave-logs .logs .tab-content .tab-pane table thead tr th {
+  text-align: center;
+  font-size: 11px;
+  padding: 12px 0px;
+}
+.wave-logs .logs .tab-content .tab-pane table tbody tr td {
+  padding: 5px 0px;
+  text-align: center;
+  font-size: 9px;
+}
+.wave-logs .logs .tab-content .tab-pane table tbody tr:not(:last-child) {
+  border-bottom: 1px solid #fff;
+}
 
 /* transition: height 0.3s ease-in-out; *//*# sourceMappingURL=wave.css.map */

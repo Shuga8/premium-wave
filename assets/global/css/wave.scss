@@ -506,6 +506,39 @@
         }
       }
     }
+
+    .tab-content {
+      .tab-pane {
+        table {
+          width: 100%;
+
+          thead {
+            tr {
+              th {
+                text-align: center;
+                font-size: 11px;
+                padding: 12px 0px;
+              }
+              border-bottom: 1px solid #fff;
+            }
+          }
+
+          tbody {
+            tr {
+              td {
+                padding: 5px 0px;
+                text-align: center;
+                font-size: 9px;
+              }
+
+              &:not(:last-child) {
+                border-bottom: 1px solid #fff;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 /* transition: height 0.3s ease-in-out; */

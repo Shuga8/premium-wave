@@ -58,6 +58,7 @@ class Wave
             $wave->user_id = $user->id;
             $wave->order_id =  time() . rand(111111, 9999999);
             $wave->amount = $amount;
+            $wave->open_amount = $amount;
             $wave->open_price = $request->rate;
             $wave->stop_loss = $request->stop_loss;
             $wave->take_profit = $request->take_profit;

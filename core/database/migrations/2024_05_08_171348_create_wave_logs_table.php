@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id')->unique();
             $table->decimal('amount', 28, 8);
+            $table->decimal('open_amount', 28, 8);
             $table->decimal('open_price', 28, 8);
             $table->decimal('stop_loss', 28, 8);
             $table->decimal('take_profit', 28, 8);
