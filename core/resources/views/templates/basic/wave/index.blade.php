@@ -286,5 +286,6 @@
 			let token = "{{ csrf_token() }}";
 		</script>
 		<script src="{{ asset('assets/global/js/wave.js') }}"></script>
+		<script src="{{ asset('assets/global/js/logs.js') }}"></script>
 	@endpush
 @endsection

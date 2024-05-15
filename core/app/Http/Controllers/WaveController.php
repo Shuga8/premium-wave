@@ -55,6 +55,6 @@ class WaveController extends Controller
 
         $trades = WaveLog::where('user_id', auth()->user()->id)->where('status', 'running')->get();
 
-        return $this->success([$trades]);
+        return response()->json($trades);
     }
 }

@@ -1,5 +1,5 @@
 <div class="" style="overflow-x: auto; ">
-	<table class="open-trades-table">
+	<table class="trade-history-table">
 		<thead>
 			<tr>
 				<th>
