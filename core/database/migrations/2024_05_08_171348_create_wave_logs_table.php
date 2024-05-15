@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string("commodity")->nullable();
             $table->string("stock")->nullable();
             $table->boolean('open_at_is_set')->default(false);
-            $table->dateTime("open_at")->nullable();
+            $table->decimal("open_at", 28, 8)->nullable();
             $table->enum("status", ['pending', 'running', 'completed'])->default('pending');
             $table->timestamps();
 

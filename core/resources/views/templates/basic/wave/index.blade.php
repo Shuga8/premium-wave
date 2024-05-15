@@ -175,43 +175,53 @@
 					<div class="accordion-btn"><i class="las la-caret-down"></i> Advanced</div>
 
 					<div class="accordion-content">
+
 						<div class="stop-loss-container">
-							<p>Stop Loss</p>
+							<div class="access">
+								<input id="stop_loss_check" name="stop_loss_check" type="checkbox">
+								<p>Stop Loss</p>
+							</div>
 							<div class="stop-loss-content">
 								<p>Potential Loss</p>
-								<div class="potentials-value potential-loss-value text-center text-white">1.2001</div>
+
+								<div class="potentials-value potential-loss-value text-center text-white"></div>
 								<div class="potential-action-buttons potential-loss-action-buttons">
-									<button>+</button>
-									<button>-</button>
+									<button class="potential-button increment">+</button>
+									<button class="potential-button decrement">-</button>
 								</div>
 							</div>
 						</div>
 
 						<div class="take-profit-container">
-							<p>Take Profit</p>
+							<div class="access">
+								<input id="take_profit_check" name="take_profit_check" type="checkbox">
+								<p>Take Profit</p>
+							</div>
 							<div class="take-profit-content">
 								<p>Potential Profit</p>
-								<div class="potentials-value potential-profit-value text-center text-white">1.2334</div>
+								<div class="potentials-value potential-profit-value text-center text-white"></div>
 								<div class="potential-action-buttons potential-profit-action-buttons">
-									<button>+</button>
-									<button>-</button>
+									<button class="potential-button increment">+</button>
+									<button class="potential-button decrement">-</button>
 								</div>
 							</div>
 						</div>
 
 						<div class="open-trade-container">
-							<p>Open Trade When Rate Is</p>
+							<div class="access">
+								<input id="open_rate_check" name="open_rate_check" type="checkbox">
+								<p>Open Trade When Rate Is</p>
+							</div>
 							<div class="open-trade-content">
-								<p> Open Time</p>
-								<div class="potentials-value potential-open-value text-center text-white">1.2001</div>
+								<p> Open Rate</p>
+								<div class="potentials-value potential-open-rate-value text-center text-white"></div>
 								<div class="potential-action-buttons potential-open-action-buttons">
-									<button>+</button>
-									<button>-</button>
+									<button class="potential-button potential-open-rate-button increment">+</button>
+									<button class="potential-button potential-open-rate-button decrement">-</button>
 								</div>
 							</div>
 						</div>
 					</div>
-
 
 				</div>
 

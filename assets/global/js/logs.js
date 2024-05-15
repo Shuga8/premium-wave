@@ -11,18 +11,20 @@ function setOpenTrades() {
       let data = [...response];
 
       tbody.innerHTML = ``;
-      data.forEach((trade) => {
-        let symbol = null;
-        if (trade.isCrypto) {
-          symbol = trade.crypto;
-        } else if (trade.isStock) {
-          symbol = trade.stock;
-        } else if (trade.isCommodity) {
-          symbol = trade.commodity;
-        } else if (trade.isForex) {
-          symbol = trade.currency;
-        }
-        let tr = `<tr>
+
+      if (data.length > 0) {
+        data.forEach((trade) => {
+          let symbol = null;
+          if (trade.isCrypto) {
+            symbol = trade.crypto;
+          } else if (trade.isStock) {
+            symbol = trade.stock;
+          } else if (trade.isCommodity) {
+            symbol = trade.commodity;
+          } else if (trade.isForex) {
+            symbol = trade.currency;
+          }
+          let tr = `<tr>
                 <td>
                     #${trade.order_id}
                     <br/>
@@ -55,10 +57,24 @@ function setOpenTrades() {
         </tr>
              `;
 
-        tbody.innerHTML += tr;
-      });
+          tbody.innerHTML += tr;
+        });
+      } else {
+        let tr = `
+            <tr>
+                <td colspan="5" class="text-danger">No Open Trade Is Running!</td>
+            </tr>
+        `;
+
+        tbody.innerHTML = tr;
+      }
     },
   });
+}
+
+function setPendingTrades() {
+  const pendingTrades = document.querySelector(".pending-trades-table");
+  const tbody = pendingTrades.querySelector("tbody");
 }
 
 setInterval(() => {

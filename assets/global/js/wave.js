@@ -17,11 +17,17 @@ let take_profit = null;
 let lotsize = 0.1;
 let currency_type = "currency";
 let coin_symbol = "AUD";
+let open_at_rate_is_checked = false;
+let open_rate = null;
 
 let cryptoRates = {};
 let currencyRates = [];
 let stockRates = [];
 let commodityRates = [];
+
+document.querySelectorAll(".potential-button").forEach((button) => {
+  button.setAttribute("disabled", true);
+});
 
 document.querySelector("#lot").addEventListener("change", function (e) {
   let value = parseFloat(this.value) * 10;
@@ -34,6 +40,46 @@ document.querySelector("#lot").addEventListener("change", function (e) {
 
   tradeFom.querySelector(".required-margin").textContent = `$${returnval}`;
 });
+
+document
+  .querySelector("#open_rate_check")
+  .addEventListener("click", function (e) {
+    let checker = this;
+
+    accordionContent
+      .querySelectorAll(".potential-open-rate-button")
+      .forEach((btn) => {
+        if (checker.checked) {
+          btn.removeAttribute("disabled");
+          open_at_rate_is_checked = true;
+          let currenctEther = accordionContent.querySelector(
+            ".potential-open-rate-value"
+          ).textContent;
+
+          open_rate = currenctEther;
+
+          btn.addEventListener("click", function (e) {
+            let ether = accordionContent.querySelector(
+              ".potential-open-rate-value"
+            ).textContent;
+
+            ether = parseFloat(ether);
+
+            if (this.classList.contains("increment")) {
+              setPotentialIncrementVisuals(ether);
+            } else if (this.classList.contains("decrement")) {
+              setPotentialDecrementVisuals(ether);
+            }
+
+            open_rate = ether.toFixed(4);
+          });
+        } else {
+          btn.setAttribute("disabled", true);
+          open_at_rate_is_checked = false;
+          open_rate = null;
+        }
+      });
+  });
 
 controlButtons.forEach((controlBtn) => {
   controlBtn.addEventListener("click", async function (e) {
@@ -458,8 +504,15 @@ function setVisuals() {
 
     document.querySelector(".set-sell-value").textContent =
       parseFloat(stop_loss).toFixed(4);
+    accordionContent.querySelector(".potential-loss-value").textContent =
+      parseFloat(stop_loss).toFixed(4);
     document.querySelector(".set-buy-value").textContent =
       parseFloat(take_profit).toFixed(4);
+    accordionContent.querySelector(".potential-profit-value").textContent =
+      parseFloat(take_profit).toFixed(4);
+
+    accordionContent.querySelector(".potential-open-rate-value").textContent =
+      parseFloat(coin_rate).toFixed(4);
   } else {
     stop_loss = parseFloat(coin_rate) - 9.09;
 
@@ -467,7 +520,96 @@ function setVisuals() {
 
     document.querySelector(".set-sell-value").textContent =
       parseFloat(stop_loss).toFixed(2);
+    accordionContent.querySelector(".potential-loss-value").textContent =
+      parseFloat(stop_loss).toFixed(2);
+
     document.querySelector(".set-buy-value").textContent =
+      parseFloat(take_profit).toFixed(2);
+
+    accordionContent.querySelector(".potential-profit-value").textContent =
+      parseFloat(take_profit).toFixed(2);
+
+    accordionContent.querySelector(".potential-open-rate-value").textContent =
+      parseFloat(coin_rate).toFixed(2);
+  }
+}
+
+function setPotentialIncrementVisuals(rate) {
+  if (rate < 10) {
+    rate += 0.0001;
+    stop_loss = parseFloat(rate) - 0.0009;
+
+    accordionContent.querySelector(".potential-open-rate-value").textContent =
+      parseFloat(rate).toFixed(4);
+
+    take_profit = parseFloat(rate) + 0.0009;
+
+    document.querySelector(".set-sell-value").textContent =
+      parseFloat(stop_loss).toFixed(4);
+    accordionContent.querySelector(".potential-loss-value").textContent =
+      parseFloat(stop_loss).toFixed(4);
+    document.querySelector(".set-buy-value").textContent =
+      parseFloat(take_profit).toFixed(4);
+    accordionContent.querySelector(".potential-profit-value").textContent =
+      parseFloat(take_profit).toFixed(4);
+  } else {
+    rate += 0.01;
+    stop_loss = parseFloat(rate) - 9.09;
+
+    accordionContent.querySelector(".potential-open-rate-value").textContent =
+      parseFloat(rate).toFixed(2);
+
+    take_profit = parseFloat(rate) + 9.09;
+
+    document.querySelector(".set-sell-value").textContent =
+      parseFloat(stop_loss).toFixed(2);
+    accordionContent.querySelector(".potential-loss-value").textContent =
+      parseFloat(stop_loss).toFixed(2);
+
+    document.querySelector(".set-buy-value").textContent =
+      parseFloat(take_profit).toFixed(2);
+
+    accordionContent.querySelector(".potential-profit-value").textContent =
+      parseFloat(take_profit).toFixed(2);
+  }
+}
+
+function setPotentialDecrementVisuals(rate) {
+  if (rate < 10) {
+    rate -= 0.0001;
+    stop_loss = parseFloat(rate) - 0.0009;
+
+    accordionContent.querySelector(".potential-open-rate-value").textContent =
+      parseFloat(rate).toFixed(4);
+
+    take_profit = parseFloat(rate) + 0.0009;
+
+    document.querySelector(".set-sell-value").textContent =
+      parseFloat(stop_loss).toFixed(4);
+    accordionContent.querySelector(".potential-loss-value").textContent =
+      parseFloat(stop_loss).toFixed(4);
+    document.querySelector(".set-buy-value").textContent =
+      parseFloat(take_profit).toFixed(4);
+    accordionContent.querySelector(".potential-profit-value").textContent =
+      parseFloat(take_profit).toFixed(4);
+  } else {
+    rate -= 0.01;
+    stop_loss = parseFloat(rate) - 9.09;
+
+    accordionContent.querySelector(".potential-open-rate-value").textContent =
+      parseFloat(rate).toFixed(2);
+
+    take_profit = parseFloat(rate) + 9.09;
+
+    document.querySelector(".set-sell-value").textContent =
+      parseFloat(stop_loss).toFixed(2);
+    accordionContent.querySelector(".potential-loss-value").textContent =
+      parseFloat(stop_loss).toFixed(2);
+
+    document.querySelector(".set-buy-value").textContent =
+      parseFloat(take_profit).toFixed(2);
+
+    accordionContent.querySelector(".potential-profit-value").textContent =
       parseFloat(take_profit).toFixed(2);
   }
 }
@@ -485,6 +627,7 @@ setStockRates();
 setCommodityRates();
 
 $(".trade-btn").click(function (e) {
+  const setOpenAt = open_at_rate_is_checked == true ? open_rate : null;
   $.ajax({
     headers: {
       "X-CSRF-TOKEN": token,
@@ -498,6 +641,7 @@ $(".trade-btn").click(function (e) {
       lotsize: lotsize,
       symbol: coin_symbol,
       type: currency_type,
+      open_at: setOpenAt,
     },
     success: function (response, status) {
       if (response.success) {

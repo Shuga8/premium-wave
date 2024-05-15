@@ -24,6 +24,7 @@ class Wave
         $user = User::where('id', $id)->firstOrFail();
         $balance = Wallet::where('user_id', $user->id)->where('currency_id', 31)->where('wallet_type', 1)->first();
 
+
         $validator = Validator::make($request->all(), [
             'stop_loss' => ['required', 'numeric'],
             'take_profit' => ['required', 'numeric'],
@@ -79,6 +80,7 @@ class Wave
                 $wave->commodity = $request->symbol;
             }
             if ($request->has('open_at') && !is_null($request->open_at) && !empty($request->open_at)) {
+                $wave->open_at_is_set = true;
                 $wave->open_at = $request->open_at;
                 $wave->status = 'pending';
             } else {
