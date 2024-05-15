@@ -151,14 +151,14 @@ function setPendingTrades() {
 }
 
 function setTradeHistory() {
-  const pendingTrades = document.querySelector(".pending-trades-table");
+  const pendingTrades = document.querySelector(".trade-history-table");
   const tbody = pendingTrades.querySelector("tbody");
 
   $.ajax({
     headers: {
       "X-CSRF-TOKEN": token,
     },
-    url: `wave/pending-trades`,
+    url: `wave/trades-history`,
     method: "GET",
     success: function (response, status) {
       let data = [...response];
@@ -177,38 +177,39 @@ function setTradeHistory() {
           } else if (trade.isForex) {
             symbol = trade.currency;
           }
+
+          let profitLoss =
+            price_is >= take_profit
+              ? "+" + trade.open_amount * pips
+              : "-" + trade.close_amount * pips;
           let tr = `<tr>
                   <td>
                       #${trade.order_id}
                       <br/>
                       ${trade.open_price}
-                      <br>
-                      ${trade.open_at}
                   </td>
                   
                   <td>
                       ${trade.created_at}
                       <br>
-                      ${trade.price_is}
+                      ${trade.take_profit}
                       <br>
-                      ${trade.open_amount}
+                      ${profitLoss}
                   </td>
   
                   <td>
-                      ${symbol}
+                     ${trade.updated_at}
                       <br>
                       ${trade.stop_loss}
                   </td>
   
                   <td>
-                      ${trade.wallet}
+                    ${symbol}
                       <br/>
-                      ${trade.take_profit}
+                      ${trade.price_is}
                   </td>
   
-                  <td>
-                      <a class="bg-danger px-4 py-2 text-white" href=""><i class="las la-trash"></i></a> 
-                  </td>
+
           </tr>
                `;
 
@@ -217,7 +218,7 @@ function setTradeHistory() {
       } else {
         let tr = `
               <tr>
-                  <td colspan="5" class="text-danger">No Trade Is Pending!</td>
+                  <td colspan="5" class="text-danger">No Trade Has Been Completed !</td>
               </tr>
           `;
 
@@ -230,4 +231,5 @@ function setTradeHistory() {
 setInterval(() => {
   setOpenTrades();
   setPendingTrades();
+  setTradeHistory();
 }, 1000);

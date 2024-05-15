@@ -68,4 +68,15 @@ class WaveController extends Controller
 
         return response()->json($trades);
     }
+
+    public function geTradesHistory()
+    {
+        if (!auth()->check()) {
+            return redirect()->route('user.login');
+        }
+
+        $trades = WaveLog::where('user_id', auth()->user()->id)->where('status', 'completed')->get();
+
+        return response()->json($trades);
+    }
 }
