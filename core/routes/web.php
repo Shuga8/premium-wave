@@ -49,6 +49,7 @@ Route::controller('WaveController')->prefix('wave')->group(function () {
     Route::get('', 'index')->name('wave');
     Route::post('store', 'store')->name('wave.store');
     Route::get('open-trades', 'getOpenTrades')->name('wave.open');
+    Route::get('pending-trades', 'getPendingTrades')->name('wave.pending');
 });
 
 Route::namespace('P2P')->group(function () {

@@ -57,4 +57,15 @@ class WaveController extends Controller
 
         return response()->json($trades);
     }
+
+    public function getPendingTrades()
+    {
+        if (!auth()->check()) {
+            return redirect()->route('user.login');
+        }
+
+        $trades = WaveLog::where('user_id', auth()->user()->id)->where('status', 'pending')->get();
+
+        return response()->json($trades);
+    }
 }

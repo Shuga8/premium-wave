@@ -7,6 +7,7 @@
 					<br>
 					OPEN PRICE
 					<br>
+					OPEN RATE
 				</th>
 
 				<th>
@@ -38,7 +39,7 @@
 
 		<tbody>
 
-			<tr>
+			{{-- <tr>
 				<td>
 					2239908202
 					<br>
@@ -69,7 +70,7 @@
 					<a class="bg-danger px-4 py-2 text-white" href=""><i class="las la-trash"></i></a>
 				</td>
 
-			</tr>
+			</tr> --}}
 
 		</tbody>
 	</table>

@@ -77,6 +77,7 @@ document
           btn.setAttribute("disabled", true);
           open_at_rate_is_checked = false;
           open_rate = null;
+          setVisuals();
         }
       });
   });
