@@ -186,8 +186,8 @@
 
 								<div class="potentials-value potential-loss-value text-center text-white"></div>
 								<div class="potential-action-buttons potential-loss-action-buttons">
-									<button class="potential-button increment">+</button>
-									<button class="potential-button decrement">-</button>
+									<button class="potential-button potential-stop-loss-button increment">+</button>
+									<button class="potential-button potential-stop-loss-button decrement">-</button>
 								</div>
 							</div>
 						</div>
@@ -201,8 +201,8 @@
 								<p>Potential Profit</p>
 								<div class="potentials-value potential-profit-value text-center text-white"></div>
 								<div class="potential-action-buttons potential-profit-action-buttons">
-									<button class="potential-button increment">+</button>
-									<button class="potential-button decrement">-</button>
+									<button class="potential-button potential-take-profit-button increment">+</button>
+									<button class="potential-button potential-take-profit-button decrement">-</button>
 								</div>
 							</div>
 						</div>
@@ -283,7 +283,7 @@
 				"style": "1",
 				"locale": "en",
 				"enable_publishing": false,
-				"hide_side_toolbar": true,
+				"hide_side_toolbar": false,
 				"hide_top_toolbar": true,
 				"details": false,
 				"container_id": "tradingview-container"

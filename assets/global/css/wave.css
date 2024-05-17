@@ -7,7 +7,7 @@
   padding: 15px 10px;
 }
 .wave-container .control-navigation {
-  width: 80px;
+  width: 7%;
   border-radius: 4px;
   padding: 10px 0px;
   background-color: #091619;
@@ -58,7 +58,7 @@
   display: block;
 }
 .wave-container .control-after-display.active-control-display {
-  width: 250px;
+  width: 20%;
   transition: width 0.3s ease-in-out;
 }
 .wave-container .control-after-display .close-display-btn {
@@ -163,14 +163,14 @@
   color: #fff;
 }
 .wave-container .trading-chart-display {
-  width: 850px;
+  width: 68%;
   border-radius: 5px;
   background-color: #091619 !important;
   transition: width 0.3s ease-in-out;
   overflow: hidden;
 }
 .wave-container .trading-chart-display.control-display-is-active {
-  width: 600px;
+  width: 48%;
   transition: width 0.3s ease-in-out;
 }
 .wave-container .trading-chart-display > div {
@@ -182,7 +182,7 @@
 }
 .wave-container .trading-form-display {
   display: block;
-  width: 300px;
+  width: 25%;
   border-radius: 5px;
   background-color: #091619;
   padding: 5px;

@@ -82,6 +82,68 @@ document
       });
   });
 
+document
+  .querySelector("#stop_loss_check")
+  .addEventListener("click", function (e) {
+    let checker = this;
+
+    accordionContent
+      .querySelectorAll(".potential-stop-loss-button")
+      .forEach((btn) => {
+        if (checker.checked) {
+          btn.removeAttribute("disabled");
+
+          btn.addEventListener("click", function (e) {
+            if (this.classList.contains("increment")) {
+              setIncrementTargetVisuals(
+                "potential-loss-value",
+                "set-sell-value"
+              );
+            } else if (this.classList.contains("decrement")) {
+              setDecrementTargetVisuals(
+                "potential-loss-value",
+                "set-sell-value"
+              );
+            }
+          });
+        } else {
+          btn.setAttribute("disabled", true);
+          setVisuals();
+        }
+      });
+  });
+
+document
+  .querySelector("#take_profit_check")
+  .addEventListener("click", function (e) {
+    let checker = this;
+
+    accordionContent
+      .querySelectorAll(".potential-take-profit-button")
+      .forEach((btn) => {
+        if (checker.checked) {
+          btn.removeAttribute("disabled");
+
+          btn.addEventListener("click", function (e) {
+            if (this.classList.contains("increment")) {
+              setIncrementTargetVisuals(
+                "potential-profit-value",
+                "set-buy-value"
+              );
+            } else if (this.classList.contains("decrement")) {
+              setDecrementTargetVisuals(
+                "potential-profit-value",
+                "set-buy-value"
+              );
+            }
+          });
+        } else {
+          btn.setAttribute("disabled", true);
+          setVisuals();
+        }
+      });
+  });
+
 controlButtons.forEach((controlBtn) => {
   controlBtn.addEventListener("click", async function (e) {
     if (this.classList.contains("active-control-btn")) {
@@ -573,6 +635,52 @@ function setPotentialIncrementVisuals(rate) {
     accordionContent.querySelector(".potential-profit-value").textContent =
       parseFloat(take_profit).toFixed(2);
   }
+}
+
+function setIncrementTargetVisuals(rep, to_change) {
+  let context = parseFloat(document.querySelector(`.${rep}`).textContent);
+
+  if (context < 10) {
+    context += 0.0001;
+  } else {
+    context += 0.01;
+  }
+
+  if (to_change == "set-sell-value") {
+    stop_loss = context;
+    document.querySelector(`.${to_change}`).textContent =
+      context > 10 ? context.toFixed(2) : context.toFixed(4);
+  } else if (to_change == "set-buy-value") {
+    take_profit = context;
+    document.querySelector(`.${to_change}`).textContent =
+      context > 10 ? context.toFixed(2) : context.toFixed(4);
+  }
+
+  document.querySelector(`.${rep}`).textContent =
+    context > 10 ? context.toFixed(2) : context.toFixed(4);
+}
+
+function setDecrementTargetVisuals(rep, to_change) {
+  let context = parseFloat(document.querySelector(`.${rep}`).textContent);
+
+  if (context < 10) {
+    context -= 0.0001;
+  } else {
+    context += 0.01;
+  }
+
+  if (to_change == "set-sell-value") {
+    stop_loss = context;
+    document.querySelector(`.${to_change}`).textContent =
+      context > 10 ? context.toFixed(2) : context.toFixed(4);
+  } else if (to_change == "set-buy-value") {
+    take_profit = context;
+    document.querySelector(`.${to_change}`).textContent =
+      context > 10 ? context.toFixed(2) : context.toFixed(4);
+  }
+
+  document.querySelector(`.${rep}`).textContent =
+    context > 10 ? context.toFixed(2) : context.toFixed(4);
 }
 
 function setPotentialDecrementVisuals(rate) {
