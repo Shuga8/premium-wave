@@ -53,7 +53,7 @@ function setOpenTrades() {
                 </td>
 
                 <td>
-                <a class="bg-success px-4 py-2 text-white" href="">End</a>
+                <a class="bg-success px-4 py-2 text-white" href="wave/end-running-trade/${trade.id}">End</a>
                 </td>
         </tr>
              `;
@@ -130,7 +130,7 @@ function setPendingTrades() {
                 </td>
 
                 <td>
-                    <a class="bg-danger px-4 py-2 text-white" href=""><i class="las la-trash"></i></a> 
+                    <a class="bg-danger px-4 py-2 text-white" href="wave/delete-pending-trade/${trade.id}"><i class="las la-trash"></i></a> 
                 </td>
         </tr>
              `;
