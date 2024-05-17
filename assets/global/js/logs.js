@@ -43,6 +43,7 @@ function setOpenTrades() {
                 <td>
                     ${symbol}
                     <br>
+                    
                     ${trade.stop_loss}
                 </td>
 
