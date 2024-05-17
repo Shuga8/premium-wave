@@ -647,10 +647,19 @@ function setIncrementTargetVisuals(rep, to_change) {
   }
 
   if (to_change == "set-sell-value") {
+    if (context >= coin_rate) {
+      notify("error", "stop loss cannot be greater or equal to market rate");
+      return false;
+    }
+
     stop_loss = context;
     document.querySelector(`.${to_change}`).textContent =
       context > 10 ? context.toFixed(2) : context.toFixed(4);
   } else if (to_change == "set-buy-value") {
+    if (context <= coin_rate) {
+      notify("error", "take profit cannot be lesser or equal to market rate");
+      return false;
+    }
     take_profit = context;
     document.querySelector(`.${to_change}`).textContent =
       context > 10 ? context.toFixed(2) : context.toFixed(4);
@@ -670,10 +679,18 @@ function setDecrementTargetVisuals(rep, to_change) {
   }
 
   if (to_change == "set-sell-value") {
+    if (context >= coin_rate) {
+      notify("error", "stop loss cannot be greater or equal to market rate");
+      return false;
+    }
     stop_loss = context;
     document.querySelector(`.${to_change}`).textContent =
       context > 10 ? context.toFixed(2) : context.toFixed(4);
   } else if (to_change == "set-buy-value") {
+    if (context <= coin_rate) {
+      notify("error", "take profit cannot be lesser or equal to market rate");
+      return false;
+    }
     take_profit = context;
     document.querySelector(`.${to_change}`).textContent =
       context > 10 ? context.toFixed(2) : context.toFixed(4);
