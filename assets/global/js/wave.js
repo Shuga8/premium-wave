@@ -461,8 +461,8 @@ async function assetClickTrigger(element) {
     style: "1",
     locale: "en",
     enable_publishing: false,
-    hide_side_toolbar: true,
-    hide_top_toolbar: true,
+    hide_side_toolbar: false,
+    hide_top_toolbar: false,
     details: false,
     container_id: "tradingview-container",
   });

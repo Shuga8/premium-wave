@@ -1,7 +1,7 @@
-function setOpenTrades() {
+async function setOpenTrades() {
   const openTrades = document.querySelector(".open-trades-table");
   const tbody = openTrades.querySelector("tbody");
-  $.ajax({
+  await $.ajax({
     headers: {
       "X-CSRF-TOKEN": token,
     },
@@ -43,7 +43,7 @@ function setOpenTrades() {
                 <td>
                     ${symbol}
                     <br>
-                    
+
                     ${trade.stop_loss}
                 </td>
 
@@ -74,11 +74,11 @@ function setOpenTrades() {
   });
 }
 
-function setPendingTrades() {
+async function setPendingTrades() {
   const pendingTrades = document.querySelector(".pending-trades-table");
   const tbody = pendingTrades.querySelector("tbody");
 
-  $.ajax({
+  await $.ajax({
     headers: {
       "X-CSRF-TOKEN": token,
     },
@@ -151,11 +151,11 @@ function setPendingTrades() {
   });
 }
 
-function setTradeHistory() {
+async function setTradeHistory() {
   const pendingTrades = document.querySelector(".trade-history-table");
   const tbody = pendingTrades.querySelector("tbody");
 
-  $.ajax({
+  await $.ajax({
     headers: {
       "X-CSRF-TOKEN": token,
     },
@@ -180,9 +180,9 @@ function setTradeHistory() {
           }
 
           let profitLoss =
-            price_is >= take_profit
-              ? "+" + trade.open_amount * pips
-              : "-" + trade.close_amount * pips;
+            trade.price_is >= trade.take_profit
+              ? `+${Math.abs(trade.open_amount - trade.amount)}`
+              : `-${Math.abs(trade.open_amount - trade.amount)}`;
           let tr = `<tr>
                   <td>
                       #${trade.order_id}
@@ -229,8 +229,11 @@ function setTradeHistory() {
   });
 }
 
-setInterval(() => {
-  setOpenTrades();
-  setPendingTrades();
-  setTradeHistory();
-}, 1000);
+async function executeTrades() {
+  await setOpenTrades();
+  await setPendingTrades();
+  await setTradeHistory();
+  setTimeout(executeTrades, 1000);
+}
+
+executeTrades();
