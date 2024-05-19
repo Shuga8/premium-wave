@@ -231,7 +231,7 @@ class ManageUsersController extends Controller
 
             $notify[] = ['success', gs('cur_sym') . $amount . ' added successfully'];
         } else {
-            if ($amount > $user->balance) {
+            if ($amount > $wallet->balance) {
                 $notify[] = ['error', $user->username . ' doesn\'t have sufficient balance.'];
                 return back()->withNotify($notify);
             }

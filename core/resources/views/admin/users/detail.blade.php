@@ -282,7 +282,10 @@
 							<select class="form-control select2" name="wallet" required>
 								<option value="" disabled selected>@lang('Select One')</option>
 								@foreach ($currencies as $currency)
-									<option data-symbol="{{ $currency->symbol }}" value="{{ $currency->id }}">{{ $currency->symbol }}</option>
+									@if ($currency->symbol == 'USD')
+										<option data-symbol="{{ $currency->symbol }}" value="{{ $currency->id }}" selected>{{ $currency->symbol }}
+										</option>
+									@endif
 								@endforeach
 							</select>
 						</div>
@@ -291,7 +294,9 @@
 							<select class="form-control" name="wallet_type">
 								<option selected disabled>@lang('Sellet One')</option>
 								@foreach (gs('wallet_types') as $wallet)
-									<option value="{{ $wallet->name }}">{{ __($wallet->title) }}</option>
+									@if (__($wallet->title) == 'Spot Wallets')
+										<option value="{{ $wallet->name }}" selected>{{ __($wallet->title) }}</option>
+									@endif
 								@endforeach
 							</select>
 						</div>
