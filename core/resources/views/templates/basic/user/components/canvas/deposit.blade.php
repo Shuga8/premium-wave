@@ -33,11 +33,7 @@
 							notify('error', "@lang('Amount field is required')");
 							return false;
 						}
-
-						$("#deposit-canvas").find(".empty-gateway").addClass('d-none');
-						$("#deposit-canvas").find("form").removeClass('d-none');
 					@endif
-
 				})
 
 		})(jQuery);
