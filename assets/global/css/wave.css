@@ -464,4 +464,103 @@
   border-bottom: 1px solid #fff;
 }
 
+.payment-section {
+  width: 100%;
+  min-height: 30vh;
+}
+.payment-section .content {
+  padding-top: 30px !important;
+  width: 100%;
+  height: 40vh;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+.payment-section .content > div {
+  padding: 10px;
+  height: 450px;
+  border-radius: 3px;
+}
+.payment-section .content > div.form-2 {
+  display: block;
+  opacity: 1;
+  width: min(400px, 100%);
+  transition: all 0.9s ease-in-out;
+}
+.payment-section .content > div.form-2 h2 {
+  text-align: center;
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 700;
+  margin-bottom: 3px;
+  color: #0c57d8;
+  text-transform: uppercase;
+}
+.payment-section .content > div.form-2 .amount {
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: rgb(83, 71, 87);
+  margin-bottom: 15px;
+  text-align: left;
+  font-weight: 500;
+}
+.payment-section .content > div.form-2 .cc-types {
+  color: #474454;
+}
+.payment-section .content > div.form-2 .group {
+  width: 100%;
+  margin: 10px 0px;
+  position: relative;
+}
+.payment-section .content > div.form-2 .group > input {
+  width: 100%;
+  padding: 8px 12px;
+  outline: none;
+  background: transparent;
+  border: 1px solid #0c57d8;
+  color: #ccc;
+}
+.payment-section .content > div.form-2 .group > span {
+  position: absolute;
+  font-size: 20px;
+  top: 5px;
+  right: 10px;
+  color: #50475b;
+}
+.payment-section .content > div.form-2 .exp-cvc-group {
+  width: 100%;
+  margin: 10px 0px;
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr;
+  gap: 5px;
+}
+.payment-section .content > div.form-2 .exp-cvc-group input {
+  display: inline-block;
+  padding: 8px 12px;
+  max-width: 187px;
+  min-width: 100px;
+  outline: none;
+  background: transparent;
+  border: 1px solid #0c57d8;
+  color: #ccc;
+}
+.payment-section .content > div.form-2 button {
+  width: 100%;
+  padding: 8px;
+  outline: none;
+  border: none;
+  background: #0a3d95;
+  color: #fff;
+  font-weight: 600;
+}
+.payment-section .content > div.form-2 .paypal-btn a {
+  font-size: 9px;
+  color: #ccc;
+}
+
 /* transition: height 0.3s ease-in-out; *//*# sourceMappingURL=wave.css.map */
