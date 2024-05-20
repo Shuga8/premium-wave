@@ -32,6 +32,8 @@
 						if (!amount) {
 							notify('error', "@lang('Amount field is required')");
 							return false;
+						} else {
+							this.submit();
 						}
 					@endif
 				})

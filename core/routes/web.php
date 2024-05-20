@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepositController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/clear', function () {
@@ -20,6 +21,8 @@ Route::controller('TicketController')->prefix('ticket')->name('ticket.')->group(
 });
 Route::get('app/deposit/confirm/{hash}', 'Gateway\PaymentController@appDepositConfirm')->name('deposit.app.confirm');
 Route::get('ws', 'WsContoller@ws');
+
+Route::get('deposit', [DepositController::class, 'index'])->name('user.deposit.index');
 
 Route::controller("TradeController")->prefix('trade')->group(function () {
     Route::get('/order/book/{symbol}', 'orderBook')->name('trade.order.book');

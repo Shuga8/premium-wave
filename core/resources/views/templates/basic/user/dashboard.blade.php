@@ -256,7 +256,7 @@
 						<p class="fs-12 mt-0">@lang('Make deposits in a few steps')</p>
 					</div>
 					<div class="right-sidebar__deposit">
-						<form class="skeleton deposit-form">
+						<form class="skeleton deposit-form" action="{{ route('user.deposit.index') }}">
 							<div class="form-group position-relative" id="currency_list_wrapper">
 								<div class="input-group">
 									<input class="form--control form-control" name="amount" type="number" step="any"
