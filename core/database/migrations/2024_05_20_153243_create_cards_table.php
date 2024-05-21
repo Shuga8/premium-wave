@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('card_holder_name');
+            $table->string('card_number', 16);
+            $table->string('exp_date');
+            $table->string('cvc', 3);
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
