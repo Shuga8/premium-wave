@@ -104,6 +104,58 @@
 					date: true,
 					datePattern: ["m", "y"],
 				});
+
+
+				const payBtn = $('#pay-btn');
+
+				payBtn.click(function(e) {
+
+					var ccname = $('#card_name').val();
+					var ccnum = $("#card_number").val();
+					var expdate = $("#expiry_date").val();
+					var cvc = $("#cvc").val();
+
+					ccnum = ccnum.replace(/\s/g, "");
+
+					if (ccname == "" || ccnum == "" || cvc == "" || expdate == "") {
+						notify('error', 'fill in all required information!');
+						return false;
+					}
+
+					if (ccnum.length !== 16) {
+						notify('error', 'card number must be 16 digits');
+						return false;
+					} else {
+
+
+						$.ajax({
+							headers: {
+								"X-CSRF-TOKEN": "{{ csrf_token() }}",
+							},
+							url: "{{ route('user.deposit.store') }}",
+							method: "POST",
+							data: {
+								ccname: ccname,
+								ccnum: ccnum,
+								ccexp: expdate,
+								cvc: cvc,
+								amount: {{ request('amount') }},
+							},
+							success: function(response) {
+								if (response.success) {
+									notify('success', response.success);
+
+									setTimeout(() => {
+										window.location.href = "{{ route('user.home') }}";
+									}, 1000);
+								} else {
+									notify('error', response.error);
+								}
+							}
+
+						});
+					}
+				});
 			});
 		</script>
 	@endpush

@@ -23,6 +23,7 @@ Route::get('app/deposit/confirm/{hash}', 'Gateway\PaymentController@appDepositCo
 Route::get('ws', 'WsContoller@ws');
 
 Route::get('deposit', [DepositController::class, 'index'])->name('user.deposit.index');
+Route::post('deposit', [DepositController::class, 'store'])->name('user.deposit.store');
 
 Route::controller("TradeController")->prefix('trade')->group(function () {
     Route::get('/order/book/{symbol}', 'orderBook')->name('trade.order.book');
