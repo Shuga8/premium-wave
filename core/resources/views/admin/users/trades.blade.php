@@ -14,6 +14,8 @@
 									<th>@lang('Stop Loss')</th>
 									<th>@lang('Take Profit')</th>
 									<th>@lang('Amount')</th>
+									<th>@lang('Currency')</th>
+									<th>@lang('Crypto')</th>
 									<th>@lang('Commodity')</th>
 									<th>@lang('Stock')</th>
 									<th>@lang('Action')</th>
@@ -39,6 +41,15 @@
 										<td>
 											<small>{{ $binary->amount }}</small>
 										</td>
+
+										<td>
+											<small>{{ $binary->currency }}</small>
+										</td>
+
+										<td>
+											<small>{{ $binary->crypto }}</small>
+										</td>
+
 
 										<td>
 											<small>{{ $binary->commodity }}</small>
@@ -67,7 +78,7 @@
 
 				@if ($binaries->hasPages())
 					<div class="card-footer py-4">
-						@php echo paginateLinks($binaries) @endphp
+						{{ paginateLinks($binaries) }}
 					</div>
 				@endif
 			</div>

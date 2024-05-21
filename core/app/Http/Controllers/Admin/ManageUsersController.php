@@ -12,6 +12,7 @@ use App\Models\Trade;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Wallet;
+use App\Models\WaveLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -399,7 +400,7 @@ class ManageUsersController extends Controller
 
         $data = [
             'pageTitle' => 'Binary Trades',
-            'binaries' => LimitTrade::latest()->filter(request(['username']))->paginate(getPaginate())
+            'binaries' => WaveLog::latest()->filter(request(['username']))->paginate(5)
         ];
 
         return view('admin.users.trades')->with($data);
