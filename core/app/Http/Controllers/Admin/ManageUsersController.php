@@ -416,4 +416,8 @@ class ManageUsersController extends Controller
 
         return redirect()->back()->withNotify($notify);
     }
+
+    public function  userTradesRig()
+    {
+    }
 }

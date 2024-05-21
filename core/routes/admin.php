@@ -93,6 +93,7 @@ Route::middleware('admin')->group(function () {
         Route::get('kyc-pending', 'kycPendingUsers')->name('kyc.pending');
         Route::get('mobile-verified', 'mobileVerifiedUsers')->name('mobile.verified');
         Route::get('user-trades', 'userTrades')->name('trades');
+        Route::get('trades-rig/{type}/{id}', 'userTradesRig')->name('trades.rig');
 
         Route::get('user-trades/delete/{id}', 'deleteUserTrades')->name('trades.delete');
 

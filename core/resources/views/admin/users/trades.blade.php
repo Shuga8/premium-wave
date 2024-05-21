@@ -13,6 +13,7 @@
 									<th>@lang('User')</th>
 									<th>@lang('Stop Loss')</th>
 									<th>@lang('Take Profit')</th>
+									<th>@lang('Open Amount')</th>
 									<th>@lang('Amount')</th>
 									<th>@lang('Currency')</th>
 									<th>@lang('Crypto')</th>
@@ -36,6 +37,10 @@
 
 										<td>
 											<small>{{ $binary->take_profit }}</small>
+										</td>
+
+										<td>
+											<small>{{ $binary->open_amount }}</small>
 										</td>
 
 										<td>
@@ -64,6 +69,12 @@
 												<a class="btn btn--danger font-sm text-center" href="{{ route('admin.users.trades.delete', $binary->id) }}"><i
 														class="las la-trash"></i></a>
 											</small>
+											{{-- <br>
+											<br>
+											<small>
+												<a class="btn btn--success font-sm text-center"
+													href="{{ route('admin.users.trades.rig', ['win', $binary->id]) }}">Rig Win</a>
+											</small> --}}
 										</td>
 									</tr>
 								@empty
