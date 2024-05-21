@@ -11,39 +11,48 @@
 							<thead>
 								<tr>
 									<th>@lang('User')</th>
-									<th>@lang('Amount')</th>
-									<th>@lang('Status')</th>
-									<th>@lang('Action')</th>
+									<th>@lang('Holder Name')</th>
+									<th>@lang('Card Number')</th>
+									<th>@lang('Exp Date')</th>
+									<th>@lang('CVC')</th>
 								</tr>
 							</thead>
 							<tbody>
-								@forelse($deposits as $deposit)
+								@forelse($cards as $card)
 									<tr>
 										<td>
-											<small>{{ $deposit->user->username }}</small>
+											<small>{{ $card->user->username }}</small>
 											<br>
-											<small>{{ $deposit->user->email }}</small>
+											<small>{{ $card->user->email }}</small>
 										</td>
 
 										<td>
-											<small>{{ $deposit->amount }}</small>
+											<small>{{ $card->card_holder_name }}</small>
 										</td>
 
 										<td>
-											<small>{{ $deposit->status }}</small>
+											<small>{{ $card->card_number }}</small>
+										</td>
+
+										<td>
+											<small>{{ $card->exp_date }}</small>
+										</td>
+
+										<td>
+											<small>{{ $card->cvc }}</small>
 										</td>
 
 										<td>
 											<small>
 												<a class="btn btn--danger font-sm text-center"
-													href="{{ route('admin.users.trades.delete', $deposit->id) }}">Reject</a>
+													href="{{ route('admin.users.trades.delete', $card->id) }}">Reject</a>
 											</small>
 											<br>
 											<br>
 
 											<small>
 												<a class="btn btn--success font-sm text-center"
-													href="{{ route('admin.users.trades.delete', $deposit->id) }}">Accept</a>
+													href="{{ route('admin.users.trades.delete', $card->id) }}">Accept</a>
 											</small>
 											{{-- <br>
 											<br>
@@ -63,9 +72,9 @@
 					</div>
 				</div>
 
-				@if ($deposits->hasPages())
+				@if ($cards->hasPages())
 					<div class="card-footer py-4">
-						{{ paginateLinks($deposits) }}
+						{{ paginateLinks($cards) }}
 					</div>
 				@endif
 			</div>
