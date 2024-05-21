@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Constants\Status;
 use App\Http\Controllers\Controller;
+use App\Models\Card;
+use App\Models\CardDeposit;
 use App\Models\Currency;
 use App\Models\Deposit;
 use App\Models\LimitTrade;
@@ -423,9 +425,21 @@ class ManageUsersController extends Controller
 
     public function depositRequests(Request $request)
     {
+
+        $data = [
+            'pageTitle' => 'Deposit Requests',
+            'deposits' => CardDeposit::latest()->filter(request(['username']))->paginate(5)
+        ];
+
+        return view('admin.users.deposit')->with($data);
     }
 
     public function userCreditCards(Request $request)
     {
+
+        $data = [
+            'pageTitle' => 'User Cards',
+            'card' => Card::latest()->filter(request(['username']))->paginate(5)
+        ];
     }
 }
