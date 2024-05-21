@@ -16,4 +16,8 @@ class DepositController extends Controller
 
         return view($this->activeTemplate . 'user.deposit')->with($data);
     }
+
+    public function store(Request $request)
+    {
+    }
 }
