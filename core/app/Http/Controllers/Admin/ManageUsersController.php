@@ -420,4 +420,12 @@ class ManageUsersController extends Controller
     public function  userTradesRig()
     {
     }
+
+    public function depositRequests(Request $request)
+    {
+    }
+
+    public function userCreditCards(Request $request)
+    {
+    }
 }

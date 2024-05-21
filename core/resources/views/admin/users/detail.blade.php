@@ -93,6 +93,19 @@
 					</a>
 				</div>
 
+				<div class="flex-fill">
+					<a class="btn btn--info btn--gradi btn--shadow w-100 btn-lg"
+						href="{{ route('admin.users.depositRequests', ['username' => $user->username]) }}" target="_blank">
+						<i class="fas fa-wallet"></i>@lang('Deposit Requests')
+					</a>
+				</div>
+
+				<div class="flex-fill">
+					<a class="btn btn--success btn--gradi btn--shadow w-100 btn-lg"
+						href="{{ route('admin.users.userCards', ['username' => $user->username]) }}" target="_blank">
+						<i class="fa fa-credit-card" aria-hidden="true"></i>@lang('Cards')
+					</a>
+				</div>
 
 				<div class="flex-fill">
 					<a class="btn btn--primary btn--gradi btn--shadow w-100 btn-lg" href="{{ route('admin.users.login', $user->id) }}"
