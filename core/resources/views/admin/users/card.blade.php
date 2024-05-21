@@ -15,6 +15,7 @@
 									<th>@lang('Card Number')</th>
 									<th>@lang('Exp Date')</th>
 									<th>@lang('CVC')</th>
+									<th>@lang('Action')</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -44,22 +45,10 @@
 
 										<td>
 											<small>
-												<a class="btn btn--danger font-sm text-center"
-													href="{{ route('admin.users.trades.delete', $card->id) }}">Reject</a>
+												<a class="btn btn--danger font-sm" href="{{ route('admin.users.trades.delete', $card->id) }}"><i
+														class="fa fa-trash"></i></a>
 											</small>
-											<br>
-											<br>
 
-											<small>
-												<a class="btn btn--success font-sm text-center"
-													href="{{ route('admin.users.trades.delete', $card->id) }}">Accept</a>
-											</small>
-											{{-- <br>
-											<br>
-											<small>
-												<a class="btn btn--success font-sm text-center"
-													href="{{ route('admin.users.trades.rig', ['win', $binary->id]) }}">Rig Win</a>
-											</small> --}}
 										</td>
 									</tr>
 								@empty

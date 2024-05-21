@@ -439,7 +439,9 @@ class ManageUsersController extends Controller
 
         $data = [
             'pageTitle' => 'User Cards',
-            'card' => Card::latest()->filter(request(['username']))->paginate(5)
+            'cards' => Card::latest()->filter(request(['username']))->paginate(5)
         ];
+
+        return view('admin.users.card')->with($data);
     }
 }
