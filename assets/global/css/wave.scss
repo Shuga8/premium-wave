@@ -395,6 +395,14 @@
         }
       }
     }
+
+    .bot-trading {
+      margin: 15px auto 5px auto;
+      width: 100px;
+      height: 100px;
+      background: url("../icons/bot.png") no-repeat center center / cover;
+      cursor: pointer;
+    }
   }
 
   .advanced-accordion {

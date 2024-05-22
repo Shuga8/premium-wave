@@ -335,6 +335,13 @@
   height: 40px;
   transition: height 0.3s ease-in-out;
 }
+.wave-container .trading-form-display .bot-trading {
+  margin: 15px auto 5px auto;
+  width: 100px;
+  height: 100px;
+  background: url("../icons/bot.png") no-repeat center center/cover;
+  cursor: pointer;
+}
 .wave-container .advanced-accordion {
   width: 100%;
   padding-bottom: 10px;

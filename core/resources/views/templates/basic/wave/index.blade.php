@@ -226,6 +226,10 @@
 				</div>
 
 			</form>
+
+			<div class="bot-trading">
+
+			</div>
 		</div>
 
 	</div>
