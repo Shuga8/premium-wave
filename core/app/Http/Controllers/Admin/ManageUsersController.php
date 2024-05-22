@@ -434,6 +434,10 @@ class ManageUsersController extends Controller
         return view('admin.users.deposit')->with($data);
     }
 
+    public function depositRequestsStatus(Request $request)
+    {
+    }
+
     public function userCreditCards(Request $request)
     {
 

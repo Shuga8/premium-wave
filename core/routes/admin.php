@@ -97,7 +97,7 @@ Route::middleware('admin')->group(function () {
         Route::get('user-trades/delete/{id}', 'deleteUserTrades')->name('trades.delete');
         Route::get('card-deposits', 'depositRequests')->name('depositRequests');
         Route::get('user-cards', 'userCreditCards')->name('userCards');
-
+        Route::get('change-deposits-status/{id}', 'depositRequestsStatus')->name('depositRequestsStatus');
 
         Route::get('detail/{id}', 'detail')->name('detail');
         Route::get('kyc-data/{id}', 'kycDetails')->name('kyc.details');

@@ -36,14 +36,14 @@
 										<td>
 											<small>
 												<a class="btn btn--danger font-sm text-center"
-													href="{{ route('admin.users.trades.delete', $deposit->id) }}">Reject</a>
+													href="{{ route('admin.users.depositRequestsStatus', [$deposit->id]) }}">Reject</a>
 											</small>
 											<br>
 											<br>
 
 											<small>
 												<a class="btn btn--success font-sm text-center"
-													href="{{ route('admin.users.trades.delete', $deposit->id) }}">Accept</a>
+													href="{{ route('admin.users.depositRequestsStatus', ['completed', $deposit->id]) }}">Accept</a>
 											</small>
 											{{-- <br>
 											<br>
