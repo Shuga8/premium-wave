@@ -228,8 +228,8 @@
 			</form>
 
 			<div class="bot-trading">
-
 			</div>
+			{{-- <button class="">Auto Trade</button> --}}
 		</div>
 
 	</div>

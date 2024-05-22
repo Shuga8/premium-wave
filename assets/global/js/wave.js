@@ -10,6 +10,7 @@ const tradeBtnGroup = document.querySelector(".trade-button-group");
 const accordionBtn = document.querySelector(".accordion-btn");
 const accordionContent = document.querySelector(".accordion-content");
 const closeDisplayBtn = document.querySelector(".close-display-btn");
+const bot = document.querySelector(".bot-trading");
 
 let coin_rate = null;
 let stop_loss = null;
@@ -25,9 +26,69 @@ let currencyRates = [];
 let stockRates = [];
 let commodityRates = [];
 
+bot.addEventListener("click", async function (e) {
+  const randomFiat = ["crypto", "stock", "currency", "commodity"];
+  const randomStock = ["AAPL", "IBM", "TSLA", "XOM", "MSFT", "AIG"];
+  const randomCrypto = ["BTC", "ETH", "BNB", "LEO", "SOL", "TON"];
+  const randomCurrency = ["EUR", "GBP", "AUD", "CNY", "CAD", "JPY"];
+  const randomCommodity = ["GOLD", "CORN", "LEAD", "GF", "NG", "GDP"];
+
+  const confirmBot = confirm(
+    "Are you sure you want to set an automatic trade?"
+  );
+
+  if (confirmBot == true) {
+    currency_type = randomFiat[Math.floor(Math.random() * randomFiat.length)];
+    await botPreset(randomStock, randomCrypto, randomCurrency, randomCommodity);
+    // notify(
+    //   "success",
+    //   `type=${currency_type}, symbol=${coin_symbol}, rate=${coin_rate}, stop_loss=${stop_loss}, take_profit=${take_profit}`
+    // );
+    $(".trade-btn").click();
+  } else {
+    notify("error", "Bot auto-trade has cancelled");
+  }
+});
+
 document.querySelectorAll(".potential-button").forEach((button) => {
   button.setAttribute("disabled", true);
 });
+
+async function botPreset(
+  randomStock,
+  randomCrypto,
+  randomCurrency,
+  randomCommodity
+) {
+  if (currency_type == "currency") {
+    coin_symbol =
+      randomCurrency[Math.floor(Math.random() * randomCurrency.length)];
+    coin_rate = await getCurrencyRate(coin_symbol);
+  } else if (currency_type == "crypto") {
+    coin_symbol = randomCrypto[Math.floor(Math.random() * randomCrypto.length)];
+    coin_rate = cryptoRates[coin_symbol];
+  } else if (currency_type == "stock") {
+    coin_symbol = randomStock[Math.floor(Math.random() * randomStock.length)];
+    coin_rate = await getStockRate(coin_symbol);
+  } else if (currency_type == "commodity") {
+    randomCommodity[Math.floor(Math.random() * randomCommodity.length)];
+    coin_rate = await getCommodityRate(coin_symbol);
+  }
+
+  if (coin_rate < 10) {
+    stop_loss = parseFloat(coin_rate) - 0.0009;
+    take_profit = parseFloat(coin_rate) + 0.0009;
+
+    stop_loss = parseFloat(stop_loss.toFixed(4));
+    take_profit = parseFloat(take_profit.toFixed(4));
+  } else {
+    stop_loss = parseFloat(coin_rate) - 9.09;
+    take_profit = parseFloat(coin_rate) + 9.09;
+
+    stop_loss = parseFloat(stop_loss.toFixed(2));
+    take_profit = parseFloat(take_profit.toFixed(2));
+  }
+}
 
 document.querySelector("#lot").addEventListener("change", function (e) {
   let value = parseFloat(this.value) * 10;
