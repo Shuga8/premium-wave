@@ -2,6 +2,7 @@
 
 namespace App\Lib;
 
+use App\Models\WaveLog;
 use \Illuminate\Support\Facades\Log;
 
 class Binary
@@ -20,6 +21,44 @@ class Binary
 
     public function updatePriceIs()
     {
-        Log::info("can now update price is");
+
+        $trades = WaveLog::all()->where('status', 'runinng');
+
+        foreach ($trades as &$trade) {
+            if ($trade->isForex) {
+                echo "Forex";
+                echo " \n";
+            } else if ($trade->isCrypto) {
+            } else if ($trade->isStock) {
+                $rate = (float) $this->connectIexCloud($trade->stock);
+            } else if ($trade->isCommodity) {
+                echo "Commodity";
+                echo "\n";
+            }
+        }
+        echo "all done";
+    }
+
+    public function connectIexCloud(string $symbol)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.iex.cloud/v1/data/CORE/QUOTE/$symbol?token=$this->iex_api_key",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $response = json_decode($response, true);
+
+        return $response[0]['latestPrice'];
     }
 }
