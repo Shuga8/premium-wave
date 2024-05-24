@@ -54,7 +54,7 @@ async function setOpenTrades() {
                 </td>
 
                 <td>
-                <a class="bg-success px-4 py-2 text-white" href="wave/end-running-trade/${trade.id}">End</a>
+                <a class="bg-success px-2 py-2 text-white" href="wave/end-running-trade/${trade.id}">End</a>
                 </td>
         </tr>
              `;

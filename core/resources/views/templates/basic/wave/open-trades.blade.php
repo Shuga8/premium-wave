@@ -1,4 +1,4 @@
-<div class="" style="overflow-x: auto; ">
+<div class="table-overflow" style="overflow-x: scroll">
 	<table class="open-trades-table">
 		<thead>
 			<tr>

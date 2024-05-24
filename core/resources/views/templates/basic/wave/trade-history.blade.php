@@ -1,4 +1,4 @@
-<div class="" style="overflow-x: auto; ">
+<div class="table-overflow table-responsive--sm table-responsive">
 	<table class="trade-history-table">
 		<thead>
 			<tr>

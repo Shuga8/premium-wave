@@ -3,6 +3,9 @@
 	@push('style-lib')
 		<link href="{{ asset('assets/global/css/wave.css') }}" rel="stylesheet">
 	@endpush
+	<div class="preloader">
+		<div class="loader-p"></div>
+	</div>
 	<div class="wave-container">
 
 		<div class="control-navigation">
