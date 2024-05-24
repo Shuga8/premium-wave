@@ -1,680 +1,1191 @@
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500&family=Outfit:wght@400;500;600;700&display=swap");
 
-.wave-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  padding: 15px 10px;
-
-  .control-navigation {
-    width: 7%;
-    border-radius: 4px;
-    padding: 10px 0px;
-    background-color: #091619;
-
-    > div {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      padding: 5px;
-      gap: 5px;
-      margin-bottom: 10px;
-
-      &.active-control-btn {
-        > .icon {
-          border: 1px solid #f320b0;
-          color: #f320b0;
-        }
-      }
-
-      > .icon {
-        border: 1px solid #fff;
-        margin: 0px auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-      }
-
-      > span {
-        font-size: 8px;
-        font-weight: 300;
-        text-transform: uppercase;
-      }
-
-      &:hover {
-        cursor: pointer;
-
-        > .icon {
-          border: 1px solid #f320b0;
-          color: #f320b0;
-        }
-      }
-    }
-  }
-
-  .control-after-display {
-    position: relative;
-    width: 0px;
-    overflow: hidden;
-    border-radius: 5px;
-    background-color: #091619;
-    transition: width 0.3s ease-in-out;
-    display: block;
-
-    &.active-control-display {
-      width: 20%;
-      transition: width 0.3s ease-in-out;
-    }
-
-    .close-display-btn {
-      position: absolute;
-      top: 7px;
-      right: 7px;
-      width: 18px;
-      height: 18px;
-      z-index: 1;
-      cursor: pointer;
-      background: #fff;
-      color: #091619;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: 900;
-      border-radius: 50%;
-      font-size: 13px;
-    }
-
-    .after-display-content {
-      display: block;
-      padding: 15px 5px 0px 5px;
-
-      .title {
-        font-size: 12px;
-        text-transform: uppercase;
-        word-spacing: 2px;
-        padding: 8px 10px;
-        border-bottom: 1px solid #333;
-        box-sizing: border-box;
-        font-weight: 700;
-        color: #fff;
-
-        i {
-          font-size: 20px;
-        }
-      }
-
-      .asset-list {
-        width: 100%;
-
-        .head {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          border-bottom: 1px solid #444;
-          padding: 3px;
-
-          > div {
-            color: #ddd;
-            font-size: 10px;
-            text-transform: uppercase;
-            font-weight: 700;
-          }
-        }
-
-        .asset-content {
-          width: 100%;
-          height: 430px;
-          overflow-y: auto;
-
-          .asset-pair-item {
-            width: 100%;
-            display: grid;
-            grid-template-columns: 0.49fr 0.49fr 0.02fr;
-            padding: 5px 2px;
-            gap: 2px;
-            cursor: pointer;
-
-            &.active {
-              border: 1px solid goldenrod;
-            }
-
-            .asset-pair-info {
-              display: flex;
-              flex-direction: row;
-              gap: 4px;
-              align-items: center;
-              align-content: center;
-
-              > div.img-pair {
-                width: 18px;
-                height: 18px;
-                border-radius: 50%;
-                overflow: hidden;
-
-                img {
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover !important;
-                }
-              }
-
-              > div.pair-name {
-                font-size: 9.5px;
-                color: #eee;
-                font-weight: 600;
-              }
-            }
-
-            .asset-pair-rate {
-              display: flex;
-              flex-direction: row;
-              gap: 2px;
-              align-items: center;
-              align-content: center;
-
-              > div {
-                font-size: 10px;
-                font-weight: 500;
-                color: #fff;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .trading-chart-display {
-    width: 68%;
-    border-radius: 5px;
-    background-color: #091619 !important;
-    transition: width 0.3s ease-in-out;
-
-    overflow: hidden;
-
-    &.control-display-is-active {
-      width: 48%;
-      transition: width 0.3s ease-in-out;
-    }
-
-    > div {
-      background: rgb(9, 22, 25);
-      border-radius: 5px;
-
-      > iframe {
-        background: #091619;
-      }
-    }
-  }
-
-  .trading-form-display {
-    display: block;
-    width: 25%;
-    border-radius: 5px;
-    background-color: #091619;
-    padding: 5px;
-
-    .current-symbol-info {
-      width: 100%;
-      display: flex;
-      gap: 3px;
-      align-items: center;
-      align-content: center;
-      padding: 5px 0px;
-
-      > div {
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        background: #333;
-        overflow: hidden;
-
-        img {
-          width: 25px;
-          height: 25px;
-          object-fit: cover;
-        }
-      }
-
-      > p {
-        color: gold;
-        font-weight: 400;
-      }
-    }
-
-    .trade-form {
-      width: 100%;
-      margin: 10px 0px;
-      display: block;
-
-      > .group {
-        margin: 5px 0px;
-        display: block;
-
-        > label {
-          display: block;
-          text-transform: uppercase;
-          font-size: 10px;
-          font-weight: 600;
-          margin-bottom: 6px;
-        }
-
-        > select {
-          width: 100%;
-          background: transparent;
-          padding: 5px;
-          color: #fff;
-
-          > option {
-            color: #fff;
-            background: #0b1f23;
-          }
-        }
-
-        p {
-          font-size: 10px;
-          text-transform: uppercase;
-          font-weight: 600;
-
-          span {
-            color: #fff;
-            font-size: 11px;
-            font-weight: 300;
-          }
-        }
-      }
-
-      .button-group {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        gap: 5px;
-
-        button {
-          flex: 0.5;
-          font-size: 9px;
-          text-transform: uppercase;
-          font-weight: 600;
-          padding: 3px;
-          border-radius: 5px;
-
-          p {
-            font-size: 10px;
-            font-weight: 600; /* Fixed */
-            letter-spacing: 1.2px;
-          }
-
-          &.set-sell {
-            color: #fa3131;
-            border: 1px solid #fa3131;
-
-            &:hover {
-              background: #fa3131;
-              color: #fff;
-
-              p {
-                color: #fff;
-              }
-            }
-
-            p {
-              color: #fa3131;
-            }
-
-            &.active {
-              background: #fa3131;
-              color: #fff;
-
-              p {
-                color: #fff;
-              }
-            }
-          }
-
-          &.set-buy {
-            color: #0caf66;
-            border: 1px solid #0caf66;
-
-            p {
-              color: #0caf66;
-            }
-
-            &:hover {
-              background: #0caf66;
-              color: #fff;
-
-              p {
-                color: #fff;
-              }
-            }
-
-            &.active {
-              background: #0caf66;
-              color: #fff;
-
-              p {
-                color: #fff;
-              }
-            }
-          }
-        }
-      }
-
-      .trade-button-group {
-        margin: 14px 0px 14px 0;
-        width: 100%;
-        height: 0;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        font-size: 10px;
-        transition: height 0.3s ease-in-out;
-
-        button {
-          text-transform: uppercase;
-          padding: 10px;
-          flex: 0.6;
-          border: 1px solid goldenrod;
-          border-radius: 8px;
-          color: goldenrod;
-
-          &:hover {
-            background: goldenrod;
-            color: #fff;
-          }
-        }
-
-        &.active {
-          height: 40px;
-          transition: height 0.3s ease-in-out;
-        }
-      }
-    }
-
-    .bot-trading {
-      margin: 15px auto 5px auto;
-      width: 100px;
-      height: 100px;
-      background: url("../icons/bot.png") no-repeat center center / cover;
-      cursor: pointer;
-    }
-  }
-
-  .advanced-accordion {
+@media (max-width: 700px) {
+  .wave-container {
     width: 100%;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #fff;
+    display: block;
+    padding: 20px 5px 10px 5px;
 
-    .accordion-btn {
-      cursor: pointer;
-      font-size: 9px;
-      text-transform: uppercase;
-      font-weight: bolder;
-
-      i {
-        padding: 5px;
-        border: 1px solid #fff;
-        border-radius: 50%;
-      }
-    }
-
-    .accordion-content {
-      height: 0px;
-      overflow: hidden;
-      padding: 0;
-      transition: all 0.3s ease-in-out;
+    .control-navigation {
+      margin: 50px 0px 10px 0px;
+      width: 100%;
+      border-radius: 4px;
+      padding: 10px 0px;
+      background-color: #091619;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 7px;
-
-      &.active {
-        height: 200px;
-        padding: 10px 0px;
-        transition: all 0.3s ease-in-out;
-      }
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
 
       > div {
-        display: block;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 5px;
+        gap: 5px;
+        margin-bottom: 10px;
 
-        > p {
-          text-align: center;
-          color: #fff;
-          font-size: 9px;
-          text-transform: uppercase;
-          font-weight: 600;
+        &.active-control-btn {
+          > .icon {
+            border: 1px solid #f320b0;
+            color: #f320b0;
+          }
         }
 
-        > div:not(div.access) {
-          margin-top: 5px;
-          padding: 4px;
+        > .icon {
           border: 1px solid #fff;
-          border-radius: 5px;
-
-          > p {
-            text-align: center;
-            font-size: 8px;
-            text-transform: uppercase;
-            font-weight: 600;
-          }
-
-          .potentials-value {
-            font-size: 11px;
-            font-weight: 650;
-          }
-
-          .potential-action-buttons {
-            margin: 4px;
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-
-            button {
-              flex: 0.5;
-              text-align: center;
-              font-size: 8px;
-              padding: 2px;
-              background: #666;
-              color: #fff;
-              border-radius: 3px;
-            }
-          }
-        }
-
-        div.access {
+          margin: 0px auto;
           display: flex;
           justify-content: center;
           align-items: center;
-          gap: 3px;
-
-          input {
-            background: transparent;
-          }
-
-          p {
-            font-size: 8px;
-            text-transform: uppercase;
-            font-weight: 600;
-          }
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
         }
-      }
-    }
-  }
-}
 
-.wave-logs {
-  width: 100%;
-  padding: 7px 14px;
-
-  .logs {
-    background: #0b1f23;
-    padding: 10px 7px;
-    border-radius: 5px;
-    ul {
-      li {
-        margin: 0px 2px;
-        button {
-          color: goldenrod;
-
-          &:hover {
-            color: gold;
-          }
-
-          &.active {
-            background: #0b1f23 !important;
-            color: #fff !important;
-          }
-        }
-      }
-    }
-
-    .tab-content {
-      .tab-pane {
-        table {
-          width: 100%;
-
-          thead {
-            tr {
-              th {
-                text-align: center;
-                font-size: 11px;
-                padding: 12px 0px;
-              }
-              border-bottom: 1px solid #fff;
-            }
-          }
-
-          tbody {
-            tr {
-              td {
-                padding: 5px 0px;
-                text-align: center;
-                font-size: 9px;
-              }
-
-              &:not(:last-child) {
-                border-bottom: 1px solid #fff;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.payment-section {
-  width: 100%;
-  min-height: 30vh;
-
-  .content {
-    padding-top: 30px !important;
-    width: 100%;
-    height: 40vh;
-    background: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 10px;
-    gap: 50px;
-    flex-wrap: wrap;
-
-    > div {
-      padding: 10px;
-      height: 450px;
-      border-radius: 3px;
-
-      &.form-2 {
-        display: block;
-        opacity: 1;
-        width: min(400px, 100%);
-        transition: all 0.9s ease-in-out;
-
-        h2 {
-          text-align: center;
-          font-size: 19px;
-          font-style: italic;
-          font-weight: 700;
-          margin-bottom: 3px;
-          color: #0c57d8;
+        > span {
+          font-size: 8px;
+          font-weight: 300;
           text-transform: uppercase;
         }
 
-        .amount {
-          width: 100%;
-          font-size: 1.1rem;
-          font-weight: 300;
-          color: rgb(33, 55, 255);
-          margin-bottom: 15px;
-          text-align: left;
-          font-weight: 500;
-        }
+        &:hover {
+          cursor: pointer;
 
-        .cc-types {
-          color: #474454;
-        }
-
-        .group {
-          width: 100%;
-          margin: 10px 0px;
-          position: relative;
-
-          > input {
-            width: 100%;
-            padding: 8px 12px;
-            outline: none;
-            background: transparent;
-            border: 1px solid #0c57d8;
-            color: #ccc;
+          > .icon {
+            border: 1px solid #f320b0;
+            color: #f320b0;
           }
+        }
+      }
+    }
 
-          > span {
-            position: absolute;
+    .control-after-display {
+      position: relative;
+      width: 0px;
+      height: 0px;
+      overflow: hidden;
+      border-radius: 5px;
+      background-color: #091619;
+      transition: width 0.3s ease-in-out;
+      display: block;
+      margin: 10px 0px;
+
+      &.active-control-display {
+        width: 100%;
+        height: 400px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .close-display-btn {
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        width: 18px;
+        height: 18px;
+        z-index: 1;
+        cursor: pointer;
+        background: #fff;
+        color: #091619;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 900;
+        border-radius: 50%;
+        font-size: 13px;
+      }
+
+      .after-display-content {
+        display: block;
+        padding: 15px 5px 0px 5px;
+
+        .title {
+          font-size: 12px;
+          text-transform: uppercase;
+          word-spacing: 2px;
+          padding: 8px 10px;
+          border-bottom: 1px solid #333;
+          box-sizing: border-box;
+          font-weight: 700;
+          color: #fff;
+
+          i {
             font-size: 20px;
-            top: 5px;
-            right: 10px;
-            color: #50475b;
           }
         }
 
-        .exp-cvc-group {
+        .asset-list {
           width: 100%;
-          margin: 10px 0px;
-          display: grid;
-          grid-template-columns: 0.5fr 0.5fr;
+
+          .head {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid #444;
+            padding: 3px;
+
+            > div {
+              color: #ddd;
+              font-size: 10px;
+              text-transform: uppercase;
+              font-weight: 700;
+            }
+          }
+
+          .asset-content {
+            width: 100%;
+            height: 430px;
+            overflow-y: auto;
+
+            .asset-pair-item {
+              width: 100%;
+              display: grid;
+              grid-template-columns: 0.49fr 0.49fr 0.02fr;
+              padding: 5px 2px;
+              gap: 2px;
+              cursor: pointer;
+
+              &.active {
+                border: 1px solid goldenrod;
+              }
+
+              .asset-pair-info {
+                display: flex;
+                flex-direction: row;
+                gap: 4px;
+                align-items: center;
+                align-content: center;
+
+                > div.img-pair {
+                  width: 18px;
+                  height: 18px;
+                  border-radius: 50%;
+                  overflow: hidden;
+
+                  img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover !important;
+                  }
+                }
+
+                > div.pair-name {
+                  font-size: 9.5px;
+                  color: #eee;
+                  font-weight: 600;
+                }
+              }
+
+              .asset-pair-rate {
+                display: flex;
+                flex-direction: row;
+                gap: 2px;
+                align-items: center;
+                align-content: center;
+
+                > div {
+                  font-size: 10px;
+                  font-weight: 500;
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .trading-chart-display {
+      width: 100%;
+      border-radius: 5px;
+      background-color: #091619 !important;
+      transition: width 0.3s ease-in-out;
+      overflow: hidden;
+
+      > div {
+        background: rgb(9, 22, 25);
+        border-radius: 5px;
+
+        > iframe {
+          background: #091619;
+        }
+      }
+    }
+
+    .trading-form-display {
+      margin: 12px 0px 0px 0px;
+      display: block;
+      width: 100%;
+      border-radius: 5px;
+      background-color: #091619;
+      padding: 10px;
+
+      .current-symbol-info {
+        width: 100%;
+        display: flex;
+        gap: 3px;
+        align-items: center;
+        align-content: center;
+        padding: 5px 0px;
+
+        > div {
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          background: #333;
+          overflow: hidden;
+
+          img {
+            width: 25px;
+            height: 25px;
+            object-fit: cover;
+          }
+        }
+
+        > p {
+          color: gold;
+          font-weight: 400;
+        }
+      }
+
+      .trade-form {
+        width: 100%;
+        margin: 10px 0px;
+        display: block;
+
+        > .group {
+          margin: 5px 0px;
+          display: block;
+
+          > label {
+            display: block;
+            text-transform: uppercase;
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 6px;
+          }
+
+          > select {
+            width: 100%;
+            background: transparent;
+            padding: 5px;
+            color: #fff;
+
+            > option {
+              color: #fff;
+              background: #0b1f23;
+            }
+          }
+
+          p {
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 600;
+
+            span {
+              color: #fff;
+              font-size: 11px;
+              font-weight: 300;
+            }
+          }
+        }
+
+        .button-group {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
           gap: 5px;
 
-          input {
-            display: inline-block;
-            padding: 8px 12px;
-            max-width: 187px;
-            min-width: 100px;
-            outline: none;
-            background: transparent;
-            border: 1px solid #0c57d8;
-            color: #ccc;
+          button {
+            flex: 0.5;
+            font-size: 9px;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding: 3px;
+            border-radius: 5px;
+
+            p {
+              font-size: 10px;
+              font-weight: 600; /* Fixed */
+              letter-spacing: 1.2px;
+            }
+
+            &.set-sell {
+              color: #fa3131;
+              border: 1px solid #fa3131;
+
+              &:hover {
+                background: #fa3131;
+                color: #fff;
+
+                p {
+                  color: #fff;
+                }
+              }
+
+              p {
+                color: #fa3131;
+              }
+
+              &.active {
+                background: #fa3131;
+                color: #fff;
+
+                p {
+                  color: #fff;
+                }
+              }
+            }
+
+            &.set-buy {
+              color: #0caf66;
+              border: 1px solid #0caf66;
+
+              p {
+                color: #0caf66;
+              }
+
+              &:hover {
+                background: #0caf66;
+                color: #fff;
+
+                p {
+                  color: #fff;
+                }
+              }
+
+              &.active {
+                background: #0caf66;
+                color: #fff;
+
+                p {
+                  color: #fff;
+                }
+              }
+            }
           }
         }
 
-        button {
+        .trade-button-group {
+          margin: 14px 0px 14px 0;
           width: 100%;
-          padding: 8px;
-          outline: none;
-          border: none;
-          background: #0a3d95;
-          color: #fff;
-          font-weight: 600;
+          height: 0;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          font-size: 10px;
+          transition: height 0.3s ease-in-out;
+
+          button {
+            text-transform: uppercase;
+            padding: 10px;
+            flex: 0.6;
+            border: 1px solid goldenrod;
+            border-radius: 8px;
+            color: goldenrod;
+
+            &:hover {
+              background: goldenrod;
+              color: #fff;
+            }
+          }
+
+          &.active {
+            height: 40px;
+            transition: height 0.3s ease-in-out;
+          }
+        }
+      }
+
+      .bot-trading {
+        margin: 15px auto 5px auto;
+        width: 100px;
+        height: 100px;
+        background: url("../icons/bot.png") no-repeat center center / cover;
+        cursor: pointer;
+      }
+    }
+
+    .advanced-accordion {
+      width: 100%;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #fff;
+
+      .accordion-btn {
+        cursor: pointer;
+        font-size: 9px;
+        text-transform: uppercase;
+        font-weight: bolder;
+
+        i {
+          padding: 5px;
+          border: 1px solid #fff;
+          border-radius: 50%;
+        }
+      }
+
+      .accordion-content {
+        height: 0px;
+        overflow: hidden;
+        padding: 0;
+        transition: all 0.3s ease-in-out;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 7px;
+
+        &.active {
+          height: 200px;
+          padding: 10px 0px;
+          transition: all 0.3s ease-in-out;
         }
 
-        .paypal-btn {
-          a {
+        > div {
+          display: block;
+
+          > p {
+            text-align: center;
+            color: #fff;
             font-size: 9px;
-            color: #ccc;
+            text-transform: uppercase;
+            font-weight: 600;
+          }
+
+          > div:not(div.access) {
+            margin-top: 5px;
+            padding: 4px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+
+            > p {
+              text-align: center;
+              font-size: 8px;
+              text-transform: uppercase;
+              font-weight: 600;
+            }
+
+            .potentials-value {
+              font-size: 11px;
+              font-weight: 650;
+            }
+
+            .potential-action-buttons {
+              margin: 4px;
+              display: flex;
+              justify-content: center;
+              gap: 5px;
+
+              button {
+                flex: 0.5;
+                text-align: center;
+                font-size: 8px;
+                padding: 2px;
+                background: #666;
+                color: #fff;
+                border-radius: 3px;
+              }
+            }
+          }
+
+          div.access {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3px;
+
+            input {
+              background: transparent;
+            }
+
+            p {
+              font-size: 8px;
+              text-transform: uppercase;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  .wave-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    padding: 15px 10px;
+
+    .control-navigation {
+      width: 7%;
+      border-radius: 4px;
+      padding: 10px 0px;
+      background-color: #091619;
+
+      > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 5px;
+        gap: 5px;
+        margin-bottom: 10px;
+
+        &.active-control-btn {
+          > .icon {
+            border: 1px solid #f320b0;
+            color: #f320b0;
+          }
+        }
+
+        > .icon {
+          border: 1px solid #fff;
+          margin: 0px auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+        }
+
+        > span {
+          font-size: 8px;
+          font-weight: 300;
+          text-transform: uppercase;
+        }
+
+        &:hover {
+          cursor: pointer;
+
+          > .icon {
+            border: 1px solid #f320b0;
+            color: #f320b0;
+          }
+        }
+      }
+    }
+
+    .control-after-display {
+      position: relative;
+      width: 0px;
+      overflow: hidden;
+      border-radius: 5px;
+      background-color: #091619;
+      transition: width 0.3s ease-in-out;
+      display: block;
+
+      &.active-control-display {
+        width: 20%;
+        transition: width 0.3s ease-in-out;
+      }
+
+      .close-display-btn {
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        width: 18px;
+        height: 18px;
+        z-index: 1;
+        cursor: pointer;
+        background: #fff;
+        color: #091619;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 900;
+        border-radius: 50%;
+        font-size: 13px;
+      }
+
+      .after-display-content {
+        display: block;
+        padding: 15px 5px 0px 5px;
+
+        .title {
+          font-size: 12px;
+          text-transform: uppercase;
+          word-spacing: 2px;
+          padding: 8px 10px;
+          border-bottom: 1px solid #333;
+          box-sizing: border-box;
+          font-weight: 700;
+          color: #fff;
+
+          i {
+            font-size: 20px;
+          }
+        }
+
+        .asset-list {
+          width: 100%;
+
+          .head {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid #444;
+            padding: 3px;
+
+            > div {
+              color: #ddd;
+              font-size: 10px;
+              text-transform: uppercase;
+              font-weight: 700;
+            }
+          }
+
+          .asset-content {
+            width: 100%;
+            height: 430px;
+            overflow-y: auto;
+
+            .asset-pair-item {
+              width: 100%;
+              display: grid;
+              grid-template-columns: 0.49fr 0.49fr 0.02fr;
+              padding: 5px 2px;
+              gap: 2px;
+              cursor: pointer;
+
+              &.active {
+                border: 1px solid goldenrod;
+              }
+
+              .asset-pair-info {
+                display: flex;
+                flex-direction: row;
+                gap: 4px;
+                align-items: center;
+                align-content: center;
+
+                > div.img-pair {
+                  width: 18px;
+                  height: 18px;
+                  border-radius: 50%;
+                  overflow: hidden;
+
+                  img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover !important;
+                  }
+                }
+
+                > div.pair-name {
+                  font-size: 9.5px;
+                  color: #eee;
+                  font-weight: 600;
+                }
+              }
+
+              .asset-pair-rate {
+                display: flex;
+                flex-direction: row;
+                gap: 2px;
+                align-items: center;
+                align-content: center;
+
+                > div {
+                  font-size: 10px;
+                  font-weight: 500;
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .trading-chart-display {
+      width: 68%;
+      border-radius: 5px;
+      background-color: #091619 !important;
+      transition: width 0.3s ease-in-out;
+
+      overflow: hidden;
+
+      &.control-display-is-active {
+        width: 48%;
+        transition: width 0.3s ease-in-out;
+      }
+
+      > div {
+        background: rgb(9, 22, 25);
+        border-radius: 5px;
+
+        > iframe {
+          background: #091619;
+        }
+      }
+    }
+
+    .trading-form-display {
+      display: block;
+      width: 25%;
+      border-radius: 5px;
+      background-color: #091619;
+      padding: 5px;
+
+      .current-symbol-info {
+        width: 100%;
+        display: flex;
+        gap: 3px;
+        align-items: center;
+        align-content: center;
+        padding: 5px 0px;
+
+        > div {
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          background: #333;
+          overflow: hidden;
+
+          img {
+            width: 25px;
+            height: 25px;
+            object-fit: cover;
+          }
+        }
+
+        > p {
+          color: gold;
+          font-weight: 400;
+        }
+      }
+
+      .trade-form {
+        width: 100%;
+        margin: 10px 0px;
+        display: block;
+
+        > .group {
+          margin: 5px 0px;
+          display: block;
+
+          > label {
+            display: block;
+            text-transform: uppercase;
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 6px;
+          }
+
+          > select {
+            width: 100%;
+            background: transparent;
+            padding: 5px;
+            color: #fff;
+
+            > option {
+              color: #fff;
+              background: #0b1f23;
+            }
+          }
+
+          p {
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 600;
+
+            span {
+              color: #fff;
+              font-size: 11px;
+              font-weight: 300;
+            }
+          }
+        }
+
+        .button-group {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          gap: 5px;
+
+          button {
+            flex: 0.5;
+            font-size: 9px;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding: 3px;
+            border-radius: 5px;
+
+            p {
+              font-size: 10px;
+              font-weight: 600; /* Fixed */
+              letter-spacing: 1.2px;
+            }
+
+            &.set-sell {
+              color: #fa3131;
+              border: 1px solid #fa3131;
+
+              &:hover {
+                background: #fa3131;
+                color: #fff;
+
+                p {
+                  color: #fff;
+                }
+              }
+
+              p {
+                color: #fa3131;
+              }
+
+              &.active {
+                background: #fa3131;
+                color: #fff;
+
+                p {
+                  color: #fff;
+                }
+              }
+            }
+
+            &.set-buy {
+              color: #0caf66;
+              border: 1px solid #0caf66;
+
+              p {
+                color: #0caf66;
+              }
+
+              &:hover {
+                background: #0caf66;
+                color: #fff;
+
+                p {
+                  color: #fff;
+                }
+              }
+
+              &.active {
+                background: #0caf66;
+                color: #fff;
+
+                p {
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+
+        .trade-button-group {
+          margin: 14px 0px 14px 0;
+          width: 100%;
+          height: 0;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          font-size: 10px;
+          transition: height 0.3s ease-in-out;
+
+          button {
+            text-transform: uppercase;
+            padding: 10px;
+            flex: 0.6;
+            border: 1px solid goldenrod;
+            border-radius: 8px;
+            color: goldenrod;
+
+            &:hover {
+              background: goldenrod;
+              color: #fff;
+            }
+          }
+
+          &.active {
+            height: 40px;
+            transition: height 0.3s ease-in-out;
+          }
+        }
+      }
+
+      .bot-trading {
+        margin: 15px auto 5px auto;
+        width: 100px;
+        height: 100px;
+        background: url("../icons/bot.png") no-repeat center center / cover;
+        cursor: pointer;
+      }
+    }
+
+    .advanced-accordion {
+      width: 100%;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #fff;
+
+      .accordion-btn {
+        cursor: pointer;
+        font-size: 9px;
+        text-transform: uppercase;
+        font-weight: bolder;
+
+        i {
+          padding: 5px;
+          border: 1px solid #fff;
+          border-radius: 50%;
+        }
+      }
+
+      .accordion-content {
+        height: 0px;
+        overflow: hidden;
+        padding: 0;
+        transition: all 0.3s ease-in-out;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 7px;
+
+        &.active {
+          height: 200px;
+          padding: 10px 0px;
+          transition: all 0.3s ease-in-out;
+        }
+
+        > div {
+          display: block;
+
+          > p {
+            text-align: center;
+            color: #fff;
+            font-size: 9px;
+            text-transform: uppercase;
+            font-weight: 600;
+          }
+
+          > div:not(div.access) {
+            margin-top: 5px;
+            padding: 4px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+
+            > p {
+              text-align: center;
+              font-size: 8px;
+              text-transform: uppercase;
+              font-weight: 600;
+            }
+
+            .potentials-value {
+              font-size: 11px;
+              font-weight: 650;
+            }
+
+            .potential-action-buttons {
+              margin: 4px;
+              display: flex;
+              justify-content: center;
+              gap: 5px;
+
+              button {
+                flex: 0.5;
+                text-align: center;
+                font-size: 8px;
+                padding: 2px;
+                background: #666;
+                color: #fff;
+                border-radius: 3px;
+              }
+            }
+          }
+
+          div.access {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3px;
+
+            input {
+              background: transparent;
+            }
+
+            p {
+              font-size: 8px;
+              text-transform: uppercase;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .wave-logs {
+    width: 100%;
+    padding: 7px 14px;
+
+    .logs {
+      background: #0b1f23;
+      padding: 10px 7px;
+      border-radius: 5px;
+      ul {
+        li {
+          margin: 0px 2px;
+          button {
+            color: goldenrod;
+
+            &:hover {
+              color: gold;
+            }
+
+            &.active {
+              background: #0b1f23 !important;
+              color: #fff !important;
+            }
+          }
+        }
+      }
+
+      .tab-content {
+        .tab-pane {
+          table {
+            width: 100%;
+
+            thead {
+              tr {
+                th {
+                  text-align: center;
+                  font-size: 11px;
+                  padding: 12px 0px;
+                }
+                border-bottom: 1px solid #fff;
+              }
+            }
+
+            tbody {
+              tr {
+                td {
+                  padding: 5px 0px;
+                  text-align: center;
+                  font-size: 9px;
+                }
+
+                &:not(:last-child) {
+                  border-bottom: 1px solid #fff;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .payment-section {
+    width: 100%;
+    min-height: 30vh;
+
+    .content {
+      padding-top: 30px !important;
+      width: 100%;
+      height: 40vh;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0px 10px;
+      gap: 50px;
+      flex-wrap: wrap;
+
+      > div {
+        padding: 10px;
+        height: 450px;
+        border-radius: 3px;
+
+        &.form-2 {
+          display: block;
+          opacity: 1;
+          width: min(400px, 100%);
+          transition: all 0.9s ease-in-out;
+
+          h2 {
+            text-align: center;
+            font-size: 19px;
+            font-style: italic;
+            font-weight: 700;
+            margin-bottom: 3px;
+            color: #0c57d8;
+            text-transform: uppercase;
+          }
+
+          .amount {
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgb(33, 55, 255);
+            margin-bottom: 15px;
+            text-align: left;
+            font-weight: 500;
+          }
+
+          .cc-types {
+            color: #474454;
+          }
+
+          .group {
+            width: 100%;
+            margin: 10px 0px;
+            position: relative;
+
+            > input {
+              width: 100%;
+              padding: 8px 12px;
+              outline: none;
+              background: transparent;
+              border: 1px solid #0c57d8;
+              color: #ccc;
+            }
+
+            > span {
+              position: absolute;
+              font-size: 20px;
+              top: 5px;
+              right: 10px;
+              color: #50475b;
+            }
+          }
+
+          .exp-cvc-group {
+            width: 100%;
+            margin: 10px 0px;
+            display: grid;
+            grid-template-columns: 0.5fr 0.5fr;
+            gap: 5px;
+
+            input {
+              display: inline-block;
+              padding: 8px 12px;
+              max-width: 187px;
+              min-width: 100px;
+              outline: none;
+              background: transparent;
+              border: 1px solid #0c57d8;
+              color: #ccc;
+            }
+          }
+
+          button {
+            width: 100%;
+            padding: 8px;
+            outline: none;
+            border: none;
+            background: #0a3d95;
+            color: #fff;
+            font-weight: 600;
+          }
+
+          .paypal-btn {
+            a {
+              font-size: 9px;
+              color: #ccc;
+            }
           }
         }
       }
