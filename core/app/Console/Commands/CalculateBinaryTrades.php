@@ -33,6 +33,8 @@ class CalculateBinaryTrades extends Command
 
         $binary->updatePriceIs();
 
-        $this->info('binary calculation fot this instance is successfull');
+        $binary->setPips();
+
+        $this->info('binary calculation for this instance is successfull');
     }
 }

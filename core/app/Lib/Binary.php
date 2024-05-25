@@ -5,6 +5,7 @@ namespace App\Lib;
 use App\Models\WaveLog;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Support\Facades\Log;
+use GuzzleHttp\Client;
 
 class Binary
 {
@@ -28,6 +29,29 @@ class Binary
         $this->coin_api_key = '51df7514-244b-43fc-a90a-0f53482fc699';
         $this->iex_api_key = 'pk_ec4702ee020546e68f094d6e2e99de4c';
         $this->fast_forex_api_key = '7300b3df0c-1a7889661d-sdqy7n`';
+    }
+
+    public function getCryptoRate($symbol)
+    {
+        $url = "https://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount=1&symbol=$symbol&convert=USD";
+
+        $client = new Client();
+        $response = $client->get($url, [
+            'headers' => [
+                'X-CMC_PRO_API_KEY' => $this->coin_api_key // Replace with your API key
+            ]
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+
+        if (isset($data['data']['quote']['USD']['price'])) {
+            $cryptoRate = $data['data']['quote']['USD']['price'];
+
+            Log::info("Price for $symbol : $cryptoRate");
+            return $cryptoRate;
+        } else {
+            Log::error("No price for $symbol");
+        }
     }
 
     public function connectIexCloud(string $symbol)
@@ -93,13 +117,19 @@ class Binary
         }
 
         if (!isset($response['result']['rate'])) {
-            Log::error('Fast Forex response does not contain rate');
+            Log::error('Fast Forex response does not contain rate for ' . $symbol);
             return null;
         }
 
         return (float) $response['result']['rate'];
     }
 
+    /**
+     * 
+     * Update running trade's price_is value
+     * 
+     * @return bool
+     */
     public function updatePriceIs()
     {
         $trades = WaveLog::where('status', 'running')->get();
@@ -119,7 +149,7 @@ class Binary
                     $rate = (float) $this->connectFastForex($trade->currency);
                     $trade->price_is = $rate;
                 } elseif ($trade->isCrypto) {
-                    $rate = (float) $this->connectFastForex($trade->crypto);
+                    $rate = (float) $this->getCryptoRate($trade->crypto);
                     $trade->price_is = $rate;
                 } elseif ($trade->isStock) {
                     $rate = (float) $this->connectIexCloud($trade->stock);
@@ -138,6 +168,45 @@ class Binary
         } catch (\Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
+        }
+    }
+
+    /**
+     * 
+     * Calculate and add pips to the amount
+     * 
+     * @return bool
+     */
+    public function setPips()
+    {
+        $trades = WaveLog::where('status', 'running')->get();
+
+        try {
+
+
+            DB::beginTransaction();
+
+            foreach ($trades as $trade) {
+
+                Log::info('Processing trade ID: ' . $trade->id);
+
+
+                $pips = $trade->pips * 10;
+                if ($trade->price_is > $trade->price_was) {
+                    $trade->amount += $pips;
+                } else if ($trade->price_is > $trade->price_was) {
+                    $trade->amount -= $pips;
+                }
+
+                $trade->save();
+            }
+
+            DB::commit();
+            Log::info('pips calculated and completed');
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+            Log::error($e->getMessage());
         }
     }
 }
