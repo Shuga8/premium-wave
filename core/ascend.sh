@@ -1,10 +1,11 @@
 #!/bin/bash
 
-script_path="C:\xampp\htdocs\vinance\core\app\Lib\Ascend.php"
+# script_path="C:\xampp\htdocs\vinance\core\app\Lib\Ascend.php"
 
 while true; do
-    php "$script_path" & 
+    # php "$script_path" & 
+    php artisan binary:calculate
     wait  
 
-    sleep 2
+    sleep 100
 done

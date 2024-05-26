@@ -31,6 +31,8 @@ class CalculateBinaryTrades extends Command
     {
         $binary = new Binary();
 
+        $binary->checkPendingTradesAndUpdateStatusToRunning();
+
         $binary->updatePriceIs();
 
         $binary->setPips();

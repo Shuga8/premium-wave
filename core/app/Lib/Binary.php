@@ -252,4 +252,74 @@ class Binary
             Log::error($e->getMessage());
         }
     }
+
+    /**
+     * 
+     * check pending trades's open at price and see if it is equal or greater than symbols current rate
+     * @see undefined
+     * @return bool
+     * @var object $trades
+     * @var float $rate
+     */
+    public function checkPendingTradesAndUpdateStatusToRunning()
+    {
+        $trades = WaveLog::where('status', 'pending')->get();
+
+        if ($trades->isEmpty()) {
+            Log::info('No trades with status running found.');
+            return false;
+        }
+
+        try {
+
+            DB::beginTransaction();
+
+            foreach ($trades as $trade) {
+                Log::info('Processing pending trade ID: ' . $trade->id);
+
+                if ($trade->isForex) {
+                    $rate = (float) $this->connectFastForex($trade->currency);
+
+                    if ($trade->open_at_is_set == 1 && $trade->open_at >= $rate) {
+                        $trade->status = "running";
+                    }
+
+                    $trade->price_is = $rate;
+                } elseif ($trade->isCrypto) {
+                    $rate = (float) $this->getCryptoRate($trade->crypto);
+
+                    if ($trade->open_at_is_set == 1 && $trade->open_at >= $rate) {
+                        $trade->status = "running";
+                    }
+
+                    $trade->price_is = $rate;
+                } elseif ($trade->isStock) {
+                    $rate = (float) $this->connectIexCloud($trade->stock);
+
+                    if ($trade->open_at_is_set == 1 && $trade->open_at >= $rate) {
+                        $trade->status = "running";
+                    }
+
+                    $trade->price_is = $rate;
+                } elseif ($trade->isCommodity) {
+                    $rate = (float) $this->connectIexCloud($trade->commodity);
+
+                    if ($trade->open_at_is_set == 1 && $trade->open_at >= $rate) {
+                        $trade->status = "running";
+                    }
+
+                    $trade->price_is = $rate;
+                }
+
+                Log::info('Updated status for trade ID: ' . $trade->id . ' to running');
+
+                $trade->save();
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::info($e->getMessage());
+        }
+    }
 }
