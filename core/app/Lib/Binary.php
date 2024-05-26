@@ -2,10 +2,11 @@
 
 namespace App\Lib;
 
+use App\Models\Wallet;
+use GuzzleHttp\Client;
 use App\Models\WaveLog;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Support\Facades\Log;
-use GuzzleHttp\Client;
 
 class Binary
 {
@@ -172,7 +173,6 @@ class Binary
     }
 
     /**
-     * 
      * Calculate and add pips to the amount
      * 
      * @return bool
@@ -192,6 +192,12 @@ class Binary
 
 
                 $pips = $trade->pips * 10;
+
+                if ($trade->price_is >= $trade->take_profit ||  $trade->price_is <= $trade->stop_loss) {
+                    $bal = $trade->amount;
+                    $this->updateStatusAndBalance($trade->id, $bal);
+                    continue;
+                }
                 if ($trade->price_is > $trade->price_was) {
                     $trade->amount += $pips;
                 } else if ($trade->price_is > $trade->price_was) {
@@ -203,6 +209,43 @@ class Binary
 
             DB::commit();
             Log::info('pips calculated and completed');
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+            Log::error($e->getMessage());
+        }
+    }
+
+
+
+    /**
+     *  change status to complete if take profit and stop loss conditions are met
+     * credit the amount into user balance
+     * @see undefined
+     * @return bool
+     */
+    public function updateStatusAndBalance(int $id, float $balance)
+    {
+
+        $trade = WaveLog::where('id', $id)->first();
+        $wallet = Wallet::where('user_id', $trade->user_id)->where('currency_id', 31)->where('wallet_type', 1)->first();
+
+        try {
+
+            DB::beginTransaction();
+
+            Log::info('Processing trade ID: ' . $trade->id);
+
+            $trade->status = 'completed';
+
+            $wallet->balance += (float) $balance;
+
+            $trade->save();
+
+            $wallet->save();
+
+            DB::commit();
+            Log::info('Statuses and balances updated');
         } catch (\Exception $e) {
 
             DB::rollBack();
