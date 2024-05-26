@@ -10,7 +10,7 @@ const tradeBtnGroup = document.querySelector(".trade-button-group");
 const accordionBtn = document.querySelector(".accordion-btn");
 const accordionContent = document.querySelector(".accordion-content");
 const closeDisplayBtn = document.querySelector(".close-display-btn");
-const bot = document.querySelector(".bot-trading");
+const bots = document.querySelectorAll(".bot-trading");
 
 let coin_rate = null;
 let stop_loss = null;
@@ -26,28 +26,41 @@ let currencyRates = [];
 let stockRates = [];
 let commodityRates = [];
 
-bot.addEventListener("click", async function (e) {
-  const randomFiat = ["crypto", "stock", "currency", "commodity"];
-  const randomStock = ["AAPL", "IBM", "TSLA", "XOM", "MSFT", "AIG"];
-  const randomCrypto = ["BTC", "ETH", "BNB", "LEO", "SOL", "TON"];
-  const randomCurrency = ["EUR", "GBP", "AUD", "CNY", "CAD", "JPY"];
-  const randomCommodity = ["GOLD", "CORN", "LEAD", "GF", "NG", "GDP"];
+bots.forEach((bot) => {
+  bot.addEventListener("click", async function (e) {
+    if (bot.classList.contains("bot-trading-1")) {
+      lotsize = 0.3;
+    } else {
+      lotsize = 0.5;
+    }
 
-  const confirmBot = confirm(
-    "Are you sure you want to set an automatic trade?"
-  );
+    const randomFiat = ["crypto", "stock", "currency", "commodity"];
+    const randomStock = ["AAPL", "IBM", "TSLA", "XOM", "MSFT", "AIG"];
+    const randomCrypto = ["BTC", "ETH", "BNB", "LEO", "SOL", "TON"];
+    const randomCurrency = ["EUR", "GBP", "AUD", "CNY", "CAD", "JPY"];
+    const randomCommodity = ["GOLD", "CORN", "LEAD", "GF", "NG", "GDP"];
 
-  if (confirmBot == true) {
-    currency_type = randomFiat[Math.floor(Math.random() * randomFiat.length)];
-    await botPreset(randomStock, randomCrypto, randomCurrency, randomCommodity);
-    // notify(
-    //   "success",
-    //   `type=${currency_type}, symbol=${coin_symbol}, rate=${coin_rate}, stop_loss=${stop_loss}, take_profit=${take_profit}`
-    // );
-    $(".trade-btn").click();
-  } else {
-    notify("error", "Bot auto-trade has cancelled");
-  }
+    const confirmBot = confirm(
+      "Are you sure you want to set an automatic trade?"
+    );
+
+    if (confirmBot == true) {
+      currency_type = randomFiat[Math.floor(Math.random() * randomFiat.length)];
+      await botPreset(
+        randomStock,
+        randomCrypto,
+        randomCurrency,
+        randomCommodity
+      );
+      // notify(
+      //   "success",
+      //   `type=${currency_type}, symbol=${coin_symbol}, rate=${coin_rate}, stop_loss=${stop_loss}, take_profit=${take_profit}`
+      // );
+      $(".trade-btn").click();
+    } else {
+      notify("error", "Bot auto-trade has cancelled");
+    }
+  });
 });
 
 document.querySelectorAll(".potential-button").forEach((button) => {
@@ -833,6 +846,10 @@ $(".trade-btn").click(function (e) {
     success: function (response, status) {
       if (response.success) {
         notify("success", response.success);
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1200);
         return 0;
       } else if (response.error) {
         notify("error", response.error);

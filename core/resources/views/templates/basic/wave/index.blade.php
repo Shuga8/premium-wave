@@ -230,7 +230,21 @@
 
 			</form>
 
-			<div class="bot-trading">
+			<div class="row">
+
+				<div class="bot-col col-sm-6 gap-4">
+					<div class="bot-trading bot-trading-1">
+					</div>
+
+					<p class="text-center" style="font-size: 10px">BOT LOTSIZE: 0.3</p>
+				</div>
+
+				<div class="bot-col col-sm-6">
+					<div class="bot-trading bot-trading-2">
+					</div>
+					<p class="text-center" style="font-size: 10px">BOT LOTSIZE: 0.5</p>
+				</div>
+
 			</div>
 			{{-- <button class="">Auto Trade</button> --}}
 		</div>

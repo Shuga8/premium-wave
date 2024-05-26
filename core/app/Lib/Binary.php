@@ -282,6 +282,9 @@ class Binary
 
                     if ($trade->open_at_is_set == 1 && $trade->open_at >= $rate) {
                         $trade->status = "running";
+                        Log::info('Updated status for trade ID: ' . $trade->id . ' to running');
+                    } else {
+                        Log::info('Trade with trade ID: ' . $trade->id . ' has not met open at condition');
                     }
 
                     $trade->price_is = $rate;
@@ -290,6 +293,9 @@ class Binary
 
                     if ($trade->open_at_is_set == 1 && $trade->open_at >= $rate) {
                         $trade->status = "running";
+                        Log::info('Updated status for trade ID: ' . $trade->id . ' to running');
+                    } else {
+                        Log::info('Trade with trade ID: ' . $trade->id . ' has not met open at condition');
                     }
 
                     $trade->price_is = $rate;
@@ -298,6 +304,9 @@ class Binary
 
                     if ($trade->open_at_is_set == 1 && $trade->open_at >= $rate) {
                         $trade->status = "running";
+                        Log::info('Updated status for trade ID: ' . $trade->id . ' to running');
+                    } else {
+                        Log::info('Trade with trade ID: ' . $trade->id . ' has not met open at condition');
                     }
 
                     $trade->price_is = $rate;
@@ -306,12 +315,15 @@ class Binary
 
                     if ($trade->open_at_is_set == 1 && $trade->open_at >= $rate) {
                         $trade->status = "running";
+                        Log::info('Updated status for trade ID: ' . $trade->id . ' to running');
+                    } else {
+                        Log::info('Trade with trade ID: ' . $trade->id . ' has not met open at condition');
                     }
 
                     $trade->price_is = $rate;
                 }
 
-                Log::info('Updated status for trade ID: ' . $trade->id . ' to running');
+
 
                 $trade->save();
             }
