@@ -191,7 +191,7 @@ class Binary
                 Log::info('Processing trade ID: ' . $trade->id);
 
 
-                $pips = $trade->pips * 10;
+                $pips = ((float) $trade->pips) * 10;
 
                 if ($trade->price_is >= $trade->take_profit ||  $trade->price_is <= $trade->stop_loss) {
                     $bal = $trade->amount;
@@ -200,7 +200,7 @@ class Binary
                 }
                 if ($trade->price_is > $trade->price_was) {
                     $trade->amount += $pips;
-                } else if ($trade->price_is > $trade->price_was) {
+                } else if ($trade->price_is < $trade->price_was) {
                     $trade->amount -= $pips;
                 }
 
