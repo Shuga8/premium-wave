@@ -27,9 +27,9 @@ class Binary
      */
     public function __construct()
     {
-        $this->coin_api_key = '51df7514-244b-43fc-a90a-0f53482fc699';
-        $this->iex_api_key = 'pk_ec4702ee020546e68f094d6e2e99de4c';
-        $this->fast_forex_api_key = '7300b3df0c-1a7889661d-sdqy7n`';
+        $this->coin_api_key = '552675b6-f913-4a97-adcc-bdbf6ccd37d9';
+        $this->iex_api_key = 'pk_775afb121446472ebe55fce3abd3cfe9';
+        $this->fast_forex_api_key = '8ac3c2cc1d-a6dd8e1f96-se4y2q`';
     }
 
     public function getCryptoRate($symbol)
