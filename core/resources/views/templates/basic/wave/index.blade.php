@@ -61,12 +61,11 @@
 				<span>@lang('Indicies')</span>
 			</div>
 
-			<div class="control-tab text-white" data-nav-control-title="Cannabis"
-				data-nav-control-icon='<i class="las la-leaf"></i>'>
+			<div class="control-tab text-white" data-nav-control-title="Blog" data-nav-control-icon='<i class="las la-leaf"></i>'>
 				<div class="icon">
-					<i class="las la-leaf"></i>
+					<i class="las la-file"></i>
 				</div>
-				<span>@lang('Cannabis')</span>
+				<span>@lang('Blog')</span>
 			</div>
 
 

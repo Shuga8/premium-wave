@@ -223,6 +223,10 @@ document
 
 controlButtons.forEach((controlBtn) => {
   controlBtn.addEventListener("click", async function (e) {
+    if (this.getAttribute("data-nav-control-title") == "Blog") {
+      location.href = "https://premiumwave.ca/blog/";
+      return false;
+    }
     if (this.classList.contains("active-control-btn")) {
       this.classList.remove("active-control-btn");
       afterDisplay.classList.remove("active-control-display");
