@@ -531,6 +531,8 @@ async function assetClickTrigger(element) {
     `;
   }
 
+  changeTechnicalAnalysis(returnSymbol);
+
   new TradingView.widget({
     width: "100%",
     height: 525,
@@ -547,6 +549,47 @@ async function assetClickTrigger(element) {
     details: false,
     container_id: "tradingview-container",
   });
+}
+
+function changeTechnicalAnalysis(symbol) {
+  const widgetContainer = document.querySelector(
+    ".tradingview-widget-container"
+  );
+
+  // Clear the existing widget content
+  widgetContainer.innerHTML = `
+      <div class="tradingview-widget-container__widget"></div>
+      <div class="tradingview-widget-copyright">
+          <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+              <span class="blue-text">Track all markets on TradingView</span>
+          </a>
+      </div>
+  `;
+
+  // Create a new script element
+  const script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src =
+    "https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js";
+  script.async = true;
+
+  // Set the script content
+  script.innerHTML = JSON.stringify({
+    interval: "1m",
+    width: "100%",
+    isTransparent: true,
+    height: "250",
+    symbol: symbol,
+    showIntervalTabs: true,
+    displayMode: "single",
+    locale: "en",
+    colorTheme: "dark",
+  });
+
+  // Append the script to the widget container
+  widgetContainer.appendChild(script);
+
+  console.log(widgetContainer);
 }
 
 async function getCurrencyRate(symbol) {

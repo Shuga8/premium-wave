@@ -817,8 +817,8 @@
   }
   .wave-container .trading-form-display .bot-trading {
     margin: 15px auto 5px auto;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     background: url("../icons/bot.png") no-repeat center center/cover;
     cursor: pointer;
   }

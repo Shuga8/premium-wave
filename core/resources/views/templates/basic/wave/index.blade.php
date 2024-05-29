@@ -231,6 +231,31 @@
 
 			<div class="row">
 
+				<!-- TradingView Widget BEGIN -->
+				<div class="tradingview-widget-container">
+					<div class="tradingview-widget-container__widget"></div>
+					<div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow"
+							target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+					<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js"
+						async>
+						{
+							"interval": "1m",
+							"width": "100%",
+							"isTransparent": true,
+							"height": "250",
+							"symbol": "AUDUSD",
+							"showIntervalTabs": true,
+							"displayMode": "single",
+							"locale": "en",
+							"colorTheme": "dark"
+						}
+					</script>
+				</div>
+				<!-- TradingView Widget END -->
+			</div>
+
+			<div class="row">
+
 				<div class="bot-col col-sm-6 gap-4">
 					<div class="bot-trading bot-trading-1">
 					</div>
@@ -290,11 +315,14 @@
 
 	@push('script')
 		<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+		</div>
+		<!-- TradingView Widget END -->
 		<script>
 			"use strict";
 			new TradingView.widget({
 				"width": "100%",
-				"height": 559,
+				"height": 580,
 				"symbol": "FX:AUDUSD",
 				"interval": "1",
 				"timezone": "Etc/UTC",
