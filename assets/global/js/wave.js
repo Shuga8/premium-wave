@@ -535,7 +535,7 @@ async function assetClickTrigger(element) {
 
   new TradingView.widget({
     width: "100%",
-    height: 525,
+    height: 580,
     symbol: `${returnSymbol}`,
     interval: "1",
     timezone: "Etc/UTC",
