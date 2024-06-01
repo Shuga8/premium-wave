@@ -160,6 +160,8 @@ class Binary
                     $trade->price_is = $rate;
                 }
 
+
+
                 Log::info('Updated price for trade ID: ' . $trade->id . ' to ' . $trade->price_is);
 
                 $trade->save();
@@ -203,6 +205,8 @@ class Binary
                 } else if ($trade->price_is < $trade->price_was) {
                     $trade->amount -= $pips;
                 }
+
+                $trade->price_was = $trade->price_is;
 
                 $trade->save();
             }

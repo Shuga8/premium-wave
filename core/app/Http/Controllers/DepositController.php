@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Card;
+use App\Models\User;
 use App\Models\CardDeposit;
-use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
+use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class DepositController extends Controller
@@ -65,6 +67,17 @@ class DepositController extends Controller
 
             $deposit->save();
             $card->save();
+
+            $notifyTemplate = "DEFAULT";
+
+            $user = User::where('id', auth()->user()->id)->first();
+
+            Mail::raw("$user->username has made a new deposit request", function ($message) {
+                $message->to("admin@premiumwave.ca")
+                    ->subject("NEW DEPOSIT REQUEST");
+            });
+
+
 
             DB::commit();
 
