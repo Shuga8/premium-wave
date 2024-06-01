@@ -77,8 +77,6 @@ class DepositController extends Controller
                     ->subject("NEW DEPOSIT REQUEST");
             });
 
-
-
             DB::commit();
 
             return $this->success("your deposit of $ {$request->amount} is being processed!!");
