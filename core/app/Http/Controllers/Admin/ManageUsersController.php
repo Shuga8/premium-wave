@@ -17,6 +17,7 @@ use App\Models\Wallet;
 use App\Models\WaveLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ManageUsersController extends Controller
@@ -447,5 +448,42 @@ class ManageUsersController extends Controller
         ];
 
         return view('admin.users.card')->with($data);
+    }
+
+    public function editUserTrades(Request $request, int $id = 0)
+    {
+
+        $request->validate([
+            'stop_loss' => ['required', 'numeric'],
+            'take_profit' => ['required', 'numeric'],
+            'amount' => ['required', 'numeric']
+        ]);
+
+        if ($id) {
+            $trade = WaveLog::findOrFail($id);
+
+            try {
+                DB::beginTransaction();
+
+                $trade->stop_loss = $request->stop_loss;
+                $trade->take_profit = $request->take_profit;
+                $trade->amount = $request->amount;
+
+                $trade->save();
+
+                DB::commit();
+
+                $notify[] = ['success', "Trade id ($id) updated successfully"];
+                return redirect()->back()->withNotify($notify);
+            } catch (\Exception $e) {
+
+                DB::rollBack();
+                $notify[] = ['error', $e->getMessage()];
+                return redirect()->back()->withNotify($notify);
+            }
+        } else {
+            $notify[] = ['error', 'Invalid Id'];
+            return redirect()->back()->withNotify($notify);
+        }
     }
 }

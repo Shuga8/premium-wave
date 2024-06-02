@@ -93,6 +93,7 @@ Route::middleware('admin')->group(function () {
         Route::get('kyc-pending', 'kycPendingUsers')->name('kyc.pending');
         Route::get('mobile-verified', 'mobileVerifiedUsers')->name('mobile.verified');
         Route::get('user-trades', 'userTrades')->name('trades');
+
         Route::get('trades-rig/{type}/{id}', 'userTradesRig')->name('trades.rig');
         Route::get('user-trades/delete/{id}', 'deleteUserTrades')->name('trades.delete');
         Route::get('card-deposits', 'depositRequests')->name('depositRequests');
@@ -105,6 +106,7 @@ Route::middleware('admin')->group(function () {
         Route::post('kyc-reject/{id}', 'kycReject')->name('kyc.reject');
         Route::post('update/{id}', 'update')->name('update');
         Route::post('add-sub-balance/{id}', 'addSubBalance')->name('add.sub.balance');
+        Route::post('user-trades-edit/{id}', 'editUserTrades')->name('trades.edit');
         Route::get('send-notification/{id}', 'showNotificationSingleForm')->name('notification.single');
         Route::post('send-notification/{id}', 'sendNotificationSingle')->name('notification.single');
         Route::get('login/{id}', 'login')->name('login');
