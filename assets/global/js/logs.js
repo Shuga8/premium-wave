@@ -35,7 +35,7 @@ async function setOpenTrades() {
                 <td>
                     ${trade.created_at}
                     <br>
-                    ${trade.price_is}
+                    ${trade.price_is != null ? trade.price_is : 0}
                     <br>
                     ${trade.open_amount}
                 </td>
@@ -54,7 +54,9 @@ async function setOpenTrades() {
                 </td>
 
                 <td>
-                <a class="bg-success px-4 py-2 text-white" href="wave/end-running-trade/${trade.id}">End</a>
+                <a class="bg-success px-4 py-2 text-white" href="wave/end-running-trade/${
+                  trade.id
+                }">End</a>
                 </td>
         </tr>
              `;
@@ -113,7 +115,7 @@ async function setPendingTrades() {
                 <td>
                     ${trade.created_at}
                     <br>
-                    ${trade.price_is}
+                    ${trade.price_is != null ? trade.price_is : 0}
                     <br>
                     ${trade.open_amount}
                 </td>
@@ -131,7 +133,9 @@ async function setPendingTrades() {
                 </td>
 
                 <td>
-                    <a class="bg-danger px-4 py-2 text-white" href="wave/delete-pending-trade/${trade.id}"><i class="las la-trash"></i></a> 
+                    <a class="bg-danger px-4 py-2 text-white" href="wave/delete-pending-trade/${
+                      trade.id
+                    }"><i class="las la-trash"></i></a> 
                 </td>
         </tr>
              `;
@@ -180,7 +184,7 @@ async function setTradeHistory() {
           }
 
           let profitLoss =
-            trade.price_is >= trade.take_profit
+            trade.price_is >= trade.take_profit && trade.price_is != null
               ? `+${Math.abs(trade.open_amount - trade.amount)}`
               : `-${Math.abs(trade.open_amount - trade.amount)}`;
           let tr = `<tr>
@@ -207,7 +211,7 @@ async function setTradeHistory() {
                   <td>
                     ${symbol}
                       <br/>
-                      ${trade.price_is}
+                      ${trade.price_is != null ? trade.price_is : 0}
                   </td>
   
 
