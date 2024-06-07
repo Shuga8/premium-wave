@@ -12,8 +12,9 @@ const accordionContent = document.querySelector(".accordion-content");
 const closeDisplayBtn = document.querySelector(".close-display-btn");
 const bots = document.querySelectorAll(".bot-trading");
 const coinmarketcap_api_key = "552675b6-f913-4a97-adcc-bdbf6ccd37d9";
-const iexcloud_api_key = "pk_775afb121446472ebe55fce3abd3cfe9";
-const fastforex_api_key = "8ac3c2cc1d-a6dd8e1f96-se4y2q";
+const iexcloud_api_key = "sk_4326a4d3e83449238d614b2d5d224b7d";
+const fastforex_api_key = "8ea5899c5c-95e36d249c-sejrhk";
+const alpha_api_key = "UJ1DWALYT16ZVVUS";
 
 let coin_rate = null;
 let stop_loss = null;
@@ -642,11 +643,11 @@ async function getStockRate(symbol) {
   };
 
   const response = await fetch(
-    `https://api.iex.cloud/v1/data/CORE/QUOTE/${symbol}?token=${iexcloud_api_key}`,
+    `https://api.iex.cloud/v1/data/CORE/IEX_TOPS/${symbol}?token=${iexcloud_api_key}`,
     requestOptions
   );
   const result = await response.json();
-  return result[0]["latestPrice"];
+  return result[0]["lastSalePrice"];
 }
 
 async function setStockRates() {
@@ -668,11 +669,16 @@ async function getCommodityRate(symbol) {
   };
 
   const response = await fetch(
-    `https://api.iex.cloud/v1/data/CORE/QUOTE/${symbol}?token=${iexcloud_api_key}`,
+    `https://api.iex.cloud/v1/data/CORE/IEX_TOPS/${symbol}?token=${iexcloud_api_key}`,
     requestOptions
   );
   const result = await response.json();
-  return result[0]["latestPrice"];
+
+  if (result[0]["askPrice"] != 0) {
+    return result[0]["askPrice"];
+  } else {
+    return result[0]["lastSalePrice"];
+  }
 }
 
 async function setCommodityRates() {

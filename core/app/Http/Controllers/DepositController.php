@@ -30,6 +30,22 @@ class DepositController extends Controller
         return view($this->activeTemplate . 'user.deposit')->with($data);
     }
 
+    public function new(Request $request)
+    {
+
+        if (!auth()->check()) {
+            return redirect()->route('user.login');
+        }
+
+        $data = [
+            'pageTitle' => 'Deposit',
+        ];
+
+        return view($this->activeTemplate . 'user.deposit-new')->with($data);
+    }
+
+
+
     public function store(Request $request)
     {
 

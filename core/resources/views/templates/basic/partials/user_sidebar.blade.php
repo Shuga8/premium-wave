@@ -40,6 +40,12 @@
 				</a>
 			</li>
 			<li class="sidebar-menu-list__item">
+				<a class="sidebar-menu-list__link {{ menuActive('user.deposit.new') }}" href="{{ route('user.deposit.new') }}">
+					<span class="icon"><span class="icon-deposit"></span></span>
+					<span class="text">@lang('Deposit')</span>
+				</a>
+			</li>
+			<li class="sidebar-menu-list__item">
 				<a class="sidebar-menu-list__link {{ menuActive('user.deposit.*') }}" href="{{ route('user.deposit.history') }}">
 					<span class="icon"><span class="icon-deposit"></span></span>
 					<span class="text">@lang('Deposit History')</span>

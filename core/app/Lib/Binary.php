@@ -27,9 +27,9 @@ class Binary
      */
     public function __construct()
     {
-        $this->coin_api_key = '552675b6-f913-4a97-adcc-bdbf6ccd37d9';
-        $this->iex_api_key = 'pk_775afb121446472ebe55fce3abd3cfe9';
-        $this->fast_forex_api_key = '8ac3c2cc1d-a6dd8e1f96-se4y2q`';
+        $this->coin_api_key = '326a6fd8-6f75-49c5-8acf-db35ebc6b31d';
+        $this->iex_api_key = 'sk_4326a4d3e83449238d614b2d5d224b7d';
+        $this->fast_forex_api_key = '8ea5899c5c-95e36d249c-sejrhk';
     }
 
     public function getCryptoRate($symbol)
@@ -60,7 +60,7 @@ class Binary
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.iex.cloud/v1/data/CORE/QUOTE/$symbol?token=$this->iex_api_key",
+            CURLOPT_URL => "https://api.iex.cloud/v1/data/CORE/IEX_TOPS/$symbol?token=$this->iex_api_key",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -80,12 +80,20 @@ class Binary
             return null;
         }
 
-        if (!isset($response[0]['latestPrice'])) {
-            Log::error('IEX Cloud response does not contain latestPrice');
-            return null;
-        }
+        // if (!isset($response[0]['latestPrice']) || ) {
+        //     Log::error('IEX Cloud response does not contain latestPrice');
+        //     return null;
+        // }
 
-        return $response[0]['latestPrice'];
+        if ($response[0]["bidPrice"] != 0) {
+
+            return $response[0]["bidPrice"];
+        } else if ($response[0]["askPrice"] != 0) {
+
+            return $response[0]["askPrice"];
+        } else {
+            return $response[0]["lastSalePrice"];
+        }
     }
 
 
