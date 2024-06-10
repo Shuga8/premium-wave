@@ -4,16 +4,17 @@ namespace App\Http\Controllers\User;
 
 use Exception;
 use App\Models\Order;
+use App\Models\Trade;
 use App\Models\Wallet;
+use App\Models\WaveLog;
 use App\Models\CoinPair;
+use App\Models\Currency;
 use App\Constants\Status;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\AdminNotification;
 use App\Events\Order as EventsOrder;
 use App\Http\Controllers\Controller;
-use App\Models\AdminNotification;
-use App\Models\Currency;
-use App\Models\Trade;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -21,28 +22,34 @@ class OrderController extends Controller
 
     public function open()
     {
+        $user = auth()->user();
         $pageTitle = "Open Order";
-        $orders    = $this->orderData('open');
+        $orders    = WaveLog::where('user_id', $user->id)->where('status', 'running')->paginate(getPaginate());
         return view($this->activeTemplate . 'user.order.list', compact('pageTitle', 'orders'));
     }
 
     public function completed()
     {
+        $user = auth()->user();
         $pageTitle = "Completed Order";
-        $orders    = $this->orderData('completed');
+        $orders    = WaveLog::where('user_id', $user->id)->where('status', 'completed')->paginate(getPaginate());
+
         return view($this->activeTemplate . 'user.order.list', compact('pageTitle', 'orders'));
     }
     public function canceled()
     {
+        $user = auth()->user();
         $pageTitle = "Canceled Order";
-        $orders    = $this->orderData('canceled');
+        $orders    = WaveLog::where('user_id', $user->id)->where('status', 'pending')->paginate(getPaginate());
         return view($this->activeTemplate . 'user.order.list', compact('pageTitle', 'orders'));
     }
 
     public function history()
     {
         $pageTitle = "My Order";
+        $user = auth()->user();
         $orders    = $this->orderData();
+        $orders    = WaveLog::where('user_id', $user->id)->paginate(getPaginate());
         return view($this->activeTemplate . 'user.order.list', compact('pageTitle', 'orders'));
     }
 
@@ -409,7 +416,7 @@ class OrderController extends Controller
         $order->save();
 
         if ($order->order_side ==  Status::BUY_SIDE_ORDER) {
-            $details = "Update buy order on  " . $pair->symbol . " pair. updated amount is  " . showAMount($updatedAmount) .' ' .@$order->pair->coin->symbol;
+            $details = "Update buy order on  " . $pair->symbol . " pair. updated amount is  " . showAMount($updatedAmount) . ' ' . @$order->pair->coin->symbol;
             if ($request->amount > $oldOrderAmount) {
                 $this->createTrx($wallet, 'order_buy', ($updatedAmount * $order->rate), $charge, $details, $user);
             } else {

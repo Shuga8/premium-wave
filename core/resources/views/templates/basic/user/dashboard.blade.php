@@ -86,7 +86,7 @@
 								</span>
 								<div class="dashboard-card__content">
 									<a class="dashboard-card__coin-name mb-0" href="{{ route('user.order.canceled') }}">
-										@lang('Canceled Order') </a>
+										@lang('Pending Order') </a>
 									<h6 class="dashboard-card__coin-title"> {{ getAmount($widget['canceled_order']) }}
 									</h6>
 								</div>

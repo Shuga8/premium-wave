@@ -17,6 +17,7 @@ use App\Models\GatewayCurrency;
 use App\Models\Order;
 use App\Models\Referral;
 use App\Models\Trade;
+use App\Models\WaveLog;
 use App\Models\WithdrawMethod;
 use Illuminate\Support\Facades\DB;
 
@@ -37,10 +38,10 @@ class UserController extends Controller
         $currencies = Currency::rankOrdering()->select('name', 'id', 'symbol')->active()->get();
 
         $order                     = Order::where('user_id', $user->id);
-        $widget['open_order']      = (clone $order)->open()->count();
-        $widget['completed_order'] = (clone $order)->completed()->count();
-        $widget['canceled_order']  = (clone $order)->canceled()->count();
-        $widget['total_trade']     = Trade::where('trader_id', $user->id)->count();
+        $widget['open_order']      = WaveLog::where('user_id', $user->id)->where('status', 'running')->count();
+        $widget['completed_order'] = WaveLog::where('user_id', $user->id)->where('status', 'completed')->count();
+        $widget['canceled_order']  = WaveLog::where('user_id', $user->id)->where('status', 'pending')->count();
+        $widget['total_trade']     = WaveLog::where('user_id', $user->id)->count();
 
         $recentOrders       = $order->with('pair.coin')->orderBy('id', 'DESC')->take(10)->get();
         $recentTransactions = Transaction::where('user_id', $user->id)->orderBy('id', 'DESC')->take(10)->get();

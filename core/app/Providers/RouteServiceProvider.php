@@ -31,12 +31,12 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::namespace($this->namespace)->middleware(VugiChugi::mdNm())->group(function(){
+            Route::namespace($this->namespace)->middleware(VugiChugi::mdNm())->group(function () {
                 Route::prefix('api')
-                    ->middleware(['api','maintenance'])
+                    ->middleware(['api', 'maintenance'])
                     ->group(base_path('routes/api.php'));
 
-                Route::middleware(['web','maintenance'])
+                Route::middleware(['web', 'maintenance'])
                     ->namespace('Gateway')
                     ->prefix('ipn')
                     ->name('ipn.')
@@ -48,23 +48,21 @@ class RouteServiceProvider extends ServiceProvider
                     ->name('admin.')
                     ->group(base_path('routes/admin.php'));
 
-                Route::middleware(['web','maintenance'])
+                Route::middleware(['web', 'maintenance'])
                     ->prefix('user')
                     ->group(base_path('routes/user.php'));
 
-                Route::middleware(['web','maintenance','auth'])
+                Route::middleware(['web', 'maintenance', 'auth'])
                     ->prefix('user/p2p')
                     ->name('user.p2p.')
                     ->group(base_path('routes/p2p.php'));
 
-                Route::middleware(['web','maintenance'])
+                Route::middleware(['web', 'maintenance'])
                     ->group(base_path('routes/web.php'));
-
             });
-
         });
 
-        Route::get('maintenance-mode','App\Http\Controllers\SiteController@maintenance')->name('maintenance');
+        Route::get('maintenance-mode', 'App\Http\Controllers\SiteController@maintenance')->name('maintenance');
     }
 
     /**

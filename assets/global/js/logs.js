@@ -14,7 +14,7 @@ async function setOpenTrades() {
 
       if (data.length > 0) {
         data.forEach((trade) => {
-          let symbol = null;
+          let symbol;
           if (trade.isCrypto) {
             symbol = trade.crypto;
           } else if (trade.isStock) {
@@ -93,7 +93,7 @@ async function setPendingTrades() {
 
       if (data.length > 0) {
         data.forEach((trade) => {
-          let symbol = null;
+          let symbol;
           if (trade.isCrypto) {
             symbol = trade.crypto;
           } else if (trade.isStock) {
@@ -172,7 +172,7 @@ async function setTradeHistory() {
 
       if (data.length > 0) {
         data.forEach((trade) => {
-          let symbol = null;
+          let symbol;
           if (trade.isCrypto) {
             symbol = trade.crypto;
           } else if (trade.isStock) {
