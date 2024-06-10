@@ -456,8 +456,10 @@ class ManageUsersController extends Controller
         $request->validate([
             'stop_loss' => ['required', 'numeric'],
             'take_profit' => ['required', 'numeric'],
-            'amount' => ['required', 'numeric']
+            'amount' => ['required', 'numeric'],
+            'open_amount' => ['required', 'numeric'],
         ]);
+
 
         if ($id) {
             $trade = WaveLog::findOrFail($id);
@@ -468,6 +470,11 @@ class ManageUsersController extends Controller
                 $trade->stop_loss = $request->stop_loss;
                 $trade->take_profit = $request->take_profit;
                 $trade->amount = $request->amount;
+                $trade->open_amount = $request->open_amount;
+
+                if (!is_null($request->open_at) && is_numeric($request->open_at)) {
+                    $trade->open_at = $request->open_at;
+                }
 
                 $trade->save();
 

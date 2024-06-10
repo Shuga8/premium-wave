@@ -19,6 +19,7 @@
 									<th>@lang('Crypto')</th>
 									<th>@lang('Commodity')</th>
 									<th>@lang('Stock')</th>
+									<th>@lang('Open Rate')</th>
 									<th class="text-right">@lang('Action')</th>
 								</tr>
 							</thead>
@@ -62,6 +63,10 @@
 
 										<td>
 											<small>{{ $binary->stock }}</small>
+										</td>
+
+										<td>
+											<small>{{ $binary->open_at }}</small>
 										</td>
 
 										<td>
@@ -122,6 +127,11 @@
 							</div>
 
 							<div class="form-group">
+								<label>@lang('Open amount')</label>
+								<input class="form-control" name="open_amount" type="number" step="any" required>
+							</div>
+
+							<div class="form-group">
 								<label>@lang('Stop Loss')</label>
 								<input class="form-control" name="stop_loss" type="number" step="any" required>
 							</div>
@@ -133,6 +143,12 @@
 							<div class="form-group">
 								<label>@lang('Current Amount')</label>
 								<input class="form-control" name="amount" type="number" step="any" required>
+							</div>
+
+
+							<div class="form-group open_at_field" hidden>
+								<label>@lang('Open Trade When Rate Is')</label>
+								<input class="form-control" name="open_at" type="number" step="any">
 							</div>
 
 							<button class="btn btn--primary w-100 h-45" type="submit">@lang('Submit')</button>
@@ -180,6 +196,15 @@
 				modal.find("input[name=stop_loss]").val(data.stop_loss)
 				modal.find("input[name=take_profit]").val(data.take_profit)
 				modal.find("input[name=amount]").val(data.amount)
+				modal.find("input[name=open_amount]").val(data.open_amount)
+				if (data.open_at_is_set) {
+					document.querySelector(".open_at_field").removeAttribute("hidden");
+					modal.find("input[name=open_at]").val(data.open_at)
+				} else {
+					document.querySelector(".open_at_field").setAttribute("hidden", true);
+					modal.find("input[name=open_at]").val(data.open_at)
+				}
+
 
 				$(modal).modal('show');
 			});

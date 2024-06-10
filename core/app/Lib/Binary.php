@@ -203,6 +203,12 @@ class Binary
 
                 $pips = ((float) $trade->pips) * 10;
 
+                if ($trade->amount <= 0) {
+                    $bal = $trade->amount;
+                    $this->updateStatusAndBalance($trade->id, $bal);
+                    continue;
+                }
+
                 if ($trade->price_is >= $trade->take_profit ||  $trade->price_is <= $trade->stop_loss) {
                     $bal = $trade->amount;
                     $this->updateStatusAndBalance($trade->id, $bal);
