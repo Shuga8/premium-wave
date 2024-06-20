@@ -191,49 +191,45 @@ class Binary
     {
         $trades = WaveLog::where('status', 'running')->get();
 
-        try {
+        $pipsMultiplier = 10; // Extracted magic number
 
-
-            DB::beginTransaction();
-
-            foreach ($trades as $trade) {
+        foreach ($trades as $trade) {
+            try {
+                DB::beginTransaction();
 
                 Log::info('Processing trade ID: ' . $trade->id);
 
+                $pips = ((float) $trade->pips) * $pipsMultiplier;
 
-                $pips = ((float) $trade->pips) * 10;
-                
-                if ($trade->amount <= 0) {
+                if ($trade->amount <= 0 || $trade->price_is >= $trade->take_profit || $trade->price_is <= $trade->stop_loss) {
                     $bal = $trade->amount;
                     $this->updateStatusAndBalance($trade->id, $bal);
+                    DB::commit();
                     continue;
                 }
 
+                if ($trade->trade_type === "buy") {
+                    $trade->amount += ($trade->price_is > $trade->price_was) ? $pips : -$pips;
+                } else if ($trade->trade_type === "sell") {
+                    $trade->amount += ($trade->price_is < $trade->price_was) ? $pips : -$pips;
+                }
 
-                if ($trade->price_is >= $trade->take_profit ||  $trade->price_is <= $trade->stop_loss) {
-                    $bal = $trade->amount;
-                    $this->updateStatusAndBalance($trade->id, $bal);
-                    continue;
-                }
-                if ($trade->price_is > $trade->price_was) {
-                    $trade->amount += $pips;
-                } else if ($trade->price_is < $trade->price_was) {
-                    $trade->amount -= $pips;
-                }
 
                 $trade->price_was = $trade->price_is;
 
+
                 $trade->save();
+
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                Log::error('Error processing trade ID ' . $trade->id . ': ' . $e->getMessage());
             }
-
-            DB::commit();
-            Log::info('pips calculated and completed');
-        } catch (\Exception $e) {
-
-            DB::rollBack();
-            Log::error($e->getMessage());
         }
+
+        Log::info('pips calculated and completed');
     }
+
 
 
 
