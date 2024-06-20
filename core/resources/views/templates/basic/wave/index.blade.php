@@ -3,6 +3,17 @@
 	@push('style-lib')
 		<link href="{{ asset('assets/global/css/wave.css') }}" rel="stylesheet">
 	@endpush
+	<style>
+	    .weekend-closed-trade-info{
+	        display: none;
+	        padding: 7px;
+	        text-align: center;
+	        color: red;
+	        font-weight: 800;
+	        background: pink;
+	    }
+	</style>
+	    
 	<div class="preloader">
 		<div class="loader-p"></div>
 	</div>
@@ -117,6 +128,10 @@
 		</div>
 
 		<div class="trading-form-display">
+		    
+		    <div class="weekend-closed-trade-info">
+		        Market Closed
+		    </div>
 
 			<div class="current-symbol-info">
 				<div class="SymbolImg"><img src="{{ asset('assets/global/icons/AUD.png') }}" alt="" /></div>

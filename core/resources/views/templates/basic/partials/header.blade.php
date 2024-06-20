@@ -1,8 +1,9 @@
 <header class="header" id="header">
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light">
-			<a class="navbar-brand logo" href="{{ route('home') }}">
-				<img src="{{ asset('assets/global/images/logo.png') }}" style="mix-blend-mode:difference;">
+			<a class="navbar-brand logo" href="https://premiumwave.ca">
+				<img src="https://premiumwave.ca/wp-content/uploads/2024/06/cropped-cropped-PREMIUM-WAVES-3.png"
+					style="mix-blend-mode:difference;">
 			</a>
 			<button class="navbar-toggler header-button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,59 +57,32 @@
 						@endif
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('market') }}">@lang('Market')</a>
+						<a class="nav-link" href="https://premiumwave.ca/">Home</a>
 
-					</li>
-
-					<li class="nav-item has-mega-menu">
-						<a class="nav-link" href="javascript:void(0)">@lang('Trade')</a>
-						<div class="mega-menu">
-							<div class="mega-menu__inner">
-								<ul class="mega-menu-list">
-									<li class="mega-menu-list__item mega-item-bg1">
-										<a class="mega-menu-list__link" href="{{ route('trade') }}">
-											<div class="mega-menu-list__content">
-												<span class="mega-menu-list__title">@lang('SPOT')</span>
-
-											</div>
-											<span class="mega-menu-list__icon">
-												<img class="fit-image" src="{{ getImage('assets/images/extra_images/bar-chart.png', null) }}"
-													width="50">
-											</span>
-										</a>
-									</li>
-
-								</ul>
-							</div>
-						</div>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('crypto_currencies') }}">@lang('Crypto Currency')</a>
+						<a class="nav-link" href="https://premiumwave.ca/blog">Blog</a>
+
 					</li>
 
+
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('wave') }}">@lang('Waves')</a>
-					</li>
-					{{-- <li class="nav-item">
-						<a class="nav-link" href="{{ route('commodity') }}">@lang('Commodities')</a>
-					</li>
+						<a class="nav-link" href="{{ route('wave') }}">Trading Room</a>
+
+						@php
+							$pages = App\Models\Page::where('is_default', Status::NO)
+							    ->where('tempname', $activeTemplate)
+							    ->get();
+						@endphp
+						@foreach ($pages as $item)
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('stock') }}">@lang('Stocks')</a>
-					</li> --}}
-					@php
-						$pages = App\Models\Page::where('is_default', Status::NO)
-						    ->where('tempname', $activeTemplate)
-						    ->get();
-					@endphp
-					@foreach ($pages as $item)
-						<li class="nav-item">
-							<a class="nav-link" href="{{ route('pages', ['slug' => $item->slug]) }}">
-								{{ __($item->name) }}
-							</a>
-						</li>
+						<a class="nav-link" href="{{ route('pages', ['slug' => $item->slug]) }}">
+							{{ __($item->name) }}
+						</a>
+					</li>
 					@endforeach
 					<li class="nav-item">
-						<a class="nav-link" href="{{ route('contact') }}"> @lang('Contact') </a>
+						<a class="nav-link" href="https://premiumwave.ca/contact/">Contact Us </a>
 					</li>
 				</ul>
 			</div>

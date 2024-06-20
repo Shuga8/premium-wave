@@ -38,94 +38,9 @@
 						</ul>
 					</div>
 				</li>
-				<li class="sidebar-menu-item sidebar-dropdown">
-					<a class="{{ menuActive('admin.p2p*', 3) }}" href="javascript:void(0)">
-						<i class="menu-icon las la-users"></i>
-						<span class="menu-title">@lang('Manage P2P')</span>
-						@if ($reportedTrade)
-							<span class="menu-badge pill bg--danger ms-auto">
-								<i class="fa fa-exclamation"></i>
-							</span>
-						@endif
-					</a>
-					<div class="sidebar-submenu {{ menuActive('admin.p2p*', 2) }}">
-						<ul>
-							<li class="sidebar-menu-item {{ menuActive('admin.p2p.trade.index', null, 'running') }}">
-								<a class="nav-link" href="{{ route('admin.p2p.trade.index', 'running') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Running Trade')</span>
-								</a>
-							</li>
-							<li class="sidebar-menu-item {{ menuActive('admin.p2p.trade.index', null, 'reported') }}">
-								<a class="nav-link" href="{{ route('admin.p2p.trade.index', 'reported') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Reported Trade')</span>
-									@if ($reportedTrade)
-										<span class="menu-badge pill bg--danger ms-auto">{{ $reportedTrade }}</span>
-									@endif
-								</a>
-							</li>
-							<li class="sidebar-menu-item {{ menuActive('admin.p2p.trade.index', null, 'completed') }}">
-								<a class="nav-link" href="{{ route('admin.p2p.trade.index', 'completed') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Completed Trade')</span>
-								</a>
-							</li>
-							<li class="sidebar-menu-item {{ menuActive('admin.p2p.ad*') }}">
-								<a class="nav-link" href="{{ route('admin.p2p.ad.index') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Manage Ad')</span>
-								</a>
-							</li>
-							<li class="sidebar-menu-item {{ menuActive('admin.p2p.payment.window*') }}">
-								<a class="nav-link" href="{{ route('admin.p2p.payment.window.index') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Payment Window')</span>
-								</a>
-							</li>
-							<li class="sidebar-menu-item {{ menuActive('admin.p2p.payment.method*') }}">
-								<a class="nav-link" href="{{ route('admin.p2p.payment.method.index') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Payment Method')</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</li>
-				<li class="sidebar-menu-item sidebar-dropdown">
-					<a class="{{ menuActive('admin.currency*', 3) }}" href="javascript:void(0)">
-						<i class="menu-icon las la-coins"></i>
-						<span class="menu-title">@lang('Manage Currency')</span>
-					</a>
-					<div class="sidebar-submenu {{ menuActive('admin.currency*', 2) }}">
-						<ul>
-							<li class="sidebar-menu-item {{ menuActive(['admin.currency.crypto']) }}">
-								<a class="nav-link" href="{{ route('admin.currency.crypto') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Crypto Currency')</span>
-								</a>
-							</li>
-							<li class="sidebar-menu-item {{ menuActive(['admin.currency.fiat']) }}">
-								<a class="nav-link" href="{{ route('admin.currency.fiat') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Fiat Currency')</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</li>
-				<li class="sidebar-menu-item {{ menuActive('admin.market.list') }}">
-					<a class="nav-link" href="{{ route('admin.market.list') }}">
-						<i class="menu-icon las la-list"></i>
-						<span class="menu-title">@lang('Manage Market')</span>
-					</a>
-				</li>
-				<li class="sidebar-menu-item {{ menuActive('admin.coin.pair.*') }}">
-					<a class="nav-link" href="{{ route('admin.coin.pair.list') }}">
-						<i class="menu-icon las la-list"></i>
-						<span class="menu-title">@lang('Manage Coin Pair')</span>
-					</a>
-				</li>
+			
+			
+			
 				<li class="sidebar-menu-item sidebar-dropdown">
 					<a class="{{ menuActive('admin.users*', 3) }}" href="javascript:void(0)">
 						<i class="menu-icon las la-users"></i>
@@ -400,129 +315,23 @@
 						</ul>
 					</div>
 				</li>
-				<li class="sidebar-menu-item sidebar-dropdown">
-					<a class="{{ menuActive('admin.report*', 3) }}" href="javascript:void(0)">
-						<i class="menu-icon la la-list"></i>
-						<span class="menu-title">@lang('Report') </span>
-					</a>
-					<div class="sidebar-submenu {{ menuActive('admin.report*', 2) }}">
-						<ul>
-							<li
-								class="sidebar-menu-item {{ menuActive(['admin.report.transaction', 'admin.report.transaction.search']) }}">
-								<a class="nav-link" href="{{ route('admin.report.transaction') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Transaction Log')</span>
-								</a>
-							</li>
+		
 
-							<li
-								class="sidebar-menu-item {{ menuActive(['admin.report.login.history', 'admin.report.login.ipHistory']) }}">
-								<a class="nav-link" href="{{ route('admin.report.login.history') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Login History')</span>
-								</a>
-							</li>
-
-							<li class="sidebar-menu-item {{ menuActive('admin.report.notification.history') }}">
-								<a class="nav-link" href="{{ route('admin.report.notification.history') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Notification History')</span>
-								</a>
-							</li>
-
-						</ul>
-					</div>
-				</li>
-
-
-				<li class="sidebar-menu-item {{ menuActive('admin.subscriber.*') }}">
-					<a class="nav-link" data-default-url="{{ route('admin.subscriber.index') }}"
-						href="{{ route('admin.subscriber.index') }}">
-						<i class="menu-icon las la-thumbs-up"></i>
-						<span class="menu-title">@lang('Subscribers') </span>
-					</a>
-				</li>
-
-
-				<li class="sidebar__menu-header">@lang('Settings')</li>
-
-				<li class="sidebar-menu-item {{ menuActive('admin.setting.index') }}">
-					<a class="nav-link" href="{{ route('admin.setting.index') }}">
-						<i class="menu-icon las la-life-ring"></i>
-						<span class="menu-title">@lang('General Setting')</span>
-					</a>
-				</li>
-
-				<li class="sidebar-menu-item {{ menuActive('admin.cron*') }}">
-					<a class="nav-link" href="{{ route('admin.cron.index') }}">
-						<i class="menu-icon las la-clock"></i>
-						<span class="menu-title">@lang('Cron Job Setting')</span>
-					</a>
-				</li>
-
-				<li class="sidebar-menu-item {{ menuActive('admin.setting.system.configuration') }}">
-					<a class="nav-link" href="{{ route('admin.setting.system.configuration') }}">
-						<i class="menu-icon las la-cog"></i>
-						<span class="menu-title">@lang('System Configuration')</span>
-					</a>
-				</li>
-				<li class="sidebar-menu-item {{ menuActive('admin.setting.pusher.configuration') }}">
-					<a class="nav-link" href="{{ route('admin.setting.pusher.configuration') }}">
-						<i class="menu-icon las la-cogs"></i>
-						<span class="menu-title">@lang('Pusher Configuration')</span>
-					</a>
-				</li>
-				<li class="sidebar-menu-item {{ menuActive('admin.setting.chart') }}">
-					<a class="nav-link" href="{{ route('admin.setting.chart') }}">
-						<i class="menu-icon las la-tools"></i>
-						<span class="menu-title">@lang('Chart Setting')</span>
-					</a>
-				</li>
-				<li class="sidebar-menu-item {{ menuActive('admin.setting.charge') }}">
-					<a class="nav-link" href="{{ route('admin.setting.charge') }}">
-						<i class="menu-icon las la-money-check"></i>
-						<span class="menu-title">@lang('Charge Setting')</span>
-					</a>
-				</li>
+		
 				<li class="sidebar-menu-item {{ menuActive('admin.wallet.setting') }}">
 					<a class="nav-link" href="{{ route('admin.wallet.setting') }}">
 						<i class="menu-icon las la-wallet"></i>
 						<span class="menu-title">@lang('Wallet Setting')</span>
 					</a>
 				</li>
-				<li class="sidebar-menu-item {{ menuActive('admin.setting.socialite.credentials') }}">
-					<a class="nav-link" href="{{ route('admin.setting.socialite.credentials') }}">
-						<i class="menu-icon las la-users-cog"></i>
-						<span class="menu-title">@lang('Social Credentials')</span>
-					</a>
-				</li>
+			
 				<li class="sidebar-menu-item {{ menuActive('admin.currency.data.provider.index') }}">
 					<a class="nav-link" href="{{ route('admin.currency.data.provider.index') }}">
 						<i class="menu-icon las la-cog"></i>
 						<span class="menu-title">@lang('Currency Data Provider')</span>
 					</a>
 				</li>
-				<li class="sidebar-menu-item {{ menuActive('admin.setting.logo.icon') }}">
-					<a class="nav-link" href="{{ route('admin.setting.logo.icon') }}">
-						<i class="menu-icon las la-images"></i>
-						<span class="menu-title">@lang('Logo & Favicon')</span>
-					</a>
-				</li>
-
-				<li class="sidebar-menu-item {{ menuActive('admin.extensions.index') }}">
-					<a class="nav-link" href="{{ route('admin.extensions.index') }}">
-						<i class="menu-icon las la-cogs"></i>
-						<span class="menu-title">@lang('Extensions')</span>
-					</a>
-				</li>
-
-				<li class="sidebar-menu-item {{ menuActive(['admin.language.manage', 'admin.language.key']) }}">
-					<a class="nav-link" data-default-url="{{ route('admin.language.manage') }}"
-						href="{{ route('admin.language.manage') }}">
-						<i class="menu-icon las la-language"></i>
-						<span class="menu-title">@lang('Language') </span>
-					</a>
-				</li>
+				
 
 				<li class="sidebar-menu-item {{ menuActive('admin.seo') }}">
 					<a class="nav-link" href="{{ route('admin.seo') }}">
@@ -574,47 +383,12 @@
 					</div>
 				</li>
 
-				<li class="sidebar__menu-header">@lang('Frontend Manager')</li>
 
-				<li class="sidebar-menu-item {{ menuActive('admin.frontend.templates') }}">
-					<a class="nav-link" href="{{ route('admin.frontend.templates') }}">
-						<i class="menu-icon la la-html5"></i>
-						<span class="menu-title">@lang('Manage Templates')</span>
-					</a>
-				</li>
 
-				<li class="sidebar-menu-item {{ menuActive('admin.frontend.manage.*') }}">
-					<a class="nav-link" href="{{ route('admin.frontend.manage.pages') }}">
-						<i class="menu-icon la la-list"></i>
-						<span class="menu-title">@lang('Manage Pages')</span>
-					</a>
-				</li>
+			
+			
 
-				<li class="sidebar-menu-item sidebar-dropdown">
-					<a class="{{ menuActive('admin.frontend.sections*', 3) }}" href="javascript:void(0)">
-						<i class="menu-icon la la-puzzle-piece"></i>
-						<span class="menu-title">@lang('Manage Section')</span>
-					</a>
-					<div class="sidebar-submenu {{ menuActive('admin.frontend.sections*', 2) }}">
-						<ul>
-							@php
-								$lastSegment = collect(request()->segments())->last();
-							@endphp
-							@foreach (getPageSections(true) as $k => $secs)
-								@if ($secs['builder'])
-									<li class="sidebar-menu-item @if ($lastSegment == $k) active @endif">
-										<a class="nav-link" href="{{ route('admin.frontend.sections', $k) }}">
-											<i class="menu-icon las la-dot-circle"></i>
-											<span class="menu-title">{{ __($secs['name']) }}</span>
-										</a>
-									</li>
-								@endif
-							@endforeach
-						</ul>
-					</div>
-				</li>
 
-				<li class="sidebar__menu-header">@lang('Extra')</li>
 
 				<li class="sidebar-menu-item {{ menuActive('admin.maintenance.mode') }}">
 					<a class="nav-link" href="{{ route('admin.maintenance.mode') }}">
@@ -623,60 +397,7 @@
 					</a>
 				</li>
 
-				<li class="sidebar-menu-item {{ menuActive('admin.setting.cookie') }}">
-					<a class="nav-link" href="{{ route('admin.setting.cookie') }}">
-						<i class="menu-icon las la-cookie-bite"></i>
-						<span class="menu-title">@lang('GDPR Cookie')</span>
-					</a>
-				</li>
 
-				<li class="sidebar-menu-item sidebar-dropdown">
-					<a class="{{ menuActive('admin.system*', 3) }}" href="javascript:void(0)">
-						<i class="menu-icon la la-server"></i>
-						<span class="menu-title">@lang('System')</span>
-					</a>
-					<div class="sidebar-submenu {{ menuActive('admin.system*', 2) }}">
-						<ul>
-							<li class="sidebar-menu-item {{ menuActive('admin.system.info') }}">
-								<a class="nav-link" href="{{ route('admin.system.info') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Application')</span>
-								</a>
-							</li>
-							<li class="sidebar-menu-item {{ menuActive('admin.system.server.info') }}">
-								<a class="nav-link" href="{{ route('admin.system.server.info') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Server')</span>
-								</a>
-							</li>
-							<li class="sidebar-menu-item {{ menuActive('admin.system.optimize') }}">
-								<a class="nav-link" href="{{ route('admin.system.optimize') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Cache')</span>
-								</a>
-							</li>
-							<li class="sidebar-menu-item {{ menuActive('admin.system.update') }}">
-								<a class="nav-link" href="{{ route('admin.system.update') }}">
-									<i class="menu-icon las la-dot-circle"></i>
-									<span class="menu-title">@lang('Update')</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</li>
-				<li class="sidebar-menu-item {{ menuActive('admin.setting.custom.css') }}">
-					<a class="nav-link" href="{{ route('admin.setting.custom.css') }}">
-						<i class="menu-icon lab la-css3-alt"></i>
-						<span class="menu-title">@lang('Custom CSS')</span>
-					</a>
-				</li>
-				<li class="sidebar-menu-item {{ menuActive('admin.request.report') }}">
-					<a class="nav-link" data-default-url="{{ route('admin.request.report') }}"
-						href="{{ route('admin.request.report') }}">
-						<i class="menu-icon las la-bug"></i>
-						<span class="menu-title">@lang('Report & Request') </span>
-					</a>
-				</li>
 			</ul>
 
 		</div>

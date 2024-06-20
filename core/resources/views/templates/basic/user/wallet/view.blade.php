@@ -16,86 +16,17 @@
             </div>
         </div>
     </div>
-    <div class="row gy-4 mb-3 justify-content-center">
-        <div class="col-xxl-3 col-sm-6">
-            <div class="dashboard-card ">
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="dashboard-card__icon text--base">
-                        <i class="las la-spinner"></i>
-                    </span>
-                    <div class="dashboard-card__content">
-                        <a href="{{ route('user.order.open') }}?currency={{ $currency->symbol }}"
-                            class="dashboard-card__coin-name mb-0 ">
-                            @lang('Open Order')
-                        </a>
-                        <h6 class="dashboard-card__coin-title"> {{ getAmount(@$widget['open_order']) }} </h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-3 col-sm-6">
-            <div class="dashboard-card ">
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="dashboard-card__icon text--success">
-                        <i class="las la-check-circle"></i>
-                    </span>
-                    <div class="dashboard-card__content">
-                        <a href="{{ route('user.order.completed') }}?currency={{ $currency->symbol }}"
-                            class="dashboard-card__coin-name mb-0">
-                            @lang('Completed Order')
-                        </a>
-                        <h6 class="dashboard-card__coin-title"> {{ getAmount(@$widget['completed_order']) }}
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-3 col-sm-6">
-            <div class="dashboard-card ">
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="dashboard-card__icon text--danger">
-                        <i class="las la-times-circle"></i>
-                    </span>
-                    <div class="dashboard-card__content">
-                        <a href="{{ route('user.order.canceled') }}?currency={{ $currency->symbol }}"
-                            class="dashboard-card__coin-name mb-0 ">
-                            @lang('Canceled Order')
-                        </a>
-                        <h6 class="dashboard-card__coin-title"> {{ getAmount(@$widget['canceled_order']) }}</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xxl-3 col-sm-6">
-            <div class="dashboard-card">
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="dashboard-card__icon text--base fs-50 icon-order"></span>
-                    <div class="dashboard-card__content">
-                        <a href="{{ route('user.order.history') }}?search={{ @$currency->symbol }}"
-                            class="dashboard-card__coin-name mb-0">
-                            @lang('Total Order')
-                        </a>
-                        <h6 class="dashboard-card__coin-title">
-                            {{ getAmount($widget['total_order']) }}
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="row gy-3 mb-3 justify-content-center">
         <div class="col-xxl-3 col-sm-6">
             <div class="dashboard-card">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="dashboard-card__icon text--base fs-50 icon-deposit"></span>
                     <div class="dashboard-card__content">
-                        <a href="{{ route('user.deposit.history') }}?search={{ @$currency->symbol }}"
-                            class="dashboard-card__coin-name mb-0">
-                            @lang('Total Deposit')
-                        </a>
-                        <h6 class="dashboard-card__coin-title">
-                            {{ __(@$wallet->currency->sign) }}{{ showAmount($widget['total_deposit']) }}
+                       <p class="mt-0 fs-12">@lang('Available Balance')</p>
+                     <h6 class="dashboard-card__coin-title">{{ __(@$wallet->currency->sign) }}{{ showAmount($wallet->balance) }}
                         </h6>
+                        
                     </div>
                 </div>
             </div>
@@ -160,28 +91,16 @@
                             <p class="mt-0 fs-12">{{ __(@$wallet->currency->symbol) }}</p>
                         </div>
                     </div>
-                    <div class="wallet-ballance p-3 mb-3">
-                        <p class="mb-0 fs-16">{{ __(@$wallet->currency->sign) }}{{ showAmount($wallet->balance) }}
-                        </p>
-                        <p class="mt-0 fs-12">@lang('Available Balance')</p>
-                    </div>
-                    <div class="d-flex flex-wrap gap-2 mb-3">
-                        <div class="flex-fill wallet-ballance p-3 mt-3">
-                            <p class="mb-0 fs-16">
-                                {{ __(@$wallet->currency->sign) }}{{ showAmount($wallet->in_order) }}</p>
-                            <p class="mt-0 fs-12">@lang('In Order')</p>
-                        </div>
-                        <div class="flex-fill wallet-ballance p-3 mt-3 ">
-                            <p class="mb-0 fs-16">
-                                {{ __(@$wallet->currency->sign) }}{{ showAmount($wallet->total_balance) }}</p>
-                            <p class="mt-0 fs-12">@lang('Total Balance')</p>
-                        </div>
-                    </div>
+                 
                     <div class="d-flex flex-wrap gap-2">
                         @if (checkWalletConfiguration($walletType, 'deposit'))
-                            <button type="button" class="btn btn--success outline flex-fill btn--sm depositBtn">
-                                <span class="icon-deposit"></span> @lang('Deposit')
-                            </button>
+                           
+                           <a href="https://premiumwave.ca/auth/deposit?amount=500&currency=USD">
+  <button type="button" class="btn btn--success outline flex-fill btn--sm depositBtn">
+    <span class="icon-deposit"></span>
+    @lang('Deposit')
+  </button>
+</a>
                         @endif
 
                         @if (checkWalletConfiguration($walletType, 'withdraw'))
@@ -190,11 +109,7 @@
                             </button>
                         @endif
 
-                        @if (checkWalletConfiguration($walletType, 'transfer_other_user') || checkWalletConfiguration($walletType, 'transfer_other_wallet'))
-                            <button type="button" class="btn btn--base outline flex-fill btn--sm transferBtn">
-                                <i class="las la-exchange-alt"></i> @lang('Transfer')
-                            </button>
-                        @endif
+                      
                     </div>
                 </div>
             </div>

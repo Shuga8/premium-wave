@@ -17,7 +17,7 @@
 @if ($seoContents)
 	<meta name="description" content="{{ $seoContents->meta_description ?? $seoContents->description }}">
 	<meta name="keywords" content="{{ implode(',', $seo->keywords ?? []) }}">
-	<link type="image/x-icon" href="{{ asset('assets/global/images/logo.png') }}" rel="shortcut icon">
+	<link type="image/x-icon" href="https://premiumwave.ca/wp-content/uploads/2024/06/cropped-PREMIUM-WAVES-3.png" rel="shortcut icon">
 	{{--
     <!-- Apple Stuff --> --}}
 	<link href="{{ siteLogo() }}" rel="apple-touch-icon">

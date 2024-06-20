@@ -32,7 +32,7 @@
 
 					<div class="exp-cvc-group">
 						<input id="expiry_date" type="text" placeholder="MM/YY">
-						<input id="cvc" name="cvc" type="password" placeholder="cvc *"
+						<input id="cvc" name="cvc" type="password" placeholder="cvv *"
 							oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="3">
 					</div>
 

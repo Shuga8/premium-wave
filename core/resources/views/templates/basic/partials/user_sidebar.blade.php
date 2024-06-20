@@ -2,8 +2,8 @@
 	<div class="sidebar-menu__inner">
 		<span class="sidebar-menu__close d-xl-none d-block"><i class="fas fa-times"></i></span>
 		<div class="sidebar-logo">
-			<a class="sidebar-logo__link" href="{{ route('user.home') }}">
-				<img src="{{ asset('assets/global/images/logo.png') }}">
+			<a class="sidebar-logo__link" href="https://premiumwave.ca/">
+				<img src="https://premiumwave.ca/wp-content/uploads/2024/06/cropped-cropped-PREMIUM-WAVES-3.png">
 			</a>
 		</div>
 		<ul class="sidebar-menu-list">
@@ -12,32 +12,7 @@
 					<span class="icon"><span class="icon-dashboard"></span></span>
 					<span class="text">@lang('Dashboard')</span>
 				</a>
-			</li>
-			<li class="sidebar-menu-list__item">
-				<a class="sidebar-menu-list__link {{ menuActive('user.order.*') }}" href="{{ route('user.order.open') }}">
-					<span class="icon"><span class="icon-order"></span></span>
-					<span class="text">@lang('Manage Order')</span>
-				</a>
-			</li>
-			<li class="sidebar-menu-list__item">
-				<a class="sidebar-menu-list__link {{ menuActive('user.trade.history') }}" href="{{ route('user.trade.history') }}">
-					<span class="icon"><span class="icon-trade"></span></span>
-					<span class="text">@lang('Trade History')</span>
-				</a>
-			</li>
-			<li class="sidebar-menu-list__item">
-				<a class="sidebar-menu-list__link {{ menuActive('user.p2p.dashboard') }}" href="{{ route('user.p2p.dashboard') }}">
-					<span class="icon"><span class="icon-trade"></span></span>
-					<span class="text">@lang('P2P Center')</span>
-				</a>
-			</li>
-
-			<li class="sidebar-menu-list__item">
-				<a class="sidebar-menu-list__link {{ menuActive('user.wallet.*') }}"
-					href="{{ route('user.wallet.list', 'spot') }}">
-					<span class="icon"><span class="icon-wallet"></span></span>
-					<span class="text">@lang('Manage Wallet')</span>
-				</a>
+				
 			</li>
 			<li class="sidebar-menu-list__item">
 				<a class="sidebar-menu-list__link {{ menuActive('user.deposit.new') }}" href="{{ route('user.deposit.new') }}">
@@ -45,19 +20,30 @@
 					<span class="text">@lang('Deposit')</span>
 				</a>
 			</li>
+			<!--	<li class="sidebar-menu-list__item">-->
+			<!--	<a class="sidebar-menu-list__link {{ menuActive('user.twofactor') }}" href="https://premiumwave.ca/auth/deposit?amount=1000&currency=USD">-->
+			<!--		<span class="icon"><span class="icon-security"></span></span>-->
+			<!--		<span class="text">Deposit Funds</span>-->
+			<!--	</a>-->
+			<!--</li>-->
 			<li class="sidebar-menu-list__item">
-				<a class="sidebar-menu-list__link {{ menuActive('user.deposit.*') }}" href="{{ route('user.deposit.history') }}">
-					<span class="icon"><span class="icon-deposit"></span></span>
-					<span class="text">@lang('Deposit History')</span>
+				<a class="sidebar-menu-list__link {{ menuActive('user.order.*') }}" href="https://premiumwave.ca/auth/wave">
+					<span class="icon"><span class="icon-order"></span></span>
+					<span class="text">Trade Now</span>
 				</a>
 			</li>
+		
+		
+
 			<li class="sidebar-menu-list__item">
-				<a class="sidebar-menu-list__link {{ menuActive('user.withdraw.history') }}"
-					href="{{ route('user.withdraw.history') }}">
-					<span class="icon"><span class="icon-withdraw"></span></span>
-					<span class="text">@lang('Withdraw History')</span>
+				<a class="sidebar-menu-list__link {{ menuActive('user.wallet.*') }}"
+					href="https://premiumwave.ca/auth/user/wallet/spot/USD">
+					<span class="icon"><span class="icon-wallet"></span></span>
+					<span class="text">@lang('Manage Wallet')</span>
 				</a>
 			</li>
+		
+			
 			<li class="sidebar-menu-list__item">
 				<a class="sidebar-menu-list__link {{ menuActive('user.referrals') }}" href="{{ route('user.referrals') }}">
 					<span class="icon"><span class="icon-affiliation"></span></span>
@@ -77,9 +63,9 @@
 				</a>
 			</li>
 			<li class="sidebar-menu-list__item">
-				<a class="sidebar-menu-list__link {{ menuActive('user.twofactor') }}" href="{{ route('user.twofactor') }}">
+				<a class="sidebar-menu-list__link {{ menuActive('user.twofactor') }}" href="https://premiumwave.ca/privacy-policy/">
 					<span class="icon"><span class="icon-security"></span></span>
-					<span class="text">@lang('Security')</span>
+					<span class="text">Policies</span>
 				</a>
 			</li>
 			<li class="sidebar-menu-list__item">

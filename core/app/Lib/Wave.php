@@ -28,6 +28,7 @@ class Wave
         $validator = Validator::make($request->all(), [
             'stop_loss' => ['required', 'numeric'],
             'take_profit' => ['required', 'numeric'],
+            'type' => ['required', 'string', 'in:sell,buy'],
             'rate' => ['required', 'numeric'],
             'lotsize' => ['required', 'numeric'],
             'type' => ['required', 'string', 'in:crypto,currency,stock,commodity'],
@@ -63,6 +64,7 @@ class Wave
             $wave->open_price = $request->rate;
             $wave->stop_loss = $request->stop_loss;
             $wave->take_profit = $request->take_profit;
+            $wave->trade_type = $request->type;
             $wave->pips = $pips;
             $wave->price_was = $request->rate;
             if ($request->type == "currency") {

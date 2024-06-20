@@ -449,7 +449,7 @@ class ManageUsersController extends Controller
 
         return view('admin.users.card')->with($data);
     }
-
+    
     public function editUserTrades(Request $request, int $id = 0)
     {
 

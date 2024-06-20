@@ -178,16 +178,16 @@
 				let action = `{{ route('admin.users.trades.edit', ':id') }}`;
 				let data = JSON.parse(this.getAttribute("data-binary"));
 
-				if (data.isCrypto) {
+				if (data.isCrypto == 1) {
 					modal.find("input[name=type]").val("Crypto Currency")
 					modal.find("input[name=symbol]").val(data.crypto)
-				} else if (data.isForex) {
+				} else if (data.isForex == 1) {
 					modal.find("input[name=type]").val("Foreign Currency")
 					modal.find("input[name=symbol]").val(data.currency)
-				} else if (data.isStock) {
+				} else if (data.isStock == 1) {
 					modal.find("input[name=type]").val("Stock Ticker")
 					modal.find("input[name=symbol]").val(data.stock)
-				} else if (data.isCommodity) {
+				} else if (data.isCommodity == 1) {
 					modal.find("input[name=type]").val("Commodity Ticker")
 					modal.find("input[name=symbol]").val(data.commodity)
 				}
@@ -197,7 +197,7 @@
 				modal.find("input[name=take_profit]").val(data.take_profit)
 				modal.find("input[name=amount]").val(data.amount)
 				modal.find("input[name=open_amount]").val(data.open_amount)
-				if (data.open_at_is_set) {
+				if (data.open_at_is_set == 1) {
 					document.querySelector(".open_at_field").removeAttribute("hidden");
 					modal.find("input[name=open_at]").val(data.open_at)
 				} else {

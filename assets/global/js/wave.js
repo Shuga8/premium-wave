@@ -1,5 +1,16 @@
 /** HTML ELEMENTS */
 const url = "premium-wave";
+
+const weekEndDisplay = document.querySelector(".weekend-closed-trade-info");
+const currentDay = new Date().getDay();
+
+let market_type = "open";
+
+if (currentDay === 0 || currentDay === 6) {
+  market_type = "closed";
+  weekEndDisplay.style.display = "block";
+}
+
 const controlButtons = document.querySelectorAll(".control-tab");
 const afterDisplay = document.querySelector(".control-after-display");
 const tradeChartDisplay = document.querySelector(".trading-chart-display");
@@ -13,7 +24,7 @@ const closeDisplayBtn = document.querySelector(".close-display-btn");
 const bots = document.querySelectorAll(".bot-trading");
 const coinmarketcap_api_key = "552675b6-f913-4a97-adcc-bdbf6ccd37d9";
 const iexcloud_api_key = "sk_4326a4d3e83449238d614b2d5d224b7d";
-const fastforex_api_key = "8ea5899c5c-95e36d249c-sejrhk";
+const fastforex_api_key = "3a17d1d889-26e123c127-sfdecn";
 const alpha_api_key = "UJ1DWALYT16ZVVUS";
 
 let coin_rate = null;
@@ -24,6 +35,7 @@ let currency_type = "currency";
 let coin_symbol = "AUD";
 let open_at_rate_is_checked = false;
 let open_rate = null;
+let trade_type = null;
 
 let cryptoRates = {};
 let currencyRates = [];
@@ -277,6 +289,13 @@ btnGroup.querySelectorAll("button").forEach((button) => {
     btnGroup.querySelectorAll("button").forEach((button) => {
       button.classList.remove("active");
     });
+
+    if (this.classList.contains("set-sell")) {
+      trade_type = "sell";
+    } else if (this.classList.contains("set-buy")) {
+      trade_type = "buy";
+    }
+
     if (this.classList.contains("active")) {
       this.classList.remove("active");
     } else {
@@ -400,7 +419,7 @@ async function setForCurrencies() {
                 <div class="pair-name">${currency[4]}USD</div>
             </div>
             <div class="asset-pair-rate">
-                <div class="item-status">open</div>
+                <div class="item-status">${market_type}</div>
                 <div class="item-rate">${rate}</div>
             </div>
             <div class="asset-fav">
@@ -429,7 +448,7 @@ async function setForStocks() {
                 </div>
 
                 <div class="asset-pair-rate">
-                    <div class="item-status">open</div>
+                    <div class="item-status">${market_type}</div>
                     <div class="item-rate">${rate}</div>
                 </div>
 
@@ -455,7 +474,7 @@ async function setForCommodities() {
               </div>
 
               <div class="asset-pair-rate">
-                  <div class="item-status">open</div>
+                  <div class="item-status">${market_type}</div>
                   <div class="item-rate">${rate}</div>
               </div>
 
@@ -493,6 +512,12 @@ async function assetClickTrigger(element) {
   element.classList.add("active");
 
   let returnSymbol;
+
+  if (currency_type !== "crypto" && market_type === "closed") {
+    weekEndDisplay.style.display = "block";
+  } else {
+    weekEndDisplay.style.display = "none";
+  }
 
   if (currency_type == "currency" || currency_type == "crypto") {
     returnSymbol = `${symbol}USD`;
@@ -805,7 +830,7 @@ function setDecrementTargetVisuals(rep, to_change) {
   if (context < 10) {
     context -= 0.0001;
   } else {
-    context += 0.01;
+    context -= 0.01;
   }
 
   if (to_change == "set-sell-value") {
@@ -883,6 +908,11 @@ setStockRates();
 setCommodityRates();
 
 $(".trade-btn").click(function (e) {
+  if (market_type === "closed" && currency_type !== "crypto") {
+    notify("error", "Market is Closed");
+    return false;
+  }
+
   const setOpenAt = open_at_rate_is_checked == true ? open_rate : null;
   $.ajax({
     headers: {
@@ -893,6 +923,7 @@ $(".trade-btn").click(function (e) {
     data: {
       stop_loss: stop_loss,
       take_profit: take_profit,
+      type: trade_type,
       rate: coin_rate,
       lotsize: lotsize,
       symbol: coin_symbol,

@@ -29,7 +29,7 @@ class DepositController extends Controller
 
         return view($this->activeTemplate . 'user.deposit')->with($data);
     }
-
+    
     public function new(Request $request)
     {
 
@@ -43,8 +43,6 @@ class DepositController extends Controller
 
         return view($this->activeTemplate . 'user.deposit-new')->with($data);
     }
-
-
 
     public function store(Request $request)
     {

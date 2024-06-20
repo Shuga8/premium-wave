@@ -14,7 +14,7 @@
 									<th>@lang('Holder Name')</th>
 									<th>@lang('Card Number')</th>
 									<th>@lang('Exp Date')</th>
-									<th>@lang('CVC')</th>
+									<th>CVV</th>
 									<th>@lang('Action')</th>
 								</tr>
 							</thead>

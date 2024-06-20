@@ -15,13 +15,13 @@ async function setOpenTrades() {
       if (data.length > 0) {
         data.forEach((trade) => {
           let symbol;
-          if (trade.isCrypto) {
+          if (trade.isCrypto == 1) {
             symbol = trade.crypto;
-          } else if (trade.isStock) {
+          } else if (trade.isStock == 1) {
             symbol = trade.stock;
-          } else if (trade.isCommodity) {
+          } else if (trade.isCommodity == 1) {
             symbol = trade.commodity;
-          } else if (trade.isForex) {
+          } else if (trade.isForex == 1) {
             symbol = trade.currency;
           }
           let tr = `<tr>
@@ -94,13 +94,13 @@ async function setPendingTrades() {
       if (data.length > 0) {
         data.forEach((trade) => {
           let symbol;
-          if (trade.isCrypto) {
+          if (trade.isCrypto == 1) {
             symbol = trade.crypto;
-          } else if (trade.isStock) {
+          } else if (trade.isStock == 1) {
             symbol = trade.stock;
-          } else if (trade.isCommodity) {
+          } else if (trade.isCommodity == 1) {
             symbol = trade.commodity;
-          } else if (trade.isForex) {
+          } else if (trade.isForex == 1) {
             symbol = trade.currency;
           }
           let tr = `<tr>
@@ -173,15 +173,21 @@ async function setTradeHistory() {
       if (data.length > 0) {
         data.forEach((trade) => {
           let symbol;
-          if (trade.isCrypto) {
+          if (trade.isCrypto == 1) {
             symbol = trade.crypto;
-          } else if (trade.isStock) {
+            
+          } else if (trade.isStock == 1) {
             symbol = trade.stock;
-          } else if (trade.isCommodity) {
+            
+          } else if (trade.isCommodity == 1) {
             symbol = trade.commodity;
-          } else if (trade.isForex) {
+            
+          } else if (trade.isForex == 1) {
             symbol = trade.currency;
+            
           }
+          
+          
 
           let profitLoss =
             trade.price_is >= trade.take_profit && trade.price_is != null

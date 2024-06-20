@@ -11,15 +11,15 @@ $credentials = $general->socialite_credentials;
 <section class="account">
     <div class="account-inner">
         <div class="account-left">
-            <a href="{{ route('home') }}" class="account-left__logo">
-                <img src="{{getImage(getFilePath('logoIcon') .'/logo_base.png')}}">
+          <a href="https://premiumwave.ca/" class="account-left__logo">
+                <img src="https://premiumwave.ca/wp-content/uploads/2024/06/PREMIUM-WAVES-3.png">
             </a>
             <div class="account-left__content">
-                <h5 class="account-left__subtitle">{{ __(@$content->data_values->heading_one) }}</h5>
+                <h5 class="account-left__subtitle">Welcome To Premium Wave</h5>
                 <h3 class="account-left__title">{{ __(@$content->data_values->subheading_one) }}</h3>
             </div>
             <div class="account-left__thumb">
-                <img src="{{ getImage('assets/images/frontend/login/'.@$content->data_values->image,'600x600') }}">
+                <img src="https://premiumwave.ca/wp-content/uploads/2024/04/Start-Trading.png">
             </div>
         </div>
         <div class="account-right-wrapper">
@@ -65,14 +65,7 @@ $credentials = $general->socialite_credentials;
                         <h3 class="account-form__title mb-0">{{ __(@$content->data_values->heading_two) }}</h3>
                         <p class="account-form__desc">{{ __(@$content->data_values->subheading_two)}}</p>
 
-                        <x-flexible-view :view="$activeTemplate . 'user.auth.social_provider.index'" action="login"/>
-                        <x-flexible-view :view="$activeTemplate . 'user.auth.web3.index'" action="login"/>
-
-                        @if (@$credentials->linkedin->status || @$credentials->facebook->status == Status::ENABLE || @$credentials->google->status == Status::ENABLE || $general->metamask_login)
-                        <div class="other-option">
-                            <span class="other-option__text">@lang('OR')</span>
-                        </div>
-                        @endif
+                    
 
                         <form method="POST" action="{{ route('user.login') }}" class="verify-gcaptcha">
                             @csrf
