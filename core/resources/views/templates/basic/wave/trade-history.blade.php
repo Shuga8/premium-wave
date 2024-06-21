@@ -4,32 +4,46 @@
 			<tr>
 				<th>
 					ORDER ID
-					<br>
+				</th>
+
+				<th>
 					STOP LOSS
-					<br>
+				</th>
+
+				<th>
 					USED FUNDS
 				</th>
 
 				<th>
 					CREATED TIME
-					<br>
+				</th>
+
+				<th>
+					DIRECTION
+				</th>
+
+				<th>
 					TAKE PROFIT
-					<br>
-					PROFIT/LOSS
+				</th>
+
+				<th>
+					<span class="profit">PROFIT</span>/<span class="loss">LOSS</span>
 				</th>
 
 				<th>
 					CLOSING TIME
-					<br>
+				</th>
+
+				<th>
 					OPEN PRICE
-					<br>
 				</th>
 
 				<th>
 					SYMBOL
-					<br>
-					CLOSED PRICE
+				</th>
 
+				<th>
+					CLOSED PRICE
 				</th>
 			</tr>
 		</thead>

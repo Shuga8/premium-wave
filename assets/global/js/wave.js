@@ -923,7 +923,7 @@ $(".trade-btn").click(function (e) {
     data: {
       stop_loss: stop_loss,
       take_profit: take_profit,
-      type: trade_type,
+      trade_type: trade_type,
       rate: coin_rate,
       lotsize: lotsize,
       symbol: coin_symbol,

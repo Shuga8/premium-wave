@@ -4,16 +4,16 @@
 		<link href="{{ asset('assets/global/css/wave.css') }}" rel="stylesheet">
 	@endpush
 	<style>
-	    .weekend-closed-trade-info{
-	        display: none;
-	        padding: 7px;
-	        text-align: center;
-	        color: red;
-	        font-weight: 800;
-	        background: pink;
-	    }
+		.weekend-closed-trade-info {
+			display: none;
+			padding: 7px;
+			text-align: center;
+			color: red;
+			font-weight: 800;
+			background: pink;
+		}
 	</style>
-	    
+
 	<div class="preloader">
 		<div class="loader-p"></div>
 	</div>
@@ -128,10 +128,10 @@
 		</div>
 
 		<div class="trading-form-display">
-		    
-		    <div class="weekend-closed-trade-info">
-		        Market Closed
-		    </div>
+
+			<div class="weekend-closed-trade-info">
+				Market Closed
+			</div>
 
 			<div class="current-symbol-info">
 				<div class="SymbolImg"><img src="{{ asset('assets/global/icons/AUD.png') }}" alt="" /></div>
@@ -359,6 +359,6 @@
 			let token = "{{ csrf_token() }}";
 		</script>
 		<script src="{{ asset('assets/global/js/wave.js') }}"></script>
-		<script src="{{ asset('assets/global/js/logs.js') }}"></script>
+		<script src="{{ asset('assets/global/js/logs.js') }}" type="module"></script>
 	@endpush
 @endsection

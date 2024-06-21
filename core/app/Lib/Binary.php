@@ -27,7 +27,7 @@ class Binary
      */
     public function __construct()
     {
-        $this->coin_api_key = '326a6fd8-6f75-49c5-8acf-db35ebc6b31d';
+        $this->coin_api_key = '6567ef3d-f3e6-49f7-8d47-a17e0574d7f0';
         $this->iex_api_key = 'sk_4326a4d3e83449238d614b2d5d224b7d';
         $this->fast_forex_api_key = '3a17d1d889-26e123c127-sfdecn';
     }
@@ -147,11 +147,12 @@ class Binary
             Log::info('No trades with status running found.');
             return false;
         }
-        try {
 
-            DB::beginTransaction();
 
-            foreach ($trades as $trade) {
+        foreach ($trades as $trade) {
+            try {
+
+                DB::beginTransaction();
                 Log::info('Processing trade ID: ' . $trade->id);
 
                 if ($trade->isForex) {
@@ -168,17 +169,15 @@ class Binary
                     $trade->price_is = $rate;
                 }
 
-
-
                 Log::info('Updated price for trade ID: ' . $trade->id . ' to ' . $trade->price_is);
 
                 $trade->save();
-            }
+                DB::commit();
+            } catch (\Exception $e) {
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::info($e->getMessage());
+                DB::rollBack();
+                Log::info($e->getMessage());
+            }
         }
     }
 

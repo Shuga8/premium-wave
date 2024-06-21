@@ -18,6 +18,10 @@
 				</th>
 
 				<th>
+					DIRECTION
+				</th>
+
+				<th>
 					USED FUNDS
 				</th>
 

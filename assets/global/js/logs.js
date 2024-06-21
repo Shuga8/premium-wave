@@ -1,3 +1,5 @@
+import { formatDistanceToNow } from "https://cdn.jsdelivr.net/npm/date-fns@2.29.3/+esm";
+
 async function setOpenTrades() {
   const openTrades = document.querySelector(".open-trades-table");
   const tbody = openTrades.querySelector("tbody");
@@ -30,35 +32,44 @@ async function setOpenTrades() {
                 </td>
 
                 <td>
-                ${trade.open_price}
+                $${trade.open_price}
                 </td>
 
                 <td>
-                ${trade.created_at}
+                ${formatDistanceToNow(new Date(trade.created_at), {
+                  addSuffix: true,
+                })}
                 </td>
 
                 <td>
-                    ${trade.price_is != null ? trade.price_is : 0}
+                    $${trade.price_is != null ? trade.price_is : "0.00000000"}
                 </td>
 
                 <td>
-                ${trade.open_amount}
+                    ${
+                      trade.trade_type[0].toUpperCase() +
+                      trade.trade_type.substring(1)
+                    }
+                </td>
+
+                <td>
+                $${trade.open_amount}
                 </td>
 
                 <td>
                     ${symbol}
                 </td>
 
-                <td>
-                ${trade.stop_loss}
+                <td class="loss">
+                $${trade.stop_loss}
                 </td>
 
                 <td>
                     ${trade.wallet}
                 </td>
 
-                <td>
-                ${trade.take_profit}
+                <td class="profit">
+                $${trade.take_profit}
                 </td>
 
                 <td>
@@ -117,23 +128,36 @@ async function setPendingTrades() {
                 </td>
 
                 <td>
-                    ${trade.open_price}
+                    $${trade.open_price}
                 </td>
 
                 <td>
-                    ${trade.open_at}
+                    $${trade.open_at}
                 </td>
 
                 <td>
-                ${trade.created_at}
+                    ${formatDistanceToNow(new Date(trade.created_at), {
+                      addSuffix: true,
+                    })}
                 </td>
                 
                 <td>
-                    ${trade.price_is != null ? trade.price_is : 0}
+                    $${trade.price_is != null ? trade.price_is : "0.00000000"}
                 </td>
 
                 <td>
-                    ${trade.open_amount}
+                    ${
+                      trade.trade_type[0].toUpperCase() +
+                      trade.trade_type.substring(1)
+                    }
+                </td>
+
+                <td>
+                    $${trade.open_amount}
+                </td>
+
+                <td class="loss">
+                    $${trade.stop_loss}
                 </td>
 
                 <td>
@@ -141,15 +165,11 @@ async function setPendingTrades() {
                 </td>
 
                 <td>
-                    ${trade.stop_loss}
-                </td>
-
-                <td>
                     ${trade.wallet}
                 </td>
 
-                <td>
-                    ${trade.take_profit}
+                <td class="profit">
+                    $${trade.take_profit}
                 </td>
 
                 <td>
@@ -203,35 +223,68 @@ async function setTradeHistory() {
             symbol = trade.currency;
           }
 
-          let profitLoss =
-            trade.price_is >= trade.take_profit && trade.price_is != null
-              ? `+${Math.abs(trade.open_amount - trade.amount)}`
-              : `-${Math.abs(trade.open_amount - trade.amount)}`;
+          let profitLoss = trade.amount - trade.open_amount;
+          let profitLossType;
+
+          if (trade.amount > trade.open_amount) {
+            profitLossType = "profit";
+          } else if (trade.amount < trade.open_amount) {
+            profitLossType = "loss";
+          } else {
+            profitLossType = "draw";
+            profitLoss = "0.00";
+          }
+
           let tr = `<tr>
                   <td>
-                      #${trade.order_id}
-                      <br/>
-                      ${trade.open_price}
+                    #${trade.order_id}
                   </td>
-                  
+
                   <td>
-                      ${trade.created_at}
-                      <br>
-                      ${trade.take_profit}
-                      <br>
-                      ${profitLoss}
+                      $${trade.open_price}
+                  </td>
+
+                  <td>
+                      $${trade.open_amount}
+                  </td>
+
+                  <td>
+                  ${formatDistanceToNow(new Date(trade.created_at), {
+                    addSuffix: true,
+                  })}
+                  </td>
+
+                  <td>
+                    ${
+                      trade.trade_type[0].toUpperCase() +
+                      trade.trade_type.substring(1)
+                    }
+                </td>
+
+                  <td>
+                    $${trade.take_profit}
+                  </td>
+
+                  <td class="${profitLossType}">
+                      ${profitLoss.toFixed(2)} USD
+                  </td>
+
+                  <td>
+                  ${formatDistanceToNow(new Date(trade.updated_at), {
+                    addSuffix: true,
+                  })}
                   </td>
   
                   <td>
-                     ${trade.updated_at}
-                      <br>
-                      ${trade.stop_loss}
+                      $${trade.stop_loss}
                   </td>
-  
+
                   <td>
                     ${symbol}
-                      <br/>
-                      ${trade.price_is != null ? trade.price_is : 0}
+                  </td>
+  
+                  <td>
+                      $${trade.price_is != null ? trade.price_is : "0.00000000"}
                   </td>
   
 
