@@ -74,7 +74,7 @@ async function setOpenTrades() {
       } else {
         let tr = `
             <tr>
-                <td colspan="5" class="text-danger">No Open Trade Is Running!</td>
+                <td colspan="12" class="text-danger">No Open Trade Is Running!</td>
             </tr>
         `;
 
@@ -113,30 +113,42 @@ async function setPendingTrades() {
           }
           let tr = `<tr>
                 <td>
-                    #${trade.order_id}
-                    <br/>
+                   #${trade.order_id}
+                </td>
+
+                <td>
                     ${trade.open_price}
-                    <br>
+                </td>
+
+                <td>
                     ${trade.open_at}
+                </td>
+
+                <td>
+                ${trade.created_at}
                 </td>
                 
                 <td>
-                    ${trade.created_at}
-                    <br>
                     ${trade.price_is != null ? trade.price_is : 0}
-                    <br>
+                </td>
+
+                <td>
                     ${trade.open_amount}
                 </td>
 
                 <td>
                     ${symbol}
-                    <br>
+                </td>
+
+                <td>
                     ${trade.stop_loss}
                 </td>
 
                 <td>
                     ${trade.wallet}
-                    <br/>
+                </td>
+
+                <td>
                     ${trade.take_profit}
                 </td>
 
@@ -153,7 +165,7 @@ async function setPendingTrades() {
       } else {
         let tr = `
             <tr>
-                <td colspan="5" class="text-danger">No Trade Is Pending!</td>
+                <td colspan="12" class="text-danger">No Trade Is Pending!</td>
             </tr>
         `;
 
@@ -231,7 +243,7 @@ async function setTradeHistory() {
       } else {
         let tr = `
               <tr>
-                  <td colspan="5" class="text-danger">No Trade Has Been Completed !</td>
+                  <td colspan="12" class="text-danger">No Trade Has Been Completed !</td>
               </tr>
           `;
 

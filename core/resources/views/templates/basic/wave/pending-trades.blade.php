@@ -4,30 +4,40 @@
 			<tr>
 				<th>
 					ORDER ID
-					<br>
+				</th>
+				<th>
 					OPEN PRICE
-					<br>
+				</th>
+
+				<th>
 					OPEN RATE
 				</th>
 
 				<th>
 					CREATED TIME
-					<br>
+				</th>
+
+				<th>
 					CURRENT PRICE
-					<br>
+				</th>
+
+				<th>
 					USED FUNDS
 				</th>
 
 				<th>
-					SYMBOL
-					<br>
 					STOP LOSS
-					<br>
+				</th>
+
+				<th>
+					SYMBOL
 				</th>
 
 				<th>
 					WALLET
-					<br>
+				</th>
+
+				<th>
 					TAKE PROFIT
 				</th>
 
