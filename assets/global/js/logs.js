@@ -26,31 +26,39 @@ async function setOpenTrades() {
           }
           let tr = `<tr>
                 <td>
-                    #${trade.order_id}
-                    <br/>
-                    ${trade.open_price}
-                    
+                    #${trade.order_id}    
                 </td>
-                
+
                 <td>
-                    ${trade.created_at}
-                    <br>
+                ${trade.open_price}
+                </td>
+
+                <td>
+                ${trade.created_at}
+                </td>
+
+                <td>
                     ${trade.price_is != null ? trade.price_is : 0}
-                    <br>
-                    ${trade.open_amount}
+                </td>
+
+                <td>
+                ${trade.open_amount}
                 </td>
 
                 <td>
                     ${symbol}
-                    <br>
+                </td>
 
-                    ${trade.stop_loss}
+                <td>
+                ${trade.stop_loss}
                 </td>
 
                 <td>
                     ${trade.wallet}
-                    <br/>
-                    ${trade.take_profit}
+                </td>
+
+                <td>
+                ${trade.take_profit}
                 </td>
 
                 <td>
@@ -175,19 +183,13 @@ async function setTradeHistory() {
           let symbol;
           if (trade.isCrypto == 1) {
             symbol = trade.crypto;
-            
           } else if (trade.isStock == 1) {
             symbol = trade.stock;
-            
           } else if (trade.isCommodity == 1) {
             symbol = trade.commodity;
-            
           } else if (trade.isForex == 1) {
             symbol = trade.currency;
-            
           }
-          
-          
 
           let profitLoss =
             trade.price_is >= trade.take_profit && trade.price_is != null

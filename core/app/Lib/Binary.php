@@ -29,7 +29,7 @@ class Binary
     {
         $this->coin_api_key = '326a6fd8-6f75-49c5-8acf-db35ebc6b31d';
         $this->iex_api_key = 'sk_4326a4d3e83449238d614b2d5d224b7d';
-        $this->fast_forex_api_key = '3288e1c3b3-63f2c7b496-sev9t3';
+        $this->fast_forex_api_key = '3a17d1d889-26e123c127-sfdecn';
     }
 
     public function getCryptoRate($symbol)
@@ -198,6 +198,10 @@ class Binary
                 DB::beginTransaction();
 
                 Log::info('Processing trade ID: ' . $trade->id);
+
+                if (is_null($trade->price_is) || $trade->price_is === 0.00000000) {
+                    continue;
+                }
 
                 $pips = ((float) $trade->pips) * $pipsMultiplier;
 
