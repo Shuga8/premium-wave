@@ -1123,6 +1123,18 @@
                   font-size: 14px;
                   padding: 12px 0px;
 
+                  &.loss {
+                    color: red;
+                  }
+
+                  &.profit {
+                    color: green;
+                  }
+
+                  &.draw {
+                    color: rgb(143, 143, 2);
+                  }
+
                   .loss {
                     color: red;
                   }

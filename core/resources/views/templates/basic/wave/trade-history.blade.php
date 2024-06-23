@@ -6,7 +6,7 @@
 					ORDER ID
 				</th>
 
-				<th>
+				<th class="loss">
 					STOP LOSS
 				</th>
 
@@ -22,7 +22,7 @@
 					DIRECTION
 				</th>
 
-				<th>
+				<th class="profit">
 					TAKE PROFIT
 				</th>
 

@@ -224,15 +224,16 @@ async function setTradeHistory() {
           }
 
           let profitLoss = trade.amount - trade.open_amount;
+
           let profitLossType;
 
           if (trade.amount > trade.open_amount) {
             profitLossType = "profit";
           } else if (trade.amount < trade.open_amount) {
             profitLossType = "loss";
-          } else {
+          } else if (trade.amount === trade.open_amount) {
             profitLossType = "draw";
-            profitLoss = "0.00";
+            // profitLoss = 0.00;  // Ensure profitLoss is a number
           }
 
           let tr = `<tr>
@@ -240,8 +241,8 @@ async function setTradeHistory() {
                     #${trade.order_id}
                   </td>
 
-                  <td>
-                      $${trade.open_price}
+                  <td class="loss">
+                      $${trade.stop_loss}
                   </td>
 
                   <td>
@@ -261,7 +262,7 @@ async function setTradeHistory() {
                     }
                 </td>
 
-                  <td>
+                  <td class="profit">
                     $${trade.take_profit}
                   </td>
 
@@ -276,7 +277,7 @@ async function setTradeHistory() {
                   </td>
   
                   <td>
-                      $${trade.stop_loss}
+                      $${trade.open_price}
                   </td>
 
                   <td>
@@ -296,7 +297,7 @@ async function setTradeHistory() {
       } else {
         let tr = `
               <tr>
-                  <td colspan="12" class="text-danger">No Trade Has Been Completed !</td>
+                  <td colspan="12" class="text-danger">No Trade Has Been Completed!</td>
               </tr>
           `;
 

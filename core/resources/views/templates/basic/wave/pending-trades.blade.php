@@ -29,7 +29,7 @@
 					USED FUNDS
 				</th>
 
-				<th>
+				<th class="loss">
 					STOP LOSS
 				</th>
 
@@ -41,7 +41,7 @@
 					WALLET
 				</th>
 
-				<th>
+				<th class="profit">
 					TAKE PROFIT
 				</th>
 
