@@ -55,6 +55,7 @@ bots.forEach((bot) => {
     const randomCrypto = ["BTC", "ETH", "BNB", "LEO", "SOL", "TON"];
     const randomCurrency = ["EUR", "GBP", "AUD", "CNY", "CAD", "JPY"];
     const randomCommodity = ["GOLD", "CORN", "LEAD", "GF", "NG", "GDP"];
+    const randomTradeType = ["sell", "buy"];
 
     const confirmBot = confirm(
       "Are you sure you want to set an automatic trade?"
@@ -62,6 +63,8 @@ bots.forEach((bot) => {
 
     if (confirmBot == true) {
       currency_type = randomFiat[Math.floor(Math.random() * randomFiat.length)];
+      trade_type =
+        randomTradeType[Math.floor(Math.random() * randomTradeType.length)];
       await botPreset(
         randomStock,
         randomCrypto,
