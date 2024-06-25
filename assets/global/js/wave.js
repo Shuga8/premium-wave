@@ -1,6 +1,15 @@
 /** HTML ELEMENTS */
 const url = "premium-wave";
 
+function isCurrentTimeInRange() {
+  const startTime = new Date();
+  startTime.setHours(8, 0, 0, 0);
+
+  const endTime = new Date();
+  endTime.setHours(16, 30, 0, 0);
+  const currentTime = new Date();
+  return currentTime >= startTime && currentTime <= endTime;
+}
 const weekEndDisplay = document.querySelector(".weekend-closed-trade-info");
 const currentDay = new Date().getDay();
 
@@ -63,6 +72,17 @@ bots.forEach((bot) => {
 
     if (confirmBot == true) {
       currency_type = randomFiat[Math.floor(Math.random() * randomFiat.length)];
+
+      if (market_type === "closed" && currency_type !== "crypto") {
+        notify("error", "Market is Closed");
+        return false;
+      } else if (
+        !isCurrentTimeInRange() &&
+        (currency_type === "stock" || currency_type === "commodity")
+      ) {
+        notify("error", "Market is closed from 8:00am to 4:30pm ");
+        return false;
+      }
       trade_type =
         randomTradeType[Math.floor(Math.random() * randomTradeType.length)];
       await botPreset(
@@ -516,7 +536,11 @@ async function assetClickTrigger(element) {
 
   let returnSymbol;
 
-  if (currency_type !== "crypto" && market_type === "closed") {
+  if (
+    (currency_type !== "crypto" && market_type === "closed") ||
+    (!isCurrentTimeInRange() &&
+      (currency_type === "stock" || currency_type === "commodity"))
+  ) {
     weekEndDisplay.style.display = "block";
   } else {
     weekEndDisplay.style.display = "none";
@@ -913,6 +937,12 @@ setCommodityRates();
 $(".trade-btn").click(function (e) {
   if (market_type === "closed" && currency_type !== "crypto") {
     notify("error", "Market is Closed");
+    return false;
+  } else if (
+    !isCurrentTimeInRange() &&
+    (currency_type === "stock" || currency_type === "commodity")
+  ) {
+    notify("error", "Market is closed from 8:00am to 4:30pm ");
     return false;
   }
 
