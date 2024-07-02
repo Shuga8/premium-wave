@@ -6,12 +6,13 @@ use App\Lib\Wave;
 use App\Models\User;
 use App\Models\Stock;
 use App\Models\Wallet;
+use App\Models\WaveLog;
 use App\Models\Currency;
 use App\Models\Commodity;
-use App\Models\WaveLog;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class WaveController extends Controller
 {
@@ -150,6 +151,42 @@ class WaveController extends Controller
             $notify[] = ['error', 'This trade is already active !!'];
 
             return redirect()->back()->withNotify($notify);
+        }
+    }
+
+    public function editPendingTrade(Request $request)
+    {
+        if (!auth()->check()) {
+            return redirect()->route('user.login');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'id' => ['required'],
+            'stop_loss' => ['required', 'numeric'],
+            'take_profit' => ['required', 'numeric'],
+            'open_at' => ['required', 'numeric'],
+            'trade_type' => ['required', 'string', 'in:sell,buy'],
+            'symbol' => ['required', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return $this->error($validator->errors()->all());
+        }
+
+
+
+        try {
+            $trade = WaveLog::where('id', (int) $request->id)->where('user_id', auth()->user()->id)->first();
+
+            $trade->stop_loss = $request->stop_loss;
+            $trade->take_profit = $request->take_profit;
+            $trade->open_at = $request->open_at;
+
+            $trade->save();
+
+            return $this->success("Trade was saved successfully");
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
         }
     }
 }

@@ -33,7 +33,7 @@ const closeDisplayBtn = document.querySelector(".close-display-btn");
 const bots = document.querySelectorAll(".bot-trading");
 const coinmarketcap_api_key = "552675b6-f913-4a97-adcc-bdbf6ccd37d9";
 const iexcloud_api_key = "sk_4326a4d3e83449238d614b2d5d224b7d";
-const fastforex_api_key = "3a17d1d889-26e123c127-sfdecn";
+const fastforex_api_key = "44ec0bc81e-c7b40ab499-sft3wg";
 const alpha_api_key = "UJ1DWALYT16ZVVUS";
 
 let coin_rate = null;

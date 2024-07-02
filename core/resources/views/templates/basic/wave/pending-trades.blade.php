@@ -45,7 +45,7 @@
 					TAKE PROFIT
 				</th>
 
-				<th>
+				<th colspan="2">
 					Action
 				</th>
 			</tr>
@@ -89,3 +89,55 @@
 		</tbody>
 	</table>
 </div>
+
+<!-- Pending Modal -->
+<div class="modal fade" id="pendingTrade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="pendingTradeLabel">Modal title</h5>
+				<button class="btn-close" data-bs-dismiss="modal" type="button" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form action="" method="GET">
+					@csrf
+					<div class="form-group">
+						<label>@lang('Type')</label>
+						<input class="form-control" name="type" type="text" step="any" disabled>
+					</div>
+
+					<div class="form-group">
+						<label>@lang('Symbol')</label>
+						<input class="form-control" name="symbol" type="text" step="any" disabled>
+					</div>
+
+					<div class="form-group">
+						<label>@lang('Direction')</label>
+						<input class="form-control" name="trade_type" type="text" step="any" disabled>
+					</div>
+
+					<div class="form-group">
+						<label>@lang('Stop Loss')</label>
+						<input class="form-control" name="stop_loss" type="number" step="any" required>
+					</div>
+					<div class="form-group">
+						<label>@lang('Take Profit')</label>
+						<input class="form-control" name="take_profit" type="number" step="any" required>
+					</div>
+
+					<div class="form-group open_at_field" hidden>
+						<label>@lang('Open Trade When Rate Is')</label>
+						<input class="form-control" name="open_at" type="number" step="any">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+				<button class="btn btn-primary submitEditedBtn" type="submit" onclick="">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
