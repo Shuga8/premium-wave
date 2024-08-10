@@ -2,8 +2,7 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<a class="navbar-brand logo" href="https://premiumwave.ca">
-				<img src="https://premiumwave.ca/wp-content/uploads/2024/06/cropped-cropped-PREMIUM-WAVES-3.png"
-					style="mix-blend-mode:difference;">
+				<img src="https://premiumwave.ca/wp-content/uploads/2024/06/cropped-cropped-PREMIUM-WAVES-3.png" style="mix-blend-mode:difference;">
 			</a>
 			<button class="navbar-toggler header-button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,27 +59,16 @@
 						<a class="nav-link" href="https://premiumwave.ca/">Home</a>
 
 					</li>
-					<li class="nav-item">
+	<li class="nav-item">
 						<a class="nav-link" href="https://premiumwave.ca/blog">Blog</a>
 
 					</li>
-
+				
 
 					<li class="nav-item">
 						<a class="nav-link" href="{{ route('wave') }}">Trading Room</a>
-
-						@php
-							$pages = App\Models\Page::where('is_default', Status::NO)
-							    ->where('tempname', $activeTemplate)
-							    ->get();
-						@endphp
-						@foreach ($pages as $item)
-					<li class="nav-item">
-						<a class="nav-link" href="{{ route('pages', ['slug' => $item->slug]) }}">
-							{{ __($item->name) }}
-						</a>
-					</li>
-					@endforeach
+					
+				
 					<li class="nav-item">
 						<a class="nav-link" href="https://premiumwave.ca/contact/">Contact Us </a>
 					</li>

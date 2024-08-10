@@ -32,11 +32,9 @@ class CalculateBinaryTrades extends Command
         $binary = new Binary();
 
         $binary->checkPendingTradesAndUpdateStatusToRunning();
-
-        $binary->updatePriceIs();
-
-        $binary->setPips();
-
-        $this->info('binary calculation for this instance is successfull');
+        if ($binary->updatePriceIs() != false) {
+            $binary->setPips();
+            $this->info('binary calculation for this instance is successfull');
+        }
     }
 }
