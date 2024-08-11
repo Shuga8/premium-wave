@@ -165,8 +165,13 @@ class Binary
         Log::info('Pips calculated and completed');
     }
 
-    public function updateStatusAndBalance($id, $balance)
+    public function updateStatusAndBalance($id, float $balance)
     {
+
+        if ($balance < 0) {
+            $balance = 0.000000;
+        }
+
         $trade = WaveLog::find($id);
         $wallet = Wallet::where('user_id', $trade->user_id)
             ->where('currency_id', 31)
@@ -178,7 +183,7 @@ class Binary
             Log::info('Processing trade ID: ' . $trade->id);
 
             $trade->status = 'completed';
-            $wallet->balance += (float) $balance;
+            $wallet->balance +=  $balance;
 
             $trade->save();
             $wallet->save();
