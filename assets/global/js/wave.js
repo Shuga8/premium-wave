@@ -31,10 +31,11 @@ const accordionBtn = document.querySelector(".accordion-btn");
 const accordionContent = document.querySelector(".accordion-content");
 const closeDisplayBtn = document.querySelector(".close-display-btn");
 const bots = document.querySelectorAll(".bot-trading");
-const coinmarketcap_api_key = "552675b6-f913-4a97-adcc-bdbf6ccd37d9";
+const coinmarketcap_api_key = "2f8bc8a6-f18a-4d12-8144-f7a114acef76";
 const iexcloud_api_key = "sk_4326a4d3e83449238d614b2d5d224b7d";
-const fastforex_api_key = "44ec0bc81e-c7b40ab499-sft3wg";
+const fastforex_api_key = "1524f42cf8-1872de1e22-sfu1gi";
 const alpha_api_key = "UJ1DWALYT16ZVVUS";
+const fmp_api_key = "cARpiP1yH7faNhSWqnQLyGNV0mc7oTxl";
 
 let coin_rate = null;
 let stop_loss = null;
@@ -83,8 +84,10 @@ bots.forEach((bot) => {
         notify("error", "Market is closed from 8:00am to 4:30pm ");
         return false;
       }
-      trade_type =
-        randomTradeType[Math.floor(Math.random() * randomTradeType.length)];
+
+      if (curr)
+        trade_type =
+          randomTradeType[Math.floor(Math.random() * randomTradeType.length)];
       await botPreset(
         randomStock,
         randomCrypto,
@@ -385,21 +388,24 @@ async function setForCryptos() {
   const assetContent = afterDisplay.querySelector(".asset-content");
 
   cryptos.forEach((crypto) => {
-    let rate = parseFloat(crypto.rate);
-    rate = rate.toFixed(2);
+    let rate = cryptoRates[crypto.symbol];
 
     assetContent.innerHTML += `
-          <div class="asset-pair-item" data-asset-symbol=${crypto.symbol} onclick="assetClickTrigger(this)" data-asset-type="crypto">
+          <div class="asset-pair-item" data-asset-symbol=${
+            crypto.symbol
+          } onclick="assetClickTrigger(this)" data-asset-type="crypto">
 
               <div class="asset-pair-info">
-                  <div class="img-pair"><img src="/${url}/assets/global/icons/${crypto.symbol}.png" alt="" /></div>
+                  <div class="img-pair"><img src="/${url}/assets/global/icons/${
+      crypto.symbol
+    }.png" alt="" /></div>
                   <div class="img-pair"><img src="/${url}/assets/global/icons/USD.png" alt="" /></div>
                   <div class="pair-name">${crypto.symbol}USD</div>
               </div>
 
               <div class="asset-pair-rate">
                   <div class="item-status">open</div>
-                  <div class="item-rate">${rate}</div>
+                  <div class="item-rate">${rate ? rate : "loading..."}</div>
               </div>
 
               <div class="asset-fav">
@@ -443,7 +449,7 @@ async function setForCurrencies() {
             </div>
             <div class="asset-pair-rate">
                 <div class="item-status">${market_type}</div>
-                <div class="item-rate">${rate}</div>
+                <div class="item-rate">${rate ? rate : "loading..."}</div>
             </div>
             <div class="asset-fav">
                 <i class="las la-star"></i>
@@ -463,16 +469,20 @@ async function setForStocks() {
     let rate = stockRates[stocks.indexOf(stock)];
 
     assetContent.innerHTML += `
-            <div class="asset-pair-item" data-asset-symbol=${stock.symbol} onclick="assetClickTrigger(this)" data-asset-type="stock">
+            <div class="asset-pair-item" data-asset-symbol=${
+              stock.symbol
+            } onclick="assetClickTrigger(this)" data-asset-type="stock">
 
                 <div class="asset-pair-info">
-                    <div class="img-pair"><img src="/${url}/assets/global/icons/${stock.symbol}.png" alt="" /></div>
+                    <div class="img-pair"><img src="/${url}/assets/global/icons/${
+      stock.symbol ?? "stock"
+    }.png" alt="" /></div>
                     <div class="pair-name">${stock.symbol}</div>
                 </div>
 
                 <div class="asset-pair-rate">
                     <div class="item-status">${market_type}</div>
-                    <div class="item-rate">${rate}</div>
+                    <div class="item-rate">${rate ? rate : "loading..."}</div>
                 </div>
 
                 <div class="asset-fav">
@@ -489,7 +499,9 @@ async function setForCommodities() {
   commodities.forEach((commodity) => {
     let rate = commodityRates[commodities.indexOf(commodity)];
     assetContent.innerHTML += `
-          <div class="asset-pair-item" data-asset-symbol=${commodity.symbol} onclick="assetClickTrigger(this)" data-asset-type="commodity">
+          <div class="asset-pair-item" data-asset-symbol=${
+            commodity.symbol
+          } onclick="assetClickTrigger(this)" data-asset-type="commodity">
 
               <div class="asset-pair-info">
                   <div class="img-pair"><img src="/${url}/assets/global/icons/stock.png" alt="" /></div>
@@ -498,7 +510,7 @@ async function setForCommodities() {
 
               <div class="asset-pair-rate">
                   <div class="item-status">${market_type}</div>
-                  <div class="item-rate">${rate}</div>
+                  <div class="item-rate">${rate ? rate : "loading..."}</div>
               </div>
 
               <div class="asset-fav">
@@ -685,21 +697,18 @@ async function setCurrencyRates() {
 }
 
 async function getStockRate(symbol) {
-  const myHeaders = new Headers();
-  myHeaders.append("Cookie", "ctoken=ef97832feebc4885851723444a94419e");
-
   const requestOptions = {
     method: "GET",
-    headers: myHeaders,
     redirect: "follow",
   };
 
   const response = await fetch(
-    `https://api.iex.cloud/v1/data/CORE/IEX_TOPS/${symbol}?token=${iexcloud_api_key}`,
+    `https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=${fmp_api_key}`,
     requestOptions
   );
   const result = await response.json();
-  return result[0]["lastSalePrice"];
+
+  return result[0].price;
 }
 
 async function setStockRates() {
@@ -710,9 +719,53 @@ async function setStockRates() {
   }
 }
 
-async function getCommodityRate(symbol) {
+// async function getCryptoRates(symbol) {
+//   const myHeaders = new Headers();
+//   myHeaders.append("Accept", "application/json");
+
+//   const requestOptions = {
+//     method: "GET",
+//     headers: myHeaders,
+//     redirect: "follow",
+//   };
+
+//   try {
+//     const response = await fetch(
+//       `https://api.fastforex.io/convert?from=${symbol}&to=USD&amount=1&api_key=${fastforex_api_key}`,
+//       requestOptions
+//     );
+//     const result = await response.json();
+
+//     if (!response.ok) {
+//       throw new Error(result.message || "Failed to fetch the rate");
+//     }
+
+//     return parseFloat(result.result.rate).toFixed(4);
+//   } catch (error) {
+//     console.error(error);
+//     return null; // Or handle it in a way that suits your application
+//   }
+// }
+
+// async function extractAndSaveCryptoBalance() {
+//   for (const crypto of cryptos) {
+//     let sym = crypto.symbol;
+//     let rate = await getCryptoRates(sym);
+
+//     if (rate !== null) {
+//       cryptoRates[sym] = rate;
+//     } else {
+//       console.warn(`Skipping ${sym} due to fetching error`);
+//     }
+//   }
+// }
+
+async function getCryptoRates(symbol) {
+  const url = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=${symbol}&convert=USD`;
+
   const myHeaders = new Headers();
-  myHeaders.append("Cookie", "ctoken=ef97832feebc4885851723444a94419e");
+  myHeaders.append("X-CMC_PRO_API_KEY", coinmarketcap_api_key);
+  myHeaders.append("Accept", "application/json");
 
   const requestOptions = {
     method: "GET",
@@ -720,17 +773,55 @@ async function getCommodityRate(symbol) {
     redirect: "follow",
   };
 
+  try {
+    const response = await fetch(url, requestOptions);
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Failed to fetch the rate");
+    }
+
+    const rate = result.data[symbol].quote.USD.price;
+    return parseFloat(rate).toFixed(4);
+  } catch (error) {
+    console.error(`Error fetching rate for ${symbol}:`, error);
+    return null; // Or handle it in a way that suits your application
+  }
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function extractAndSaveCryptoBalance() {
+  for (const crypto of cryptos) {
+    let sym = crypto.symbol;
+    let rate = await getCryptoRates(sym);
+
+    if (rate !== null) {
+      cryptoRates[sym] = rate;
+    } else {
+      console.warn(`Skipping ${sym} due to fetching error`);
+    }
+
+    // Add a delay to prevent API rate limiting
+    await delay(1000); // Adjust the delay as needed (e.g., 1000ms = 1 second)
+  }
+}
+
+async function getCommodityRate(symbol) {
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
   const response = await fetch(
-    `https://api.iex.cloud/v1/data/CORE/IEX_TOPS/${symbol}?token=${iexcloud_api_key}`,
+    `https://financialmodelingprep.com/api/v3/quote/${symbol}?apikey=${fmp_api_key}`,
     requestOptions
   );
   const result = await response.json();
 
-  if (result[0]["askPrice"] != 0) {
-    return result[0]["askPrice"];
-  } else {
-    return result[0]["lastSalePrice"];
-  }
+  return result[0].price;
 }
 
 async function setCommodityRates() {
@@ -920,13 +1011,6 @@ function setPotentialDecrementVisuals(rate) {
     accordionContent.querySelector(".potential-profit-value").textContent =
       parseFloat(take_profit).toFixed(2);
   }
-}
-
-function extractAndSaveCryptoBalance() {
-  cryptos.forEach((crypto) => {
-    let sym = crypto.symbol;
-    cryptoRates[sym] = crypto.rate;
-  });
 }
 
 extractAndSaveCryptoBalance();

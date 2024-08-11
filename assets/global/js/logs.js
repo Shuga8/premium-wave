@@ -173,17 +173,6 @@ async function setPendingTrades() {
                 </td>
 
                 <td>
-                    <button class="bg-primary px-4 py-2 text-white editBtn"  type="button" data-binary='${JSON.stringify(
-                      trade
-                    )
-                      .replace(/'/g, "&apos;")
-                      .replace(
-                        /"/g,
-                        "&quot;"
-                      )}'><i class="las la-pen"></i></button> 
-                </td>
-
-                <td>
                     <a class="bg-danger px-4 py-2 text-white" href="wave/delete-pending-trade/${
                       trade.id
                     }"><i class="las la-trash"></i></a> 
@@ -193,15 +182,10 @@ async function setPendingTrades() {
 
           tbody.innerHTML += tr;
         });
-
-        // Bind event listener after rows are added to DOM
-        document.querySelectorAll(".editBtn").forEach((button) => {
-          button.addEventListener("click", setModal);
-        });
       } else {
         let tr = `
             <tr>
-                <td colspan="13" class="text-danger">No Trade Is Pending!</td>
+                <td colspan="12" class="text-danger">No Trade Is Pending!</td>
             </tr>
         `;
 
@@ -239,18 +223,33 @@ async function setTradeHistory() {
             symbol = trade.currency;
           }
 
-          let profitLoss = trade.amount - trade.open_amount;
+          // Ensure trade.amount and trade.open_amount are numbers
+          let tradeAmount = parseFloat(trade.amount);
+          let openAmount = parseFloat(trade.open_amount);
+
+          if (isNaN(tradeAmount) || isNaN(openAmount)) {
+            console.error(
+              `Invalid trade amount or open amount for trade ID ${trade.order_id}`
+            );
+            return;
+          }
+
+          let profitLoss = tradeAmount - openAmount;
 
           let profitLossType;
 
-          if (trade.amount > trade.open_amount) {
+          if (tradeAmount > openAmount) {
             profitLossType = "profit";
-          } else if (trade.amount < trade.open_amount) {
+          } else if (tradeAmount < openAmount) {
             profitLossType = "loss";
-          } else if (trade.amount === trade.open_amount) {
+          } else {
             profitLossType = "draw";
-            // profitLoss = 0.00;  // Ensure profitLoss is a number
           }
+
+          // Debugging logs
+          // console.log(
+          //   `Trade ID: ${trade.order_id}, Amount: ${tradeAmount}, Open Amount: ${openAmount}, Profit/Loss: ${profitLoss}`
+          // );
 
           let tr = `<tr>
                   <td>
@@ -262,7 +261,7 @@ async function setTradeHistory() {
                   </td>
 
                   <td>
-                      $${trade.open_amount}
+                      $${openAmount.toFixed(2)}
                   </td>
 
                   <td>
@@ -304,7 +303,6 @@ async function setTradeHistory() {
                       $${trade.price_is != null ? trade.price_is : "0.00000000"}
                   </td>
   
-
           </tr>
                `;
 
@@ -327,107 +325,7 @@ async function executeTrades() {
   await setOpenTrades();
   await setPendingTrades();
   await setTradeHistory();
-  setTimeout(executeTrades, 1000);
+  setTimeout(executeTrades, 100);
 }
 
-$(document).ready(function () {
-  executeTrades();
-  document
-    .querySelector(".submitEditedBtn")
-    .addEventListener("click", submitEditedTrade);
-});
-
-function setModal(event) {
-  let modal = $("#pendingTrade");
-  let el = event.currentTarget;
-
-  let action = `/edit-pending-trade/:id`;
-  let data = JSON.parse(el.getAttribute("data-binary"));
-  if (data.isCrypto == 1) {
-    modal.find("input[name=type]").val("Crypto Currency");
-    modal.find("input[name=symbol]").val(data.crypto);
-  } else if (data.isForex == 1) {
-    modal.find("input[name=type]").val("Foreign Currency");
-    modal.find("input[name=symbol]").val(data.currency);
-  } else if (data.isStock == 1) {
-    modal.find("input[name=type]").val("Stock Ticker");
-    modal.find("input[name=symbol]").val(data.stock);
-  } else if (data.isCommodity == 1) {
-    modal.find("input[name=type]").val("Commodity Ticker");
-    modal.find("input[name=symbol]").val(data.commodity);
-  }
-
-  modal.find("form").prop("action", action.replace(":id", data.id));
-  modal.find("input[name=stop_loss]").val(data.stop_loss);
-  modal.find("input[name=take_profit]").val(data.take_profit);
-  modal.find("input[name=trade_type]").val(data.trade_type);
-  if (data.open_at_is_set == 1) {
-    document.querySelector(".open_at_field").removeAttribute("hidden");
-    modal.find("input[name=open_at]").val(data.open_at);
-  } else {
-    document.querySelector(".open_at_field").setAttribute("hidden", true);
-    modal.find("input[name=open_at]").val(data.open_at);
-  }
-
-  $(modal).modal("show");
-}
-
-function submitEditedTrade(event) {
-  event.preventDefault(); // Prevent the default form submission
-
-  let modal = $("#pendingTrade");
-
-  // Collect data from the modal inputs
-  let tradeId = modal.find("form").prop("action").split("/").pop(); // Extract the ID from the form action URL
-  let type = modal.find("input[name=type]").val();
-  let symbol = modal.find("input[name=symbol]").val();
-  let stopLoss = modal.find("input[name=stop_loss]").val();
-  let takeProfit = modal.find("input[name=take_profit]").val();
-  let tradeType = modal.find("input[name=trade_type]").val();
-  let openAt = modal.find("input[name=open_at]").val();
-  let openAtIsSet = document
-    .querySelector(".open_at_field")
-    .hasAttribute("hidden")
-    ? 0
-    : 1;
-
-  // Prepare the data to be sent
-  let updatedData = {
-    id: tradeId,
-    type: type,
-    symbol: symbol,
-    stop_loss: stopLoss,
-    take_profit: takeProfit,
-    trade_type: tradeType,
-    open_at: openAt,
-    open_at_is_set: openAtIsSet,
-  };
-
-  // Send the updated data to the server
-  $.ajax({
-    headers: {
-      "X-CSRF-TOKEN": token,
-    },
-    url: `wave/edit-pending-trade/${tradeId}`,
-    method: "POST",
-    data: updatedData,
-    success: function (response, status) {
-      // console.log(response);
-      if (response.success) {
-        notify("success", response.success);
-      } else {
-        notify("error", response.error);
-      }
-      $(modal).modal("hide");
-      setPendingTrades(); // Refresh the pending trades table
-    },
-    error: function (xhr, status, error) {
-      notify("error", `Error updating trade: ${error}`);
-    },
-  });
-}
-
-// Add the event listener for the save changes button
-document
-  .querySelector(".submitEditedBtn")
-  .addEventListener("click", submitEditedTrade);
+executeTrades();

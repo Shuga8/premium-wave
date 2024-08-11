@@ -614,16 +614,19 @@
     align-content: center;
   }
   .wave-container .control-after-display .after-display-content .asset-list .asset-content .asset-pair-item .asset-pair-info > div.img-pair {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .wave-container .control-after-display .after-display-content .asset-list .asset-content .asset-pair-item .asset-pair-info > div.img-pair img {
     width: 100%;
     height: 100%;
-    -o-object-fit: cover !important;
-       object-fit: cover !important;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
   .wave-container .control-after-display .after-display-content .asset-list .asset-content .asset-pair-item .asset-pair-info > div.pair-name {
     font-size: 9.5px;
