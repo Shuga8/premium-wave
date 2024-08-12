@@ -14,6 +14,10 @@
 				</th>
 
 				<th>
+					<span class="profit">PROFIT</span>/<span class="loss">LOSS</span>
+				</th>
+
+				<th>
 					CURRENT PRICE
 				</th>
 

@@ -26,6 +26,29 @@ async function setOpenTrades() {
           } else if (trade.isForex == 1) {
             symbol = trade.currency;
           }
+
+          // Ensure trade.amount and trade.open_amount are numbers
+          let tradeAmount = parseFloat(trade.amount);
+          let openAmount = parseFloat(trade.open_amount);
+
+          if (isNaN(tradeAmount) || isNaN(openAmount)) {
+            console.error(
+              `Invalid trade amount or open amount for trade ID ${trade.order_id}`
+            );
+            return;
+          }
+
+          let profitLoss = tradeAmount - openAmount;
+
+          let profitLossType;
+
+          if (tradeAmount > openAmount) {
+            profitLossType = "profit";
+          } else if (tradeAmount < openAmount) {
+            profitLossType = "loss";
+          } else {
+            profitLossType = "draw";
+          }
           let tr = `<tr>
                 <td>
                     #${trade.order_id}    
@@ -39,6 +62,10 @@ async function setOpenTrades() {
                 ${formatDistanceToNow(new Date(trade.created_at), {
                   addSuffix: true,
                 })}
+                </td>
+
+                <td class="${profitLossType}">
+                  ${profitLoss}
                 </td>
 
                 <td>

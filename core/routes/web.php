@@ -58,6 +58,7 @@ Route::controller('WaveController')->prefix('wave')->group(function () {
     Route::get('trades-history', 'getTradesHistory')->name('wave.history');
     Route::get('end-running-trade/{id}', 'endTrade')->name('name.end-trade');
     Route::get('delete-pending-trade/{id}', 'deletePendingTrade')->name('wave.delete-pending');
+    Route::get('coin-convert/{symbol}/{apikey}', 'coinConvert')->name('coinConvert');
 });
 
 Route::namespace('P2P')->group(function () {

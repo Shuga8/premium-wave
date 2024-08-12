@@ -6,11 +6,13 @@ use App\Lib\Wave;
 use App\Models\User;
 use App\Models\Stock;
 use App\Models\Wallet;
+use GuzzleHttp\Client;
+use App\Models\WaveLog;
 use App\Models\Currency;
 use App\Models\Commodity;
-use App\Models\WaveLog;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
+use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\DB;
 
 class WaveController extends Controller
@@ -150,6 +152,27 @@ class WaveController extends Controller
             $notify[] = ['error', 'This trade is already active !!'];
 
             return redirect()->back()->withNotify($notify);
+        }
+    }
+
+    public function coinConvert(string $symbol, string $apikey)
+    {
+        $url = "https://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount=1&symbol=$symbol&convert=USD";
+        $client = new Client();
+        $response = $client->get($url, [
+            'headers' => [
+                'X-CMC_PRO_API_KEY' => $apikey
+            ]
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+
+        if (isset($data['data']['quote']['USD']['price'])) {
+            $cryptoRate = $data['data']['quote']['USD']['price'];
+
+            return $cryptoRate;
+        } else {
+            return null;
         }
     }
 }

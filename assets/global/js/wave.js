@@ -761,11 +761,10 @@ async function setStockRates() {
 // }
 
 async function getCryptoRates(symbol) {
-  const url = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=${symbol}&convert=USD`;
+  const inn = `/${url}/wave/coin-convert/${symbol}/${coinmarketcap_api_key}`;
 
   const myHeaders = new Headers();
-  myHeaders.append("X-CMC_PRO_API_KEY", coinmarketcap_api_key);
-  myHeaders.append("Accept", "application/json");
+  myHeaders.append("X-CSRF-TOKEN", token);
 
   const requestOptions = {
     method: "GET",
@@ -774,14 +773,13 @@ async function getCryptoRates(symbol) {
   };
 
   try {
-    const response = await fetch(url, requestOptions);
-    const result = await response.json();
+    const response = await fetch(inn, requestOptions);
+    const result = await response.text();
 
     if (!response.ok) {
       throw new Error(result.message || "Failed to fetch the rate");
     }
-
-    const rate = result.data[symbol].quote.USD.price;
+    const rate = result;
     return parseFloat(rate).toFixed(4);
   } catch (error) {
     console.error(`Error fetching rate for ${symbol}:`, error);
@@ -805,7 +803,7 @@ async function extractAndSaveCryptoBalance() {
     }
 
     // Add a delay to prevent API rate limiting
-    await delay(1000); // Adjust the delay as needed (e.g., 1000ms = 1 second)
+    await delay(500); // Adjust the delay as needed (e.g., 1000ms = 1 second)
   }
 }
 
